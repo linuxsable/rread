@@ -9,5 +9,13 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  def get_omni_hash
+    {
+      'info' => {
+        'name' => 'tyler',
+      },
+      'provider' => 'facebook',
+      'uid' => 1234
+    }
+  end
 end
