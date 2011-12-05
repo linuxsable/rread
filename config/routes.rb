@@ -59,5 +59,6 @@ Newsie::Application.routes.draw do
   # match ':controller(/:action(/:id(.:format)))'
   
   match "/auth/:provider/callback", :to => "sessions#create"
-  # match "/signout" => "sessions#destroy", :as => :signout
+  resources :home
+  match "/signout" => "sessions#destroy", :as => :signout
 end

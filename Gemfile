@@ -8,8 +8,9 @@ gem 'rails', '3.1.3'
 gem 'sqlite3'
 gem 'omniauth-facebook'
 gem 'fbgraph'
-gem 'curb'
+# gem 'curb'
 gem 'twitter'
+gem 'haml'
 
 # Gems used only for assets and not required
 # in production environments by default.
