@@ -35,7 +35,11 @@ class AuthorizationTest < ActiveSupport::TestCase
     hash['provider'] = 'twitter'
     user = users(:good_user)
   
-    a = Authorization.create_from_hash(hash, user)
+    a = nil
+    assert_difference('UserMeta.count', 1) do
+      a = Authorization.create_from_hash(hash, user)
+    end
+
     assert a.valid?
     assert a.user.valid?
     assert a.user.user_metas.first.valid?

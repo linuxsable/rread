@@ -11,11 +11,17 @@ class ActiveSupport::TestCase
 
   def get_omni_hash
     {
-      'info' => {
-        'name' => 'tyler',
-      },
-      'provider' => 'facebook',
       'uid' => 1234,
+      'provider' => 'facebook',
+      'info' => {
+        'nickname' => '_ty',
+        'email' => 'linuxsable@gmail.com',
+        'first_name' => 'tyler',
+        'last_name' => 'van hoomissen',
+        'image' => 'ofiqjgoqig',
+        'description' => 'oihaoihfaosdifhaosdfiadf',
+        'location' => 'oawigejaorigj'
+      },
       'credentials' => {
         'token' => '298thqg98hq3rg89hqg3298qh34g',
         'secret' => '293hq3g98qhgauhg0q834gnxvcb'
