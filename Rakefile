@@ -5,3 +5,7 @@
 require File.expand_path('../config/application', __FILE__)
 
 Newsie::Application.load_tasks
+
+# Jenkins CI
+# gem 'ci_reporter'
+# require 'ci/reporter/rake/test_unit'

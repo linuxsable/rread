@@ -15,7 +15,11 @@ class ActiveSupport::TestCase
         'name' => 'tyler',
       },
       'provider' => 'facebook',
-      'uid' => 1234
+      'uid' => 1234,
+      'credentials' => {
+        'token' => '298thqg98hq3rg89hqg3298qh34g',
+        'secret' => '293hq3g98qhgauhg0q834gnxvcb'
+      }
     }
   end
 end

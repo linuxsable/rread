@@ -17,6 +17,7 @@ class Authorization < ActiveRecord::Base
       a.user     = user
       a.uid      = hash['uid']
       a.token    = hash['credentials']['token']
+      a.secret   = hash['credentials']['secret']
       a.provider = hash['provider']
     end
     

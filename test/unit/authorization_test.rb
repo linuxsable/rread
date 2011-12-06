@@ -4,38 +4,23 @@ class AuthorizationTest < ActiveSupport::TestCase
   fixtures :authorizations, :users
   
   # Validations
-  test 'requires user_id' do
-    a = get_authorization
-    a.user = nil
-    a.save
+  test 'presence validation' do
+    auth = Authorization.new
     
-    assert a.errors.get(:user_id)
+    assert !auth.valid?
+    assert auth.invalid?(:user_id)
+    assert auth.invalid?(:uid)
+    assert auth.invalid?(:provider)
+    assert auth.invalid?(:token)
+    assert auth.invalid?(:secret)
   end
   
-  test 'requires uid' do
+  test 'unique validation' do
+    # This one plus authorizations(:good_facebook_provider) = 2
     a = get_authorization
-    a.uid = nil
     a.save
-    
-    assert a.errors.get(:uid)
-  end
-  
-  test 'requires provider' do
-    a = get_authorization
-    a.provider = nil
-    a.save
-    
-    assert a.errors.get(:provider)
-  end
-  
-  test 'unique :provider' do
-    a = get_authorization
-    b = get_authorization
-    
-    a.save
-    b.save
-    
-    assert b.errors.get(:provider)
+
+    assert a.invalid?(:provider)
   end
   
   # Other
@@ -43,13 +28,17 @@ class AuthorizationTest < ActiveSupport::TestCase
     record = Authorization.find_from_hash(get_omni_hash)
     assert record.valid?
   end
-  
+
   test 'create_from_hash' do
     # First create a user if there's none
-    
-    # Then create an Authorization
-    
-    # Then create the UserMeta
+    hash = get_omni_hash
+    hash['provider'] = 'twitter'
+    user = users(:good_user)
+  
+    a = Authorization.create_from_hash(hash, user)
+    assert a.valid?
+    assert a.user.valid?
+    assert a.user.user_metas.first.valid?
   end
   
   def get_authorization
