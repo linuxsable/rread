@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :authorizations
-  has_many :user_metas
+  has_many :provider_infos
   
   # Create from the omniauth hash
   def self.create_from_hash(hash)

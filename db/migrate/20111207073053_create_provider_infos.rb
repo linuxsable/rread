@@ -1,9 +1,9 @@
-class CreateUserMeta < ActiveRecord::Migration
+class CreateProviderInfos < ActiveRecord::Migration
   def change
-    create_table :user_meta do |t|
-      t.integer :user_id, :null => false
-      t.string :provider, :null => false
-      t.string :uid, :null => false
+    create_table :provider_infos do |t|
+      t.integer :user_id
+      t.string :provider
+      t.string :uid
       t.string :username
       t.string :email
       t.string :first_name

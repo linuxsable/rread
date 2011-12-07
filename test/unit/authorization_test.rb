@@ -36,13 +36,15 @@ class AuthorizationTest < ActiveSupport::TestCase
     user = users(:good_user)
   
     a = nil
-    assert_difference('UserMeta.count', 1) do
-      a = Authorization.create_from_hash(hash, user)
+    assert_difference('Authorization.count', 1) do
+      assert_difference('ProviderInfo.count', 1) do
+        a = Authorization.create_from_hash(hash, user)
+      end
     end
 
     assert a.valid?
     assert a.user.valid?
-    assert a.user.user_metas.first.valid?
+    assert a.user.provider_infos.first.valid?
   end
   
   def get_authorization

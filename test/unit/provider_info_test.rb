@@ -1,21 +1,21 @@
 require 'test_helper'
 
-class UserMetaTest < ActiveSupport::TestCase
+class ProviderInfoTest < ActiveSupport::TestCase
   # Validations
   test 'presence validation' do
-    user_meta = get_user_meta
+    info = get_provider_info
     
-    assert !user_meta.valid?
-    assert user_meta.invalid?(:user_id)
-    assert user_meta.invalid?(:provider)
-    assert user_meta.invalid?(:uid)
+    assert !info.valid?
+    assert info.invalid?(:user_id)
+    assert info.invalid?(:provider)
+    assert info.invalid?(:uid)
   end
   
   test 'uniqueness validation' do
-    user_meta = get_user_meta
+    info = get_provider_info
     
-    assert !user_meta.valid?
-    assert user_meta.invalid?(:uid)
+    assert !info.valid?
+    assert info.invalid?(:uid)
   end
   
   # Other
@@ -23,13 +23,13 @@ class UserMetaTest < ActiveSupport::TestCase
     user = users(:good_user)
     hash = get_omni_hash
     
-    assert_difference('UserMeta.count', 1) do
-      UserMeta.create_from_hash_and_user(hash, user)
+    assert_difference('ProviderInfo.count', 1) do
+      ProviderInfo.create_from_hash_and_user(hash, user)
     end
   end
   
-  def get_user_meta
-    UserMeta.new do |u|
+  def get_provider_info
+    ProviderInfo.new do |u|
       u.user        = users(:good_user)
       u.provider    = 'facebook'
       u.uid         = '1'

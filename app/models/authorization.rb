@@ -21,6 +21,6 @@ class Authorization < ActiveRecord::Base
       a.provider = hash['provider']
     end
     
-    UserMeta.create_from_hash_and_user(hash, user)
+    ProviderInfo.create_from_hash_and_user(hash, user)
   end
 end

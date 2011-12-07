@@ -1,11 +1,10 @@
-class UserMeta < ActiveRecord::Base
+class ProviderInfo < ActiveRecord::Base
   belongs_to :user
   
   validates_presence_of :user_id, :uid, :provider
   validates_uniqueness_of :uid, :scope => :provider
   
-  # Create the user meta table from the hash
-  # from omni auth.
+  # Create from an omnihash and user.
   def self.create_from_hash_and_user(hash, user)
     create! do |m|
       m.user        = user
