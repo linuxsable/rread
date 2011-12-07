@@ -1,0 +1,15 @@
+=box_shadow( $horizontal_offset: 2px, $vertical_offset: 2px, $blur_radius: 2px, $color: #ccc, $inset: unquote(""), $spread_distance: 0, $ie_support: false)
+  -moz-box-shadow: $horizontal_offset $vertical_offset $blur_radius $spread_distance $color $inset
+  -webkit-box-shadow: $horizontal_offset $vertical_offset $blur_radius $spread_distance $color $inset
+  box-shadow: $horizontal_offset $vertical_offset $blur_radius $spread_distance $color $inset
+
+  @if $ie_support 
+    /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='" + $color + "')"
+    /* For IE 5.5 - 7 */
+    filter: unquote("progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='" + $color + "')")
+
+=box_shadow_remove()
+  -moz-box-shadow: none
+  -webkit-box-shadow: none
+  box-shadow: none

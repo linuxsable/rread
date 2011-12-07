@@ -1,0 +1,27 @@
+// use this if all corners have same radius
+// example:
+// +border_radius(5px)
+
+=border_radius($value)
+  -moz-border-radius: $value
+  -webkit-border-radius: $value
+  -o-border-radius: $value
+  -ms-border-radius: $value
+  -khtml-border-radius: $value
+  border-radius: $value
+  background-clip: padding-box
+
+// use this to declare individual corner values
+// example:
+// +border_radius_singular(5px, "top", "left")
+// +border_radius_singular(5px, "top", "right")
+// +border_radius_singular(5px, "bottom", "left")
+// +border_radius_singular(5px, "bottom", "right")
+
+=border_radius_singular($value, $vertical, $horizontal)
+  -moz-border-radius-#{$vertical}#{$horizontal}: $value
+  -webkit-border-#{$vertical}-#{$horizontal}-radius: $value
+  -o-border-#{$vertical}-#{$horizontal}-radius: $value
+  -ms-border-#{$vertical}-#{$horizontal}-radius: $value
+  -khtml-border-#{$vertical}-#{$horizontal}-radius: $value
+  border-#{$vertical}-#{$horizontal}-radius: $value

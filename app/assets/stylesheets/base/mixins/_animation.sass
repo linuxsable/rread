@@ -1,0 +1,33 @@
+=keyframes-rotate
+  @-moz-keyframes spin
+    from
+      -moz-transform: rotate(0deg)
+    to
+      -moz-transform: rotate(360deg)
+
+  @-o-keyframes spin
+    from
+      -o-transform: rotate(0deg)
+    to
+      -o-transform: rotate(360deg)
+
+  @-webkit-keyframes spin
+    from
+      -webkit-transform: rotate(0deg)
+    to
+      -webkit-transform: rotate(360deg)
+
+
+=animation( $name, $count: infinite, $duration: 10s, $easing: linear)
+  -moz-animation-name: $name
+  -moz-animation-iteration-count: $count
+  -moz-animation-duration: $duration
+  -moz-animation-timing-function: $easing
+  -o-animation-name: $name
+  -o-animation-iteration-count: $count
+  -o-animation-duration: $duration
+  -o-animation-timing-function: $easing
+  -webkit-animation-name: $name
+  -webkit-animation-iteration-count: $count
+  -webkit-animation-duration: $duration
+  -webkit-animation-timing-function: $easing
