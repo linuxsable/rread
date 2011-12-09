@@ -1,7 +1,7 @@
 class Authorization < ActiveRecord::Base
   belongs_to :user
   
-  validates_presence_of :user_id, :uid, :provider, :token, :secret
+  validates_presence_of :user_id, :uid, :provider, :token
   validates_uniqueness_of :provider
   
   # Find from the omniauth hash

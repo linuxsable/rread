@@ -11,7 +11,6 @@ class AuthorizationTest < ActiveSupport::TestCase
     assert auth.invalid?(:user_id)
     assert auth.invalid?(:uid)
     assert auth.invalid?(:provider)
-    assert auth.invalid?(:token)
     assert auth.invalid?(:secret)
   end
   

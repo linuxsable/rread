@@ -7,10 +7,10 @@ gem 'rails', '3.1.3'
 
 gem 'sqlite3'
 gem 'omniauth-facebook'
-gem 'fbgraph'
-# gem 'curb'
 gem 'twitter'
 gem 'haml'
+gem 'koala'
+gem 'delayed_job'
 
 # Gems used only for assets and not required
 # in production environments by default.
