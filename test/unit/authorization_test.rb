@@ -14,12 +14,23 @@ class AuthorizationTest < ActiveSupport::TestCase
     assert auth.invalid?(:secret)
   end
   
-  test 'unique validation' do
-    # This one plus authorizations(:good_facebook_provider) = 2
+  # Provider unique to user
+  test 'provider unique validation' do
     a = get_authorization
+    a.user_id = authorizations(:good_facebook_provider).user_id
     a.save
-
+    
     assert a.invalid?(:provider)
+  end
+  
+  # uid unique to provider
+  test 'uid unique validation' do
+    a = get_authorization
+    a.provider = authorizations(:good_facebook_provider).provider
+    a.uid = authorizations(:good_facebook_provider).uid
+    a.save
+    
+    assert a.invalid?(:uid)
   end
   
   # Other
