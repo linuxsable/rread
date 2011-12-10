@@ -58,7 +58,7 @@ Rread::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
   
-  resources :home
+  resources :home, :user
   
   match "/auth/:provider/callback", :to => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout

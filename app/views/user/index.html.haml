@@ -1,0 +1,16 @@
+%br
+%br
+
+%h1 Friendship Info
+
+%h2 Mutual Friends
+- for friend in current_user.mutual_friends
+  %img{src: friend.avatar}
+
+%h2 My friends
+- for friend in current_user.friends
+  %img{src: friend.avatar}
+
+%h2 People who've added me
+- for friend in current_user.inverse_friends
+  %img{src: friend.avatar}

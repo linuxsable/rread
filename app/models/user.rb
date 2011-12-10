@@ -14,5 +14,5 @@ class User < ActiveRecord::Base
       u.name = hash['info']['name']
     end
   end
-  
+    
 end
