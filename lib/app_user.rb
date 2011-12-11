@@ -151,6 +151,18 @@ class AppUser
     end
   end
   
+  # This should probably get moved to a
+  # "Reader" class later.
+  def import_google_reader(email, password)
+    creds = { :email => email, :password => password }
+    
+    reader = GReader.auth(creds)
+    reader.feeds.each do |feed|
+      # Import the feeds here
+      Rails.logger.debug feed
+    end
+  end
+  
   private
   
   # This helps to lazy load the provder model only if it's

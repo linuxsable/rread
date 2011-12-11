@@ -11,6 +11,7 @@ gem 'twitter'
 gem 'haml'
 gem 'koala'
 gem 'delayed_job'
+gem 'greader'
 
 # Gems used only for assets and not required
 # in production environments by default.
