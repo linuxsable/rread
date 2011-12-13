@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :authorizations
   has_many :provider_infos
+  has_one :reader
   
   has_many :friendships
   has_many :friends, :through => :friendships

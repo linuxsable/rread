@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111209021843) do
+ActiveRecord::Schema.define(:version => 20111213082442) do
+
+  create_table "articles", :force => true do |t|
+    t.integer  "blog_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "publish_date"
+    t.string   "guid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -19,6 +29,18 @@ ActiveRecord::Schema.define(:version => 20111209021843) do
     t.integer  "user_id"
     t.string   "token"
     t.string   "secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blogs", :force => true do |t|
+    t.integer  "reader_id"
+    t.string   "url"
+    t.string   "feed_url"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "first_created_by"
+    t.string   "avatar"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,6 +78,12 @@ ActiveRecord::Schema.define(:version => 20111209021843) do
     t.string   "avatar"
     t.text     "description"
     t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "readers", :force => true do |t|
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
