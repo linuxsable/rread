@@ -102,51 +102,24 @@ class AppUser
   #
   # Currently I do not know how efficent this is as no
   # DB optimizations have been done.
-  def import_facebook_friends
-    friend_auths = find_facebook_friends_with_accounts
-    friend_auths.each do |auth|
+  def sync_facebook_friends
+    find_facebook_friends_with_accounts.each do |auth|
       temp = self.class.new(auth)
       
-      friend = self.friend?(temp)
-      inverse_friend = self.inverse_friend?(temp)
-      mutual_friend = self.mutual_friend?(temp)
+      if !friend?(temp)
+        Friendship.create! do |f|
+          f.user_id = self.id
+          f.friend_id = temp.id
+        end
+      end
       
-      # No relation
-      if !friend and !inverse_friend
-        Rails.logger.debug 'No relationship'
-        Friendship.create! do |f|
-          f.user_id = self.id
-          f.friend_id = temp.id
-        end
-        
+      # Create the inverse friendship to save
+      # extra db taxes later when the user logs in
+      if !inverse_friend?(temp)
         Friendship.create! do |f|
           f.user_id = temp.id
           f.friend_id = self.id
         end
-        
-      # Just friend
-      elsif friend and !inverse_friend
-        Rails.logger.debug 'Just friends'
-        # Create the inverse friendship to save
-        # extra db taxes later when the user logs in
-        Friendship.create! do |f|
-          f.user_id = temp.id
-          f.friend_id = self.id
-        end
-        
-      # Just inverse friend
-      elsif !friend and inverse_friend
-        Rails.logger.debug 'Just inverse friends'
-        # Create friend relationship to save
-        # db tax as well
-        Friendship.create! do |f|
-          f.user_id = self.id
-          f.friend_id = temp.id
-        end
-        
-      # Already related
-      elsif mutual_friend
-        Rails.logger.debug 'Already mutual friends'
       end
     end
   end
