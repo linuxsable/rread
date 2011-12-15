@@ -124,6 +124,10 @@ class AppUser
     end
   end
   
+  def reader
+    @user_model.readers.first
+  end
+  
   # This should probably get moved to a
   # "Reader" class later.
   def import_google_reader(email, password)
