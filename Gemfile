@@ -13,6 +13,7 @@ gem 'koala'
 gem 'delayed_job'
 gem 'greader'
 gem 'feedzirra'
+gem 'kss', "~> 0.1.2"
 
 # Gems used only for assets and not required
 # in production environments by default.
