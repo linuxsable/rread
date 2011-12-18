@@ -12,6 +12,7 @@ gem 'haml-rails'
 gem 'koala'
 gem 'delayed_job'
 gem 'greader'
+gem 'feedzirra'
 
 # Gems used only for assets and not required
 # in production environments by default.

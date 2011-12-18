@@ -3,13 +3,15 @@
 one:
   blog_id: 1
   title: MyString
-  description: MyText
-  publish_date: 2011-12-13 00:24:42
-  guid: MyString
+  author: MyString
+  content: MyText
+  published_date: 2011-12-13 00:24:42
+  entry_id: MyString
 
 two:
-  blog_id: 1
+  blog_id: 2
   title: MyString
-  description: MyText
-  publish_date: 2011-12-13 00:24:42
-  guid: MyString
+  author: MyString
+  content: MyText
+  published_date: 2011-12-13 00:24:42
+  entry_id: MyString

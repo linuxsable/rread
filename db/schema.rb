@@ -16,9 +16,10 @@ ActiveRecord::Schema.define(:version => 20111215081117) do
   create_table "articles", :force => true do |t|
     t.integer  "blog_id"
     t.string   "title"
-    t.text     "description"
-    t.datetime "publish_date"
-    t.string   "guid"
+    t.string   "author"
+    t.text     "content"
+    t.string   "entry_id"
+    t.datetime "published_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
