@@ -1,0 +1,6 @@
+- Setup a queue system that syncs blog articles in a smart way with weights
+
+-- Q
+- Each time a blog gets added to a reader, that blog has a column which gets incremented
+- When a blog is added to the Q, that column is used as the priority
+- It may be that we need to reverse this so that less used blogs have a higher priority because they'll be read less

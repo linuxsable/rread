@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111215081117) do
+ActiveRecord::Schema.define(:version => 20111220074846) do
 
   create_table "articles", :force => true do |t|
     t.integer  "blog_id"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20111215081117) do
     t.datetime "updated_at"
   end
 
-  create_table "timelines", :force => true do |t|
+  create_table "subscriptions", :force => true do |t|
     t.integer  "blog_id"
     t.integer  "reader_id"
     t.datetime "created_at"

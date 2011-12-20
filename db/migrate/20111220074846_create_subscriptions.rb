@@ -1,6 +1,6 @@
-class CreateTimelines < ActiveRecord::Migration
+class CreateSubscriptions < ActiveRecord::Migration
   def change
-    create_table :timelines do |t|
+    create_table :subscriptions do |t|
       t.integer :blog_id
       t.integer :reader_id
 
