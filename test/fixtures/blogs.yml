@@ -7,6 +7,7 @@ one:
   description: MyText
   first_created_by: 1
   avatar: MyString
+  articles_last_syncd_at: 2011-12-13 00:24:42
 
 two:
   url: MyString
@@ -15,3 +16,4 @@ two:
   description: MyText
   first_created_by: 1
   avatar: MyString
+  articles_last_syncd_at: 2011-12-13 00:24:42

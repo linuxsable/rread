@@ -5,13 +5,13 @@ one:
   title: MyString
   author: MyString
   content: MyText
-  published_date: 2011-12-13 00:24:42
-  entry_id: MyString
+  published_at: 2011-12-13 00:24:42
+  url: MyString
 
 two:
   blog_id: 2
   title: MyString
   author: MyString
   content: MyText
-  published_date: 2011-12-13 00:24:42
-  entry_id: MyString
+  published_at: 2011-12-13 00:24:42
+  url: MyString
