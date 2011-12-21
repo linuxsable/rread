@@ -6,20 +6,23 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Blog.create! do |b|
+Blog.create do |b|
 	b.url = 'www.techcrunch.com'
 	b.feed_url = 'http://feeds.feedburner.com/TechCrunch/'
 	b.name = 'TechCrunch'
+	b.articles_last_syncd_at = Time.now - 3.days
 end
 
-Blog.create! do |b|
+Blog.create do |b|
 	b.url = 'www.engadget.com'
 	b.feed_url = 'http://www.engadget.com/rss.xml'
 	b.name = 'Engadget'
+	b.articles_last_syncd_at = Time.now - 3.days
 end
 
-Blog.create! do |b|
+Blog.create do |b|
 	b.url = 'www.venturebeat.com'
 	b.feed_url = 'http://feeds.venturebeat.com/VentureBeat'
 	b.name = 'Venturebeat'
+	b.articles_last_syncd_at = Time.now - 3.days
 end

@@ -11,17 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111220074846) do
+ActiveRecord::Schema.define(:version => 20111221081220) do
 
   create_table "articles", :force => true do |t|
     t.integer  "blog_id"
     t.string   "title"
     t.string   "author"
     t.text     "content"
-    t.string   "entry_id"
-    t.datetime "published_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
+    t.string   "url"
   end
 
   create_table "authorizations", :force => true do |t|
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20111220074846) do
     t.string   "avatar"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "articles_last_syncd_at"
   end
 
   create_table "delayed_jobs", :force => true do |t|
