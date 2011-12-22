@@ -2,16 +2,8 @@
 
 one:
   blog_id: 1
-  title: MyString
-  author: MyString
-  content: MyText
+  title: post
+  author: tyler
+  content: yup!
   published_at: 2011-12-13 00:24:42
-  url: MyString
-
-two:
-  blog_id: 2
-  title: MyString
-  author: MyString
-  content: MyText
-  published_at: 2011-12-13 00:24:42
-  url: MyString
+  url: http://www.google.com

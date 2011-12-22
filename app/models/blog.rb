@@ -3,9 +3,19 @@ class Blog < ActiveRecord::Base
   has_many :subscriptions
   has_many :readers, :through => :subscriptions
 
+  validates_presence_of :url, :feed_url, :name, :first_created_by
+  validates_uniqueness_of :url, :feed_url, :name
+
+  validates :url, :feed_url, :format => {
+    :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix,
+    :message => "Must be a valid URL."
+  }
+
   SYNC_DIFFERENCE = 30.seconds
 
-  # Really need to setup validations
+  def sync
+    
+  end
 
   # Check if the blog has had it's articles sync'd in
   # a certain period below SYNC_DIFFERENCE
@@ -22,7 +32,7 @@ class Blog < ActiveRecord::Base
       if entry.published.to_i > self.articles_last_syncd_at.to_i
         entry.sanitize!
 
-        Article.create do |a|
+        Article.create! do |a|
           a.blog = self
           a.title = entry.title
           a.author = entry.author

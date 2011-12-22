@@ -1,19 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  url: MyString
-  feed_url: MyString
-  name: MyString
-  description: MyText
+techcrunch:
+  url: http://www.techcrunch.com
+  feed_url: http://feeds.feedburner.com/TechCrunch/
+  name: TechCrunch
+  description: Great blog
   first_created_by: 1
-  avatar: MyString
-  articles_last_syncd_at: 2011-12-13 00:24:42
-
-two:
-  url: MyString
-  feed_url: MyString
-  name: MyString
-  description: MyText
-  first_created_by: 1
-  avatar: MyString
+  avatar: String
   articles_last_syncd_at: 2011-12-13 00:24:42

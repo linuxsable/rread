@@ -42,4 +42,9 @@ gem 'capistrano'
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
+  #gem 'ZenTest'
+	gem 'autotest'
+	gem 'autotest-rails'
+	gem 'test_notifier'
+  gem 'autotest-growl'
 end
