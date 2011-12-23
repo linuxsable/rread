@@ -30,8 +30,6 @@ class ArticleTest < ActiveSupport::TestCase
     b.published_at = articles(:one).published_at
     b.save
     
-    pp Blog.all
-    
     assert b.invalid?(:published_at)
   end
   
