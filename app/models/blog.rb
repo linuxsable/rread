@@ -1,3 +1,8 @@
+# 1 worker = 3 blogs per second
+# 1 minutes = 180 blogs
+# 2 minutes = 360 blogs
+
+
 class Blog < ActiveRecord::Base
   has_many :articles
   has_many :subscriptions
@@ -44,7 +49,7 @@ class Blog < ActiveRecord::Base
     end
 
     self.articles_last_syncd_at = Time.now
-    self.save
+    self.save!
   end
 
   def sync_articles_delayed
