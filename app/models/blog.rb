@@ -1,7 +1,10 @@
 # 1 worker = 3 blogs per second
+#
 # 1 minutes = 180 blogs
 # 2 minutes = 360 blogs
-
+#
+# 1 worker on 1000 blogs = 6 minutes
+# 2 workers on 1000 blogs = 3 minutes
 
 class Blog < ActiveRecord::Base
   has_many :articles

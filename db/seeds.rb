@@ -29,3 +29,27 @@ Blog.create! do |b|
 	b.articles_last_syncd_at = Time.now - 3.days
 	b.first_created_by = 1
 end
+
+Blog.create! do |b|
+	b.url = 'http://www.theoatmeal.com'
+	b.feed_url = 'http://feeds.feedburner.com/oatmealfeed'
+	b.name = 'The Oatmeal'
+	b.articles_last_syncd_at = Time.now - 3.days
+	b.first_created_by = 1
+end
+
+Blog.create! do |b|
+	b.url = 'http://37signals.com/svn/'
+	b.feed_url = 'http://feeds.feedburner.com/37signals/beMH'
+	b.name = 'Signal vs Noise'
+	b.articles_last_syncd_at = Time.now - 3.days
+	b.first_created_by = 1
+end
+
+Blog.create! do |b|
+	b.url = 'http://zenhabits.net/'
+	b.feed_url = 'http://feeds.feedburner.com/zenhabits'
+	b.name = 'Zen Habits'
+	b.articles_last_syncd_at = Time.now - 3.days
+	b.first_created_by = 1
+end

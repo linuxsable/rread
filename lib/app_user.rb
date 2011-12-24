@@ -123,6 +123,11 @@ class AppUser
       end
     end
   end
+
+  def sync_facebook_friends_delayed
+    sync_facebook_friends
+  end
+  handle_asynchronously :sync_facebook_friends_delayed, :priority => 0
   
   def reader
     @user_model.readers.first

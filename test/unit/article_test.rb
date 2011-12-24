@@ -8,7 +8,6 @@ class ArticleTest < ActiveSupport::TestCase
 		
 		assert !a.valid?
 		assert a.invalid? :title
-		assert a.invalid? :content
 		assert a.invalid? :published_at
 		assert a.invalid? :url
 	end

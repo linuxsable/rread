@@ -14,7 +14,7 @@ class Authorization < ActiveRecord::Base
   def self.create_from_hash(hash, user = nil)
     user ||= User.create_from_hash(hash)
     
-    create! do |a|
+    auth = create! do |a|
       a.user     = user
       a.uid      = hash['uid']
       a.token    = hash['credentials']['token']
@@ -23,5 +23,7 @@ class Authorization < ActiveRecord::Base
     end
     
     ProviderInfo.create_from_hash_and_user(hash, user)
+
+    auth
   end
 end
