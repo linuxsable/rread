@@ -2,11 +2,8 @@
 class HomeController < ApplicationController
   def index
     # Get the current users Reader
-    
-    # pp current_user
-    current_user.reader
-    
-    # Update the reader by pulling in all blog posts
+    reader = current_user.reader.first
+    @blogs = reader.blogs
     
     # Render the reader
   end
