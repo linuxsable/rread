@@ -90,6 +90,10 @@ class AppUser
     
     friend?(app_user) and inverse_friend?(app_user)
   end
+
+  def reader
+    @user_model.reader
+  end
   
   # This actually goes through the whole process of
   # importing facebook friends mutually for the user.
@@ -128,22 +132,6 @@ class AppUser
     sync_facebook_friends
   end
   handle_asynchronously :sync_facebook_friends_delayed, :priority => 0
-  
-  def reader
-    @user_model.readers.first
-  end
-  
-  # This should probably get moved to a
-  # "Reader" class later.
-  def import_google_reader(email, password)
-    creds = { :email => email, :password => password }
-    
-    reader = GReader.auth(creds)
-    reader.feeds.each do |feed|
-      # Import the feeds here
-      Rails.logger.debug feed
-    end
-  end
   
   private
   

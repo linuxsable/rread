@@ -53,3 +53,11 @@ Blog.create! do |b|
 	b.articles_last_syncd_at = Time.now - 3.days
 	b.first_created_by = 1
 end
+
+Blog.create! do |b|
+	b.url = 'http://news.ycombinator.com'
+	b.feed_url = 'http://news.ycombinator.com/rss'
+	b.name = 'Hacker News'
+	b.articles_last_syncd_at = Time.now - 3.days
+	b.first_created_by = 1
+end

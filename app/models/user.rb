@@ -10,15 +10,22 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   
   # Create from the omniauth hash.
-  # Setup the guys reader.
   def self.create_from_hash(hash)
     user = create! do |u|
       u.name = hash['info']['name']
     end
+    user.setup_reader
+    return user
   end
 
   # Create the user reader if necessary.
   def setup_reader
-    
+    if self.reader != nil
+      return self.reader
+    end
+
+    Reader.create do |reader|
+      reader.user = self
+    end
   end
 end

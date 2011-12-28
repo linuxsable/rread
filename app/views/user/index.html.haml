@@ -14,3 +14,11 @@
 %h2 People who've added me
 - for friend in current_user.inverse_friends
   %img{src: friend.avatar}
+
+%h1 Import Greader
+%form{}
+  Email:
+  %input{:type => 'text', :name => 'email'}
+  Password:
+  %input{:type => 'password', :name => 'password'}
+  %a{:id => 'greader-link', :href => '#'} Go!

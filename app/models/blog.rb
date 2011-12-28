@@ -5,7 +5,6 @@
 #
 # 1 worker on 1000 blogs = 6 minutes
 # 2 workers on 1000 blogs = 3 minutes
-
 class Blog < ActiveRecord::Base
   has_many :articles
   has_many :subscriptions
@@ -21,32 +20,57 @@ class Blog < ActiveRecord::Base
 
   SYNC_DIFFERENCE = 30.seconds
 
-  def sync
-    
+  # Look-up a feed_url and create the new blog record.
+  # Use feedzira to do this.
+  def self.create_from_user_and_feed_url(user, feed_url)
+    feed = Feedzirra::Feed.fetch_and_parse(feed_url)
+
+    blog = self.new do |b|
+      b.url = feed.url
+      b.feed_url = feed.feed_url
+      b.name = feed.title
+      b.description = nil
+      b.avatar = nil
+      b.first_created_by = user.id      
+    end
+
+    blog.save!
+    blog.sync_articles(feed)
+
+    return blog
   end
 
   # Check if the blog has had it's articles sync'd in
   # a certain period below SYNC_DIFFERENCE
+  #
+  # NEEDS UNIT TEST
   def articles_synced?
     Time.now.to_i - articles_last_syncd_at.to_i <= SYNC_DIFFERENCE
   end
 
   # Hit the blog and parse and update the articles
   # in the db.
-  def sync_articles
-    feed = Feedzirra::Feed.fetch_and_parse(feed_url)
+  #
+  # NEEDS UNIT TEST
+  def sync_articles(feed=nil)
+    if feed.nil?
+      feed = Feedzirra::Feed.fetch_and_parse(feed_url)
+    end
 
     feed.entries.each do |entry|
       if entry.published.to_i > self.articles_last_syncd_at.to_i
-        entry.sanitize!
-
-        Article.create! do |a|
-          a.blog = self
-          a.title = entry.title
-          a.author = entry.author
-          a.url = entry.url
-          a.content = entry.content
-          a.published_at = entry.published
+        begin
+          entry.sanitize!
+          Article.create! do |a|
+            a.blog = self
+            a.title = entry.title
+            a.author = entry.author
+            a.url = entry.url
+            a.content = entry.content
+            a.published_at = entry.published
+          end
+        rescue Exception => e
+          puts e.message
         end
       end
     end
@@ -55,11 +79,10 @@ class Blog < ActiveRecord::Base
     self.save!
   end
 
+  # NEEDS UNIT TEST
   def sync_articles_delayed
     sync_articles
   end
-
-  # Not sure if this is the best method   
-  handle_asynchronously :sync_articles_delayed, :priority => Proc.new { |i| i.readers.count }
+  handle_asynchronously :sync_articles_delayed, :priority => 0
 
 end

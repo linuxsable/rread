@@ -48,6 +48,20 @@ class BlogTest < ActiveSupport::TestCase
     assert b.invalid? :url
   end
 
+  test 'create_from_user_and_feed_url' do
+    user = User.create(:name => 'Tyler')
+    feed_url = 'http://monome.org/rss/'
+
+    blog = nil
+    assert_nothing_raised {
+      blog = Blog.create_from_user_and_feed_url(user, feed_url)  
+    }
+
+    assert_equal blog.first_created_by, user.id
+    assert_not_nil blog.articles_last_syncd_at
+    assert_not_nil blog.name
+  end
+
   def get_blog
   	Blog.new do |blog|
   		blog.url = 'http://www.testblog.com'
