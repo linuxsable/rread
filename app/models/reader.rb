@@ -15,18 +15,11 @@ class Reader < ActiveRecord::Base
   # happen too much after the beginning of the app (at least it wont happen)
   # on popular blogs.
   def add_subscription(feed_url)
-   	blog = Blog.find_by_feed_url(feed_url)
+    blog = Blog.find_by_feed_url(feed_url)
     if blog.nil?
-      begin
-        blog = Blog.create_from_user_and_feed_url(self.user, feed_url)
-      rescue Exception => e
-        false
-      end
+      blog = Blog.create_from_user_and_feed_url(self.user, feed_url)  
+      return subscriptions.build(:blog => blog).save
     end
-
-    debugger
-
-    Subscription.create!(:blog_id => blog.id, :reader_id => self.id)
   end
 
   # Will import all the Google Reader feeds

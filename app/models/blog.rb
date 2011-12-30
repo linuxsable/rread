@@ -25,6 +25,10 @@ class Blog < ActiveRecord::Base
   def self.create_from_user_and_feed_url(user, feed_url)
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
 
+    if !feed.is_a? Feedzirra::Parser::RSS
+      raise 'Cannot fetch and parse feed: "' + feed_url + '"'
+    end
+
     blog = self.new do |b|
       b.url = feed.url
       b.feed_url = feed.feed_url
@@ -34,7 +38,7 @@ class Blog < ActiveRecord::Base
       b.first_created_by = user.id      
     end
 
-    blog.save!
+    blog.save
     blog.sync_articles(feed)
 
     return blog
