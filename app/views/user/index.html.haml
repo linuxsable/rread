@@ -1,6 +1,19 @@
 %br
 %br
 
+%h1 Reader
+%form
+  Feed URL:
+  %input{type: 'text', name: 'url'}
+  %a{id: 'add_link', href: '#'} Add
+  
+- for article in current_user.reader.article_feed
+  %h3= article.title
+  %p{style: "color:red"}= article.blog.name
+  = article.published_at
+  = link_to article.url, article.url
+  %p= raw(article.content)
+
 %h1 Friendship Info
 
 %h2 Mutual Friends
@@ -15,10 +28,10 @@
 - for friend in current_user.inverse_friends
   %img{src: friend.avatar}
 
-%h1 Import Greader
-%form{}
-  Email:
-  %input{:type => 'text', :name => 'email'}
-  Password:
-  %input{:type => 'password', :name => 'password'}
-  %a{:id => 'greader-link', :href => '#'} Go!
+/ %h1 Import Greader
+/ %form{}
+/   Email:
+/   %input{:type => 'text', :name => 'email'}
+/   Password:
+/   %input{:type => 'password', :name => 'password'}
+/   %a{:id => 'greader-link', :href => '#'} Go!

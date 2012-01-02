@@ -26,4 +26,15 @@ class ReaderTest < ActiveSupport::TestCase
 	# 	reader.import_greader_feeds(guser, gpass)
 	# 	assert_equal reader.subscriptions.count >= 1
 	# end
+
+	test 'get_article_feed' do
+		user = User.create(:name => 'Tyler')
+		reader = Reader.create(:user_id => user.id)
+
+		reader.add_subscription('http://monome.org/rss/')
+		reader.add_subscription('http://feeds.feedburner.com/TechCrunch/')
+
+		articles = reader.article_feed
+		assert articles.count > 0
+	end
 end

@@ -18,8 +18,8 @@ class Reader < ActiveRecord::Base
     blog = Blog.find_by_feed_url(feed_url)
     if blog.nil?
       blog = Blog.create_from_user_and_feed_url(self.user, feed_url)  
-      return subscriptions.build(:blog => blog).save
     end
+    subscriptions.build(:blog => blog).save
   end
 
   # Will import all the Google Reader feeds
@@ -31,5 +31,11 @@ class Reader < ActiveRecord::Base
     greader.feeds.each do |feed|
       add_subscription(feed.url)
     end
+  end
+
+  def article_feed
+    blog_ids = []
+    self.blogs.each { |b| blog_ids << b.id }
+    Article.where(:blog_id => blog_ids).order('published_at DESC').limit(30)
   end
 end
