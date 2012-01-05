@@ -55,9 +55,9 @@ Blog.create! do |b|
 end
 
 Blog.create! do |b|
-	b.url = 'http://news.ycombinator.com'
-	b.feed_url = 'http://news.ycombinator.com/rss'
-	b.name = 'Hacker News'
+	b.url = 'http://designsponge.com'
+	b.feed_url = 'http://feeds.feedburner.com/designspongeonline/njjl'
+	b.name = 'Design Sponge'
 	b.articles_last_syncd_at = Time.now - 3.days
 	b.first_created_by = 1
 end

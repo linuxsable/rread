@@ -8,6 +8,7 @@
   %a{id: 'add_link', href: '#'} Add
   
 - for article in current_user.reader.article_feed
+  %hr
   %h3= article.title
   %p{style: "color:red"}= article.blog.name
   = article.published_at

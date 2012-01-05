@@ -150,14 +150,15 @@ class AppUser
     load_facebook_api
     friends = @facebook_api.get_connections('me', 'friends')
     
-    auths = []
-    friends.each do |friend|
-      auth = Authorization.where(:provider => 'facebook', :uid => friend['id']).first
-      if !auth.nil?
-        auths << auth.user
-      end
-    end
-    auths
+    friend_ids = []
+    friends.each { |friend| friend_ids << friend['id'] }
+
+    auths = Authorization.where(:provider => 'facebook', :uid => friend_ids)
+
+    output = []
+    auths.each { |auth| output << auth.user }
+
+    output
   end
     
   # Setup the facebook api wrapper.

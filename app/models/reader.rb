@@ -5,15 +5,9 @@ class Reader < ActiveRecord::Base
 
   validates_uniqueness_of :user_id
 
-  # This will handle high level adding of a Subscription.
-  # It will take a feed-url and see if a blog exists for that URL.
-  # If a blog doesn't exist it will create the blog.
-  # It will then add a link to that blog (a Subscription record).
-  # It will sync the articles for the blog in the current thread
-  # and wont throw them on the queue (don't want the user to be able
-  # to see the blog without articles in the UI). Hopefully this won't
-  # happen too much after the beginning of the app (at least it wont happen)
-  # on popular blogs.
+  # This should support smart detection
+  # of the paramter type. It should be able to add a subscription
+  # based on feed_url, regular url, name, etc.
   def add_subscription(feed_url)
     blog = Blog.find_by_feed_url(feed_url)
     if blog.nil?
@@ -33,9 +27,9 @@ class Reader < ActiveRecord::Base
     end
   end
 
-  def article_feed
+  def article_feed(count=50)
     blog_ids = []
     self.blogs.each { |b| blog_ids << b.id }
-    Article.where(:blog_id => blog_ids).order('published_at DESC').limit(30)
+    Article.where(:blog_id => blog_ids).order('published_at DESC').limit(count)
   end
 end
