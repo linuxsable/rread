@@ -10,4 +10,11 @@ class Article < ActiveRecord::Base
     :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix,
     :message => "Must be a valid URL."
   }
+
+  # Mostly used for debugging so you can see text output
+  def self.text_list
+    output = [];
+    Article.all.each { |a| output << a.blog.name + ' -- ' + a.title }
+    output
+  end
 end

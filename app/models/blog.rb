@@ -45,7 +45,7 @@ class Blog < ActiveRecord::Base
   end
 
   def self.sync_articles_all
-    all.each{ |b| b.sync_articles }
+    all.each { |b| b.sync_articles }
   end
 
   # Check if the blog has had it's articles sync'd in
