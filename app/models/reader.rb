@@ -16,6 +16,12 @@ class Reader < ActiveRecord::Base
     subscriptions.build(:blog => blog).save
   end
 
+  def add_all_subscriptions
+    Blog.all.each { |blog|
+      subscriptions.build(:blog => blog).save
+    }
+  end
+
   # Will import all the Google Reader feeds
   # of the authing user to the current reader.
   def import_greader_feeds(email, password)

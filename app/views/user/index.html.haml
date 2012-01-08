@@ -9,7 +9,7 @@
   
 - for article in current_user.reader.article_feed
   %hr
-  %h3= article.title
+  %h3= raw(article.title)
   %p{style: "color:red"}= article.blog.name
   = article.published_at
   = link_to article.url, article.url

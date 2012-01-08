@@ -6,62 +6,54 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-LAST_SYNCD_AT = Time.now - 6.months
+blogs = [
+	{ 
+		'url' => 'http://www.techcrunch.com',
+		'feed_url' => 'http://feeds.feedburner.com/TechCrunch/',
+		'name' => 'TechCrunch'
+	},
+	{ 
+		'url' => 'http://www.venturebeat.com',
+		'feed_url' => 'http://feeds.venturebeat.com/VentureBeat',
+		'name' => 'Venturebeat'
+	},
+	{ 
+		'url' => 'http://www.theoatmeal.com',
+		'feed_url' => 'http://feeds.feedburner.com/oatmealfeed',
+		'name' => 'The Oatmeal'
+	},
+	{ 
+		'url' => 'http://37signals.com/svn/',
+		'feed_url' => 'http://feeds.feedburner.com/37signals/beMH',
+		'name' => 'Signal vs Noise'
+	},
+	{ 
+		'url' => 'http://zenhabits.net/',
+		'feed_url' => 'http://feeds.feedburner.com/zenhabits',
+		'name' => 'Zen Habits'
+	},
+	{ 
+		'url' => 'http://designsponge.com',
+		'feed_url' => 'http://feeds.feedburner.com/designspongeonline/njjl',
+		'name' => 'Design Sponge'
+	},
+	{ 
+		'url' => 'http://inc.com',
+		'feed_url' => 'http://www.inc.com/rss/homepage.xml',
+		'name' => 'INC'
+	}
+]
 
-Blog.create! do |b|
-	b.url = 'http://www.techcrunch.com'
-	b.feed_url = 'http://feeds.feedburner.com/TechCrunch/'
-	b.name = 'TechCrunch'
-	b.articles_last_syncd_at = LAST_SYNCD_AT
-	b.first_created_by = 1
-end
+blogs.each { |b|
+	Blog.create! { |blog|
+		blog.url = b['url']
+		blog.feed_url = b['feed_url']
+		blog.name = b['name']
+		blog.articles_last_syncd_at = Time.now - 6.months
+		blog.first_created_by = 1
+	}
+}
 
-Blog.create! do |b|
-	b.url = 'http://www.engadget.com'
-	b.feed_url = 'http://www.engadget.com/rss.xml'
-	b.name = 'Engadget'
-	b.articles_last_syncd_at = LAST_SYNCD_AT
-	b.first_created_by = 1
-end
-
-Blog.create! do |b|
-	b.url = 'http://www.venturebeat.com'
-	b.feed_url = 'http://feeds.venturebeat.com/VentureBeat'
-	b.name = 'Venturebeat'
-	b.articles_last_syncd_at = LAST_SYNCD_AT
-	b.first_created_by = 1
-end
-
-Blog.create! do |b|
-	b.url = 'http://www.theoatmeal.com'
-	b.feed_url = 'http://feeds.feedburner.com/oatmealfeed'
-	b.name = 'The Oatmeal'
-	b.articles_last_syncd_at = LAST_SYNCD_AT
-	b.first_created_by = 1
-end
-
-Blog.create! do |b|
-	b.url = 'http://37signals.com/svn/'
-	b.feed_url = 'http://feeds.feedburner.com/37signals/beMH'
-	b.name = 'Signal vs Noise'
-	b.articles_last_syncd_at = LAST_SYNCD_AT
-	b.first_created_by = 1
-end
-
-Blog.create! do |b|
-	b.url = 'http://zenhabits.net/'
-	b.feed_url = 'http://feeds.feedburner.com/zenhabits'
-	b.name = 'Zen Habits'
-	b.articles_last_syncd_at = LAST_SYNCD_AT
-	b.first_created_by = 1
-end
-
-Blog.create! do |b|
-	b.url = 'http://designsponge.com'
-	b.feed_url = 'http://feeds.feedburner.com/designspongeonline/njjl'
-	b.name = 'Design Sponge'
-	b.articles_last_syncd_at = LAST_SYNCD_AT
-	b.first_created_by = 1
-end
+puts '** SYNCING ALL ARTICLES **'
 
 Blog.sync_articles_all

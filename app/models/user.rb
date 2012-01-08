@@ -24,8 +24,10 @@ class User < ActiveRecord::Base
       return self.reader
     end
 
-    Reader.create do |reader|
+    reader = Reader.create do |reader|
       reader.user = self
     end
+
+    reader.add_all_subscriptions
   end
 end
