@@ -13,12 +13,12 @@ class Reader < ActiveRecord::Base
     if blog.nil?
       blog = Blog.create_from_user_and_feed_url(self.user, feed_url)  
     end
-    subscriptions.build(:blog => blog).save
+    subscriptions.build(:blog => blog).save!
   end
 
   def add_all_subscriptions
     Blog.all.each { |blog|
-      subscriptions.build(:blog => blog).save
+      subscriptions.build(:blog => blog).save!
     }
   end
 

@@ -13,7 +13,7 @@ class Article < ActiveRecord::Base
 
   # Mostly used for debugging so you can see text output
   def self.text_list
-    output = [];
+    output = []
     Article.all.each { |a| output << a.blog.name + ' -- ' + a.title }
     output
   end
