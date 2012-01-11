@@ -15,6 +15,10 @@ class AppUser
     @provider_info_model = nil
     @facebook_api = nil
   end
+
+  def user_model
+    @user_model
+  end
   
   def id
     @user_model.id

@@ -33,7 +33,7 @@ class Reader < ActiveRecord::Base
     end
   end
 
-  def article_feed(count=50)
+  def article_feed(count=20)
     blog_ids = []
     self.blogs.each { |b| blog_ids << b.id }
     Article.where(:blog_id => blog_ids).order('published_at DESC').limit(count)
