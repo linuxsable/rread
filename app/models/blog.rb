@@ -87,10 +87,4 @@ class Blog < ActiveRecord::Base
     self.save!
   end
 
-  # NEEDS UNIT TEST
-  def sync_articles_delayed
-    sync_articles
-  end
-  handle_asynchronously :sync_articles_delayed, :priority => 0
-
 end

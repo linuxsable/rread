@@ -10,8 +10,9 @@ class SessionsController < ApplicationController
       app_user = AppUser.new(@auth.user)
       app_user.sync_facebook_friends
     else
+      # TODO: SYNC DELAYED HERE WHEN READY
       app_user = AppUser.new(@auth.user)
-      app_user.sync_facebook_friends_delayed
+      app_user.sync_facebook_friends
     end
     
     # Log the authorizing user in.

@@ -5,8 +5,10 @@ class Activity < ActiveRecord::Base
   default_scope :order => 'activities.created_at DESC', :limit => 15
 
   # Activity Types
-  ARTICLE_LIKED = 1
-  SUBSCRIPTION_ADDED = 2
+  ARTICLE_LIKED       = 1
+  ARTICLE_READ        = 2
+  SUBSCRIPTION_ADDED  = 3
+  FRIENDSHIP_ADDED    = 4
 
   def self.batch_add(users, activity_type, target)
     return false if users.blank? or activity_type.blank? or target.blank?

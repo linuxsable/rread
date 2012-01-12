@@ -16,6 +16,10 @@ class AppUser
     @facebook_api = nil
   end
 
+  def self.get_by_user_id(user_id)
+    self.new(User.find(user_id))
+  end
+
   def user_model
     @user_model
   end
@@ -132,10 +136,9 @@ class AppUser
     end
   end
 
-  def sync_facebook_friends_delayed
-    sync_facebook_friends
+  def async_facebook_friends
+    Resque.enqueue(FriendshipSyncer, self.id)
   end
-  handle_asynchronously :sync_facebook_friends_delayed, :priority => 0
   
   private
   

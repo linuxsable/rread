@@ -10,13 +10,12 @@ gem 'omniauth-facebook'
 gem 'twitter'
 gem 'haml-rails'
 gem 'koala'
-gem 'delayed_job'
-# gem 'delayed_job_active_record'
 gem 'greader'
 gem 'feedzirra'
 gem 'kss', "~> 0.1.2"
 gem 'whenever'
 gem 'home_run', :require => 'date'
+gem 'resque', :require => "resque/server"
 
 # Gems used only for assets and not required
 # in production environments by default.
