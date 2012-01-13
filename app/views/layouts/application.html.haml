@@ -34,9 +34,10 @@
       %ul
         %li
           %a{href: '#'} All Items
-        - current_user.reader.subscriptions.each do |s|
-          %li
-            %a{href: '#'}=s.blog.name
+        - if signed_in?
+          - current_user.reader.subscriptions.each do |s|
+            %li
+              %a{href: '#'}=s.blog.name
           
     #center
       = yield

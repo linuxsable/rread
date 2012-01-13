@@ -3,7 +3,9 @@
     .article
       %h3
         %a{href: '#'}
-          =raw(article.title)
+          = raw(article.blog.name)
+          \-
+          = raw(article.title)
       .guts
         %p{style: "color:red"}= article.blog.name
         = article.published_at
