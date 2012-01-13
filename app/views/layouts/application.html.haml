@@ -12,17 +12,56 @@
   %body
   
   %header
+    .left
+      %form
+        Feed URL:
+        %input{type: 'text', name: 'url'}
+        %a{id: 'add_link', href: '#'} Add
+      
+  
     %h1.tk-lobsters rread
+    .right
+      - if signed_in?
+        =current_user.name
+        %img{src: current_user.avatar, height: '30'}
+      - else
+        %p [Not signed in]
+      
   
   #main
-    - if signed_in?
-      %p [You are signed in!]
-      %p=current_user.name + ' - ' + current_user.email
+  
+    #left
+      %ul
+        %li
+          %a{href: '#'} All Items
+        - current_user.reader.subscriptions.each do |s|
+          %li
+            %a{href: '#'}=s.blog.name
+          
+    #center
+      = yield
+    #right
+      - if signed_in?
+        - for feed_item in @user_feed
+          = feed_item.user.name
+          - if feed_item.activity_type == Activity::SUBSCRIPTION_ADDED
+            subscribed to
+            = feed_item.target.blog.name + '.'
+          %br
       
-      %img{src: current_user.avatar}
-    - else
-      %p [Not signed in]
-      
-    = yield
+        %hr
+        
+        %h4 Mutual Friends
+        - for friend in current_user.mutual_friends
+          %img{src: friend.avatar}
+        
+        %h4 My Friends
+        - for friend in current_user.friends
+          %img{src: friend.avatar}
+        
+        %h4 People who've added me
+        - for friend in current_user.inverse_friends
+          %img{src: friend.avatar}
+    
   
   %footer

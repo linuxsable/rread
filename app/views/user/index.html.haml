@@ -1,45 +1,14 @@
-%hr
-
-%h1 Friendship Info
-
-%h2 Mutual Friends
-- for friend in current_user.mutual_friends
-  %img{src: friend.avatar}
-
-%h2 My friends
-- for friend in current_user.friends
-  %img{src: friend.avatar}
-
-%h2 People who've added me
-- for friend in current_user.inverse_friends
-  %img{src: friend.avatar}
-
-%hr
-
-%h1 Friend Feed
-
-- for feed_item in @user_feed
-  = feed_item.user.name
-  - if feed_item.activity_type == Activity::SUBSCRIPTION_ADDED
-    subscribed to
-    = feed_item.target.blog.name + '.'
-  %br
-
-%hr
-
-%h1 Reader
-%form
-  Feed URL:
-  %input{type: 'text', name: 'url'}
-  %a{id: 'add_link', href: '#'} Add
-  
-- for article in current_user.reader.article_feed
-  %hr
-  %h3= raw(article.title)
-  %p{style: "color:red"}= article.blog.name
-  = article.published_at
-  = link_to article.url, article.url
-  %p= raw(article.content)
+#articles
+  - for article in current_user.reader.article_feed
+    .article
+      %h3
+        %a{href: '#'}
+          =raw(article.title)
+      .guts
+        %p{style: "color:red"}= article.blog.name
+        = article.published_at
+        = link_to article.url, article.url
+        = raw(article.content)
 
 / %h1 Import Greader
 / %form{}

@@ -5,7 +5,7 @@ $header_height: 30px
 body
   font-family: 'Helvetica Neue', Arial, Helvetica
   line-height: 1.5em
-  font-size: 11px
+  font-size: 13px
   color: #222
 header
   position: fixed
@@ -18,6 +18,11 @@ header
   background: rgba(240,240,240,.9)
   border: 1px solid #ccc
   
+  .right
+    position: absolute
+    top: 0
+    right: 0
+  
   h1
     text-align: center
     margin: 0
@@ -27,10 +32,27 @@ header
     +text_shadow(0, 1px, 2px, #fff)
   
 #main
-  margin-top: $header_height+10
+  margin-top: $header_height+50
   
   #left
     width: 120px
     border: 1px
+    float: left
     
+  #center
+    margin: 0 200px
+    
+  #right
+    position: absolute
+    top: 50px
+    right: 0
+a
+  color: #0099CC
   
+
+.article a.read
+  text-decoration: none
+  font-weight: normal
+  
+.guts
+  display: none

@@ -3,5 +3,11 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-	$('greader-link').click ->
-		
+  $('.article h3 a').click ->
+    $(this).addClass 'read'
+    $(this).parent().parent().children('.guts').toggle()
+    
+    $("html,body").animate
+      scrollTop: $(this).offset().top - 50
+    , 200
+    return false
