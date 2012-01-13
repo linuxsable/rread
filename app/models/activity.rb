@@ -9,6 +9,7 @@ class Activity < ActiveRecord::Base
   ARTICLE_READ        = 2
   SUBSCRIPTION_ADDED  = 3
   FRIENDSHIP_ADDED    = 4
+  BLOG_LIKED          = 5
 
   def self.batch_add(users, activity_type, target)
     return false if users.blank? or activity_type.blank? or target.blank?

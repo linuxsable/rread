@@ -16,7 +16,7 @@ class AppUser
     @facebook_api = nil
   end
 
-  def self.get_by_user_id(user_id)
+  def self.get_by_id(user_id)
     self.new(User.find(user_id))
   end
 

@@ -16,6 +16,7 @@ gem 'kss', "~> 0.1.2"
 gem 'whenever'
 gem 'home_run', :require => 'date'
 gem 'resque', :require => "resque/server"
+gem 'resque-pool'
 
 # Gems used only for assets and not required
 # in production environments by default.
