@@ -1,6 +1,4 @@
 Rread::Application.routes.draw do
-  get "home/index"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -50,19 +48,21 @@ Rread::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'index#index'
+  root :to => 'home#index'
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+  
+  resources :home, :user, :reader, :sessions, :blog, :article
+  
+  # Sessions stuff
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/signout' => 'sessions#destroy', :as => :signout
+
+  # Resque pannel
+  mount Resque::Server, :at => '/resque'
 
   # Static pages
   match ':action' => 'static#:action'
-  
-  resources :home, :user, :readers
-  
-  match "/auth/:provider/callback", :to => "sessions#create"
-  match "/signout" => "sessions#destroy", :as => :signout
-
-  mount Resque::Server, :at => "/resque"
 end

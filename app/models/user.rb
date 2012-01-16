@@ -14,8 +14,15 @@ class User < ActiveRecord::Base
   def self.create_from_hash(hash)
     user = create! do |u|
       u.name = hash['info']['name']
+      # Set a flag so that they have to finish onboarding
+      # before they can continue to use the site logged in.
+      u.onboarded = false
+      u.greader_imported = false
+      u.private_reading = false
     end
+
     user.setup_reader
+
     return user
   end
 
@@ -31,4 +38,11 @@ class User < ActiveRecord::Base
 
     reader.add_all_subscriptions
   end
+
+  def onboard!
+    self.onboarded = true
+    self.onboarded_at = Time.now
+    self.save!
+  end
+
 end

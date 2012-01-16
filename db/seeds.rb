@@ -41,7 +41,12 @@ blogs = [
 		'url' => 'http://inc.com',
 		'feed_url' => 'http://www.inc.com/rss/homepage.xml',
 		'name' => 'INC'
-	}
+	},
+	{ 
+		'url' => 'http://uncrate.com',
+		'feed_url' => 'http://feeds.feedburner.com/uncrate',
+		'name' => 'Uncrate'
+	},
 ]
 
 blogs.each { |b|

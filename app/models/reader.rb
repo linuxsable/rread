@@ -16,6 +16,13 @@ class Reader < ActiveRecord::Base
     subscriptions.build(:blog => blog).save!
   end
 
+  def remove_subscription(feed_url)
+    blog = Blog.find_by_feed_url(feed_url)
+    return false if blog.nil?
+
+    subscriptions.where(:blog_id => blog.id).limit(1).first.delete!
+  end
+
   def add_all_subscriptions
     Blog.all.each { |blog|
       subscriptions.build(:blog => blog).save!
@@ -33,7 +40,7 @@ class Reader < ActiveRecord::Base
     end
   end
 
-  def article_feed(count=20)
+  def article_feed(count=50)
     blog_ids = []
     self.blogs.each { |b| blog_ids << b.id }
     Article.where(:blog_id => blog_ids).order('published_at DESC').limit(count)

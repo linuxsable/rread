@@ -42,6 +42,14 @@ class AppUser
     load_provider_model
     @provider_info_model.email
   end
+
+  def onboarded?
+    @user_model.onboarded?
+  end
+
+  def onboard!
+    @user_model.onboard!
+  end
   
   # Get the users friends.
   def friends

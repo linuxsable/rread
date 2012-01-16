@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+
+  before_filter :check_onboarding_status
   
   protected
   
@@ -25,6 +27,21 @@ class ApplicationController < ActionController::Base
   # Is current user signed in
   def signed_in?
     !!current_user
+  end
+
+  def check_onboarding_status
+    @controller_name = controller_name
+    @action_name = action_name
+
+    return if !signed_in?
+
+    if @controller_name == 'sessions' and @action_name == 'index'
+      return
+    end
+
+    if !current_user.onboarded?
+      return redirect_to :controller => 'sessions', :action => 'index'
+    end
   end
   
   # Make these avail to the views as helpers

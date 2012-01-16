@@ -1,28 +1,35 @@
 class SessionsController < ApplicationController
+  # This will handle the stage between creating an account
+  # and accepting terms and small settings before starting.
+  def index
+    current_user.onboard!
+
+    render :layout => 'index'
+  end
+
   def create
     auth = request.env['omniauth.auth']
     unless @auth = Authorization.find_from_hash(auth)
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
       @auth = Authorization.create_from_hash(auth, current_user)
-
-      # Sync his facebook friends
-      app_user = AppUser.new(@auth.user)
-      app_user.sync_facebook_friends
-    else
-      # TODO: SYNC DELAYED HERE WHEN READY
-      app_user = AppUser.new(@auth.user)
-      app_user.sync_facebook_friends
     end
+
+    app_user = AppUser.new(@auth.user)
+    app_user.async_facebook_friends
     
     # Log the authorizing user in.
     self.current_user = @auth.user
-    
-    redirect_to :controller => 'index'
+
+    if @auth.user.onboarded?
+      return redirect_to :controller => 'reader'
+    else
+      return redirect_to :controller => 'sessions', :action => 'index'
+    end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to :controller => 'index'
+    redirect_to :controller => 'home'
   end
 end

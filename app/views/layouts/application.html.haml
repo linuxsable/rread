@@ -5,9 +5,6 @@
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    / %script{:src => "http://use.typekit.com/hrs5uav.js"}
-    / %script
-    /   try{Typekit.load();}catch(e){}
     
   %body
   
@@ -27,7 +24,6 @@
       - else
         %p [Not signed in]
       
-  
   #main
   
     #left
@@ -64,5 +60,4 @@
         - for friend in current_user.inverse_friends
           %img{src: friend.avatar}
     
-  
   %footer

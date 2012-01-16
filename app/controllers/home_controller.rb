@@ -1,10 +1,11 @@
 # This will be for logged in users only
 class HomeController < ApplicationController
   def index
-    # Get the current users Reader
-    reader = current_user.reader.first
-    @blogs = reader.blogs
-    
-    # Render the reader
+    if signed_in?
+      return redirect_to :controller => 'reader', :action => 'index'
+    end
+
+    render :layout => 'index'
   end
+
 end
