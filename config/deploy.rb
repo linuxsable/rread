@@ -19,7 +19,6 @@ server "50.56.208.142", :app, :web, :db, :primary => true
 namespace :deploy do
   task :start, :roles => :app do
     run "touch #{current_release}/tmp/restart.txt"
-    run "bundle install"
   end
 
   task :stop, :roles => :app do
