@@ -4,10 +4,11 @@
 
 $(document).ready ->
   $('.article h3 a').click ->
-    $(this).addClass 'read'
-    $(this).parent().parent().children('.guts').toggle()
+    $('.article.active').removeClass('active')
+    article = $(this).parent().parent()
+    article.addClass 'read active'
     
     $("html,body").animate
       scrollTop: $(this).offset().top - 50
-    , 200
+    , 0
     return false

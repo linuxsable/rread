@@ -1,5 +1,8 @@
 @import base/_mixins
 
+a
+  +transition(all .18s ease-in-out)
+
 $header_height: 30px
 
 body
@@ -41,6 +44,7 @@ header
     
   #center
     margin: 0 200px
+    max-width: 800px
     
   #right
     position: absolute
@@ -50,9 +54,46 @@ a
   color: #0099CC
   
 
-.article a.read
-  text-decoration: none
-  font-weight: normal
+// READER STYLES
+
+.article
+  border-bottom: 1px solid #ccc
   
-.guts
-  display: none
+  h3
+    margin: 0
+  
+  a.title
+    color: #333
+    text-decoration: none
+    display: block
+    padding: 10px 0
+    
+    &:hover
+      color: #09C
+  
+  .guts
+    display: none
+  
+  &.read
+    h3
+      font-weight: normal
+      a
+        color: #666
+
+  &.active
+    h3
+      font-size: 18px
+      font-weight: bold
+      a
+        color: #333
+    .guts
+      display: block
+      
+
+.alignleft
+  float: right
+  margin: 0 10px 10px 0
+  
+.alignright
+  float: right
+  margin: 0 0 10px 10px

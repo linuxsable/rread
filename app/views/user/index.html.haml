@@ -1,14 +1,14 @@
 #articles
   - for article in current_user.reader.article_feed
-    .article
+    .article.unread
       %h3
-        %a{href: '#'}
+        %a.title{href: '#'}
           = raw(article.blog.name)
           \-
           = raw(article.title)
       .guts
-        %p{style: "color:red"}= article.blog.name
-        = article.published_at
+        = distance_of_time_in_words_to_now(article.published_at)
+        ago
         = link_to article.url, article.url
         = raw(article.content)
 
