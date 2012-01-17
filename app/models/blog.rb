@@ -18,7 +18,8 @@ class Blog < ActiveRecord::Base
     :message => "Must be a valid URL."
   }
 
-  SYNC_DIFFERENCE = 2.minutes
+  # Save some bandwith
+  SYNC_DIFFERENCE = 5.minutes
 
   # Look-up a feed_url and create the new blog record.
   # Use feedzira to do this.

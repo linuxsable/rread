@@ -30,3 +30,7 @@ namespace :deploy do
     run "touch #{current_release}/tmp/restart.txt"
   end
 end
+
+task :tail_logs do
+  run "tail -f /rails_apps/rread/current/log/*"
+end
