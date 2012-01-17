@@ -18,7 +18,7 @@ class Blog < ActiveRecord::Base
     :message => "Must be a valid URL."
   }
 
-  SYNC_DIFFERENCE = 30.seconds
+  SYNC_DIFFERENCE = 2.minutes
 
   # Look-up a feed_url and create the new blog record.
   # Use feedzira to do this.
@@ -64,6 +64,8 @@ class Blog < ActiveRecord::Base
     if feed.nil?
       feed = Feedzirra::Feed.fetch_and_parse(feed_url)
     end
+
+    return if feed.entries.empty?
 
     feed.entries.each do |entry|
       if entry.published.to_i > self.articles_last_syncd_at.to_i
