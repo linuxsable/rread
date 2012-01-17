@@ -29,11 +29,11 @@
     #left
       %ul
         %li
-          %a{href: '#'} All Items
+          %a{href: '/reader'} All Items
         - if signed_in?
           - current_user.reader.subscriptions.each do |s|
             %li
-              %a{href: '#'}=s.blog.name
+              %a{href: '?f=' + s.blog.id.to_s}=s.blog.name
           
     #center
       = yield
