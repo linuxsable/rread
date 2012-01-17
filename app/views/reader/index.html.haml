@@ -1,5 +1,5 @@
 #articles
-  - for article in current_user.reader.article_feed
+  - for article in @article_feed
     .article.unread
       %h3
         %a.title{href: '#'}

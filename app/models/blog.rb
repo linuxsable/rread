@@ -87,4 +87,8 @@ class Blog < ActiveRecord::Base
     self.save!
   end
 
+  def async_articles
+    Resque.enqueue(BlogSyncer, self.id)
+  end
+
 end
