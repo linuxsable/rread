@@ -31,6 +31,12 @@ namespace :deploy do
   end
 end
 
+desc "Tail the logs"
 task :tail_logs do
   run "tail -f /rails_apps/rread/current/log/*"
+end
+
+desc "Get ram usage"
+task :mem do
+  run "vmstat -S M"
 end
