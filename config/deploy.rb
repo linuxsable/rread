@@ -14,7 +14,7 @@ set :password, "Megaman1@"
 ssh_options[:forward_agent] = true
 
 # will be different entries for app, web, db if you host them on different servers
-server "50.56.208.142", :app, :web, :db, :primary => true
+server "rread.co", :app, :web, :db, :primary => true
 
 namespace :deploy do
   task :start, :roles => :app do

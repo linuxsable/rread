@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :check_onboarding_status
+  before_filter :check_onboarding_status, :authenticate
   
   protected
   
@@ -41,6 +41,12 @@ class ApplicationController < ActionController::Base
 
     if !current_user.onboarded?
       return redirect_to :controller => 'sessions', :action => 'index'
+    end
+  end
+
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == "thatshit" && password == "cray"
     end
   end
   
