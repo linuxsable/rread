@@ -47,6 +47,16 @@ blogs = [
 		'feed_url' => 'http://feeds.feedburner.com/uncrate',
 		'name' => 'Uncrate'
 	},
+	{
+		'url' => 'http://buzzbands.la',
+		'feed_url' => 'http://buzzbands.la/feed/',
+		'name' => 'Buzz Bands'
+	},
+	{
+		'url' => 'http://pitchfork.com',
+		'feed_url' => 'http://feeds2.feedburner.com/PitchforkLatestNews',
+		'name' => 'Pitchfork'
+	}
 ]
 
 blogs.each { |b|

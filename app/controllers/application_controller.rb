@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
       @current_user
     else
       user_model = User.find_by_id(session[:user_id])
-      p user_model
       if !user_model.nil?
         @current_user = AppUser.new(user_model)
       end
