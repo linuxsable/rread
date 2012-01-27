@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :authorizations
   has_many :provider_infos
   has_many :activities
+  has_many :read_statuses
   has_one :reader
   
   has_many :friendships

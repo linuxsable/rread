@@ -1,4 +1,5 @@
 class Article < ActiveRecord::Base
+  has_many :read_statuses
   belongs_to :blog
 
   validates_presence_of :title, :published_at, :url

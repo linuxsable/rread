@@ -1,0 +1,41 @@
+# I'm stil uncertian how to organize these modules
+# in coffeescript but it will evolve. Every new module
+# will just exist in this single file for now with "App"
+# being the parent.
+
+Log = do ->
+	debug: (str) -> console.log str
+
+# App is the parent object
+App = do ->
+	# Mark articles as read
+	updateArticleReadStatus: (articleId, callback = (r) ->) ->
+		return false if not articleId?
+
+		request = $.ajax {
+			url: '/article/read.json',
+			type: 'GET',
+			data: { 'id': articleId }
+		}
+
+		$.when(request).done (result) ->
+			if result.success
+				callback(result)
+			else
+				Log.debug 'Bad read response.'
+
+		return request
+
+# User is stuff the corresponds to the user..
+App.User = do ->
+
+# This makes the App var available outside
+window.App = App
+
+
+# This needs to be in each separate pages document.ready and file, etc
+$(document).ready ->
+	$('.article h3 a').click ->
+		$('.article.active').removeClass 'active'
+		article = $(this).parent().parent()
+		article.addClass 'read active'
