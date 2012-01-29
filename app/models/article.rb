@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  has_many :read_statuses
+  has_many :article_statuses
   belongs_to :blog
 
   validates_presence_of :title, :published_at, :url
@@ -17,5 +17,23 @@ class Article < ActiveRecord::Base
     output = []
     Article.all.each { |a| output << a.blog.name + ' -- ' + a.title }
     output
+  end
+
+  def self.read_by_user?(article_id, user)
+    status = ArticleStatus.where(
+      :article_id => article_id, :user_id => user.id, :read => true
+    ).limit(1).exists?
+  end
+
+  def self.hearted_by_user?(article_id, user)
+    status = ArticleStatus.where(
+      :article_id => article_id, :user_id => user.id, :hearted => true
+    ).limit(1).exists?
+  end
+
+  def self.starred_by_user?(article_id, user)
+    status = ArticleStatus.where(
+      :article_id => article_id, :user_id => user.id, :starred => true
+    ).limit(1).exists?
   end
 end

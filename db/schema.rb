@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125085542) do
+ActiveRecord::Schema.define(:version => 20120128020350) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(:version => 20120125085542) do
 
   add_index "activities", ["target_id", "target_type"], :name => "index_activities_on_target_id_and_target_type"
   add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
+
+  create_table "article_statuses", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "article_id"
+    t.integer  "read"
+    t.integer  "hearted"
+    t.integer  "starred"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "articles", :force => true do |t|
     t.integer  "blog_id"
@@ -76,13 +86,6 @@ ActiveRecord::Schema.define(:version => 20120125085542) do
     t.string   "avatar"
     t.text     "description"
     t.string   "location"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "read_statuses", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "article_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

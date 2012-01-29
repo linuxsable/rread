@@ -2,7 +2,7 @@
 # article in the system for a given user. If a user
 # ever reads an article anywhere, a new record for that
 # article will get created here so we know which ones he's read.
-class ReadStatus < ActiveRecord::Base
+class ArticleStatus < ActiveRecord::Base
   belongs_to :article
   belongs_to :user
 

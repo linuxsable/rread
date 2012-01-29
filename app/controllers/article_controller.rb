@@ -4,7 +4,13 @@ class ArticleController < ApplicationController
   end
 
   def read
-    @read_status = ReadStatus.new(:article_id => params[:id], :user_id => @current_user.id)
+    article_id = params[:id]
+
+    if Article.read_by_user?(article_id, @current_user)
+      p 'hi'
+    end
+
+    return
 
     if @read_status.save
       respond_to do |format|
@@ -15,5 +21,9 @@ class ArticleController < ApplicationController
         format.json { render :json => { :success => false } }
       end
     end
+  end
+
+  def hearted
+    
   end
 end
