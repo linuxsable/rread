@@ -22,8 +22,7 @@ class Activity < ActiveRecord::Base
 
   def self.add(user, activity_type, target)
     return false if user.blank? or activity_type.blank? or target.blank?
-    activity = Activity.new(:user => user, :activity_type => activity_type, :target => target)
-    activity.save!
+    create!(:user => user, :activity_type => activity_type, :target => target)
   end
 
   # This is how you actually get the feed for the

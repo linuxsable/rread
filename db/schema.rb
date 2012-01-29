@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128020350) do
+ActiveRecord::Schema.define(:version => 20120129175429) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -68,12 +68,35 @@ ActiveRecord::Schema.define(:version => 20120128020350) do
     t.datetime "articles_last_syncd_at"
   end
 
+  create_table "flags", :force => true do |t|
+    t.integer  "user_id",     :null => false
+    t.integer  "flag_type",   :null => false
+    t.integer  "target_id",   :null => false
+    t.string   "target_type", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "flags", ["target_id", "target_type"], :name => "index_flags_on_target_id_and_target_type"
+  add_index "flags", ["user_id"], :name => "index_flags_on_user_id"
+
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "likes", :force => true do |t|
+    t.integer  "user_id",     :null => false
+    t.integer  "target_id",   :null => false
+    t.string   "target_type", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["target_id", "target_type"], :name => "index_likes_on_target_id_and_target_type"
+  add_index "likes", ["user_id"], :name => "index_likes_on_user_id"
 
   create_table "provider_infos", :force => true do |t|
     t.integer  "user_id"

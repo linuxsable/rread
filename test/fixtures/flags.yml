@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  flag_type: 1
+  target_id: 1
+  target_type: 1
+
+two:
+  user_id: 1
+  flag_type: 1
+  target_id: 1
+  target_type: 1
