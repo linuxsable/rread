@@ -18,22 +18,4 @@ class Article < ActiveRecord::Base
     Article.all.each { |a| output << a.blog.name + ' -- ' + a.title }
     output
   end
-
-  def self.read_by_user?(article_id, user)
-    status = ArticleStatus.where(
-      :article_id => article_id, :user_id => user.id, :read => true
-    ).limit(1).exists?
-  end
-
-  def self.hearted_by_user?(article_id, user)
-    status = ArticleStatus.where(
-      :article_id => article_id, :user_id => user.id, :hearted => true
-    ).limit(1).exists?
-  end
-
-  def self.starred_by_user?(article_id, user)
-    status = ArticleStatus.where(
-      :article_id => article_id, :user_id => user.id, :starred => true
-    ).limit(1).exists?
-  end
 end

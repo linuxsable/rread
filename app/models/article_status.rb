@@ -8,4 +8,14 @@ class ArticleStatus < ActiveRecord::Base
 
   validates :article_id, :user_id, :presence => true
   validates :user_id, :uniqueness => { :scope => :article_id }
+
+  def self.read_by_user?(article_id, user)
+    where("article_read_id IS NOT NULL").where(:article_id => article_id, :user_id => user.id)
+      .limit(1).exists?
+  end
+
+  def self.liked_by_user?(article_id, user)
+    where("like_id IS NOT NULL").where(:article_id => article_id, :user_id => user.id)
+      .limit(1).exists?
+  end
 end

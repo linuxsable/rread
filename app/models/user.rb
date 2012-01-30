@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :flags
   has_many :article_statuses
+  has_many :article_reads
   has_one :reader
   
   has_many :friendships
@@ -48,4 +49,27 @@ class User < ActiveRecord::Base
     self.save!
   end
 
+  def mark_article_as_read(article)
+    # First check if it's read already
+
+    # Not sure why I can't do (:article => article, :user => user)
+    status_query = ArticleStatus.where(:article_id => article.id, :user_id => self.id)
+    status = status_query.first
+    if status_query.exists?
+      return true if status.article_read_id?
+    end
+
+    ActiveRecord::Base.transaction {
+      # Create the Read record
+      article_read = ArticleRead.create!(:user => self, :article => article)
+
+      # Create the ArticleStatus record
+      if status_query.exists?
+        status.article_read_id = article_read.id
+        status.save!
+      else
+        ArticleStatus.create!(:user => self, :article => article, :article_read_id => article_read.id)
+      end
+    }
+  end
 end

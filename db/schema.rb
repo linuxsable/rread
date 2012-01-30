@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120129175429) do
+ActiveRecord::Schema.define(:version => 20120130051027) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id",       :null => false
@@ -25,12 +25,18 @@ ActiveRecord::Schema.define(:version => 20120129175429) do
   add_index "activities", ["target_id", "target_type"], :name => "index_activities_on_target_id_and_target_type"
   add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
 
+  create_table "article_reads", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "article_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "article_statuses", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "article_id"
-    t.integer  "read"
-    t.integer  "hearted"
-    t.integer  "starred"
+    t.integer  "user_id",         :null => false
+    t.integer  "article_id",      :null => false
+    t.integer  "like_id"
+    t.integer  "article_read_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

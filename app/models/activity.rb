@@ -2,8 +2,6 @@ class Activity < ActiveRecord::Base
   belongs_to :user
   belongs_to :target, :polymorphic => true
 
-  default_scope :order => 'activities.created_at DESC', :limit => 10
-
   # Activity Types
   ARTICLE_LIKED       = 1
   ARTICLE_READ        = 2
