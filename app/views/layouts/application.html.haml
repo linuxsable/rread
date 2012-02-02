@@ -31,9 +31,9 @@
         %li
           %a{href: '/reader'} All Items
         - if signed_in?
-          - current_user.reader.subscriptions.each do |s|
+          - for sub in current_user.reader.subscription_list
             %li
-              %a{href: '?f=' + s.blog.id.to_s}=s.blog.name
+              %a{href: '?f=' + sub[:blog_id].to_s}=sub[:blog_name]
           
     #center
       = yield

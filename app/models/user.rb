@@ -72,4 +72,10 @@ class User < ActiveRecord::Base
       end
     }
   end
+  
+  def friend_activity_feed
+    friend_ids = []
+    friendships.each { |f| friend_ids << f.friend_id }
+    Activity.where(:user_id => friend_ids)
+  end
 end

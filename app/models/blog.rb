@@ -49,6 +49,15 @@ class Blog < ActiveRecord::Base
     all.each { |b| b.sync_articles }
   end
 
+  def self.get_name_by_id(blog_id)
+    Rails.cache.fetch("blog_name|#{blog_id}", :expires_in => 5.hours) {
+      blog = find(blog_id)
+      if !blog.nil?
+        blog.name
+      end
+    }
+  end
+
   # Check if the blog has had it's articles sync'd in
   # a certain period below SYNC_DIFFERENCE
   #

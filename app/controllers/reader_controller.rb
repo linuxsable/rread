@@ -9,7 +9,7 @@ class ReaderController < ApplicationController
       user.reader.async_all_subscriptions
     end
 
-    @user_feed = Activity.feed_for_user(user)
+    @user_feed = @current_user.user_model.friend_activity_feed
     @article_feed = current_user.reader.article_feed(30, filter)
   end
 end

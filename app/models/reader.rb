@@ -40,20 +40,83 @@ class Reader < ActiveRecord::Base
     end
   end
 
-  def article_feed(count=50, blog_filter_id)
+  def article_feed(count=50, blog_filter_id=nil)
     blog_ids = []
 
     if blog_filter_id.nil?
-      self.blogs.each { |b| blog_ids << b.id }
+      blogs.each { |b| blog_ids << b.id }
     else
       blog_ids << blog_filter_id
     end
+
+    return {} if blog_ids.empty?
     
-    Article.where(:blog_id => blog_ids).order('published_at DESC').limit(count)
+    articles = Article.where(:blog_id => blog_ids).order('published_at DESC').limit(count)
+    return {} if articles.empty?
+
+    articles_by_id = {}
+
+    articles.each do |article|
+      articles_by_id[article.id] = {
+        'id' => article.id,
+        'blog_id' => article.blog_id,
+        'blog_name' => Blog.get_name_by_id(article.blog_id),
+        'title' => article.title,
+        'content' => article.content,
+        'created_at' => article.created_at,
+        'published_at' => article.published_at,
+        'url' => article.url,
+        'read' => false,
+        'liked' => false
+      }
+    end
+
+    article_statuses = ArticleStatus.where(:user_id => user.id, :article_id => articles_by_id.keys)
+
+    # Return the articles if there are no article status rows
+    return articles_by_id if article_statuses.empty?
+
+    # Bring in the article status meta data into the articles array
+    article_statuses.each do |article_status|
+      article_id = article_status.article_id
+
+      if articles_by_id.has_key?(article_id)
+        if article_status.article_read_id?
+          articles_by_id[article_id]['read'] = true
+        end
+
+        if article_status.like_id?
+          articles_by_id[article_id]['liked'] = true
+        end
+      end
+    end
+
+    articles_by_id.values
+  end
+
+  def subscription_list(alpha_sort=true)
+    # TODO: Kill this cache when adding or deleteing subscriptions
+    Rails.cache.fetch("subscription_list|#{user.id}", :expires_in => 5.hours) {
+      output = []
+      subs = subscriptions.select(:blog_id)
+
+      subs.each { |sub| 
+        output << {
+          :blog_id => sub.blog_id,
+          :blog_name => Blog.get_name_by_id(sub.blog_id)
+        }
+      }
+
+      if alpha_sort
+        output.sort! { |a,b| a[:blog_name] <=> b[:blog_name] }
+      end
+
+      output
+    }
   end
 
   def async_all_subscriptions
-    self.blogs.each { |b|
+    blogs.each { |b|
       b.async_articles
     }
   end
