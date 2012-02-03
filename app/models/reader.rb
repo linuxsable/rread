@@ -74,7 +74,7 @@ class Reader < ActiveRecord::Base
     article_statuses = ArticleStatus.where(:user_id => user.id, :article_id => articles_by_id.keys)
 
     # Return the articles if there are no article status rows
-    return articles_by_id if article_statuses.empty?
+    return articles_by_id.values if article_statuses.empty?
 
     # Bring in the article status meta data into the articles array
     article_statuses.each do |article_status|
