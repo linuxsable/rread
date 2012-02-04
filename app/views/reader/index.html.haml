@@ -14,12 +14,12 @@
       %p.article-source
         %img{src: "http://www.google.com/s2/u/0/favicons?domain=" + article['url'].gsub("http://", "")}
         = article['blog_name']
-      %h2.article-title= article['title']
+      %h2.article-title= raw(article['title'])
       %h2.article-title.article-title-active
         %a{href: article['url']} 
-          = article['title']
+          = raw(article['title'])
       %p.article-blurb
-        = truncate(strip_tags(article['content']), :length => 120, :separator => ' ')
+        = truncate(strip_tags(raw(article['content'])), :length => 120, :separator => ' ')
       .article-contents
         = distance_of_time_in_words_to_now(article['published_at'])
         = raw(article['content']) 

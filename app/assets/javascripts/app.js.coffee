@@ -42,4 +42,4 @@ $(document).ready ->
 		
 		$("html,body").animate
       scrollTop: $(this).offset().top
-    , 200
+    , 50
