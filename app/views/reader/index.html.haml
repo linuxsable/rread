@@ -1,13 +1,25 @@
 #articles
   - for article in @article_feed
-    .article.unread
-      %h3
-        %a.title{href: '#'}
-          = raw(article['blog_name'])
-          \-
-          = raw(article['title'])
-      .guts
+    .article.article-inactive
+      .article-controls
+        .article-controls-links
+          %a{href: "#"} Keep Unread
+          %a{href: "#"} Share
+          %a{href: "#"} Read Later
+        .article-hearts
+          %a{href: "#"} Like
+          %a{href: "#"}
+            %img{src: "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/370638_777577509_271102326_q.jpg", class: "avatar"}
+    
+      %p.article-source
+        %img{src: "http://www.google.com/s2/u/0/favicons?domain=" + article['url'].gsub("http://", "")}
+        = article['blog_name']
+      %h2.article-title= article['title']
+      %h2.article-title.article-title-active
+        %a{href: article['url']} 
+          = article['title']
+      %p.article-blurb
+        = truncate(strip_tags(article['content']), :length => 120, :separator => ' ')
+      .article-contents
         = distance_of_time_in_words_to_now(article['published_at'])
-        ago
-        = link_to(article['url'], article['url'])
-        = raw(article['content'])
+        = raw(article['content']) 

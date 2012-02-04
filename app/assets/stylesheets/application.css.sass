@@ -10,8 +10,9 @@ body
   line-height: 1.5em
   font-size: 13px
   color: #222
+  background: #EFEFEF
 header
-  position: fixed
+  /* position: fixed */
   top: 0
   left: 0
   width: 100%
@@ -45,6 +46,7 @@ header
   #center
     margin: 0 200px
     max-width: 800px
+    background: #fff
     
   #right
     position: absolute
@@ -53,47 +55,92 @@ header
     width: 200px
 a
   color: #0099CC
-  
 
-// READER STYLES
+
+.avatar
+  width: 27px
+  width: 27px
+  border-radius: 8px
+
+a:hover .avatar
+  opacity: .8
+
+/** ARTICLES **/
 
 .article
-  border-bottom: 1px solid #ccc
-  
-  h3
-    margin: 0
-  
-  a.title
-    color: #333
-    text-decoration: none
-    display: block
-    padding: 10px 0
-    
-    &:hover
-      color: #09C
-  
-  .guts
+  border-bottom: 1px dotted
+  padding: 20px
+
+.article-inactive:hover
+  background: #f7f9fa
+  cursor: pointer
+
+.article-source
+  color: #8ba8b2
+  margin: 0
+  line-height: 16px
+  img
+    vertical-align: middle
+
+.article-title
+  font-weight: bold
+  font-size: 15px
+  margin: 4px 0
+
+.article-blurb
+  color: #333333
+  margin: 0
+
+/*** Selected Article **
+
+.article-inactive
+  .article-controls, .article-title-active, .article-contents
     display: none
-  
-  &.read
-    h3
-      font-weight: normal
-      a
-        color: #666
 
-  &.active
-    h3
-      font-weight: bold
-      a
-        color: #333
-    .guts
-      display: block
-      
+.article-active
+  .article-blurb, .article-title
+    display: none
+  h2 a
+    color: #35a0e8
+    text-decoration: none
+  .article-controls, .article-title-active, .article-contents
+    display: block
 
-.alignleft
-  float: right
-  margin: 0 10px 10px 0
+.article-controls
+  background-color: #f7f7f7
+  padding: 6px
+  line-height: 40px
+  overflow: hidden
+  line-height: 27px
+  margin-bottom: 10px
+  a
+    color: #000
+    text-decoration: none
+    font-size: 11px
+    &:hover
+      color: #35a0e8
+
+  .article-controls-links
+    float: left
   
-.alignright
-  float: right
-  margin: 0 0 10px 10px
+  .article-hearts
+    float: right
+    img
+      vertical-align: middle
+
+.article-contents
+  font-family: Georgia, Times, serif
+  font-size: 16px
+  line-height: 1.6em
+  img
+    -webkit-border-radius: 8px
+    margin: 0 auto
+    display: block
+
+  .alignleft
+    float: right
+    margin: 0 10px 10px 0
+    
+  .alignright
+    float: right
+    margin: 0 0 10px 10px
