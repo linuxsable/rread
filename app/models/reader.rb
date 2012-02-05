@@ -61,6 +61,7 @@ class Reader < ActiveRecord::Base
         'id' => article.id,
         'blog_id' => article.blog_id,
         'blog_name' => Blog.get_name_by_id(article.blog_id),
+        'blog_url' => Blog.get_url_by_id(article.blog_id),
         'title' => article.title,
         'content' => article.content,
         'created_at' => article.created_at,
