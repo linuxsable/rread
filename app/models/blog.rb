@@ -84,7 +84,7 @@ class Blog < ActiveRecord::Base
       feed = Feedzirra::Feed.fetch_and_parse(feed_url)
     end
 
-    return if feed.nil? or feed.entries.nil?
+    return false if feed.nil? or feed.entries.empty?
 
     feed.entries.each do |entry|
       if entry.published.to_i > self.articles_last_syncd_at.to_i

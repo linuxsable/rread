@@ -32,15 +32,17 @@ App.User = do ->
 # This makes the App var available outside
 window.App = App
 
-
 # This needs to be in each separate pages document.ready and file, etc
 $(document).ready ->
 	$('.article-inactive').click ->
-		$('.article-active').toggleClass 'article-active article-inactive'
+		$('.article-active').toggleClass('article-active article-inactive')
 		article = $(this)
-		article.addClass 'article-read'
-		article.toggleClass 'article-inactive article-active'
-		App.updateArticleReadStatus article.attr('rel')
+		articleRead = article.hasClass('article-read')
+		article.addClass('article-read')
+		article.toggleClass('article-inactive article-active')
+
+		if !articleRead
+			App.updateArticleReadStatus article.attr('rel')
 		
 		$("html,body").animate
       scrollTop: article.offset().top

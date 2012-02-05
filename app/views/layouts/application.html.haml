@@ -44,6 +44,9 @@
           - if feed_item.activity_type == Activity::SUBSCRIPTION_ADDED
             subscribed to
             = feed_item.target.blog.name + '.'
+          - elsif feed_item.activity_type == Activity::ARTICLE_READ
+            read
+            = feed_item.target.article.title + '.'
           %br
       
         %hr

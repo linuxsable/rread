@@ -1,7 +1,8 @@
 task :heartbeat => :environment do
   loop {
-    # 4:00PM
-    Blog.where("articles_last_syncd_at >-=")
+    # RECORD: 4:00PM
+    # TIME: 5:00PM
+    Blog.where("articles_last_syncd_at >=")
   }
 
     # loop {

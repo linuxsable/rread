@@ -76,6 +76,7 @@ class User < ActiveRecord::Base
   def friend_activity_feed
     friend_ids = []
     friendships.each { |f| friend_ids << f.friend_id }
-    Activity.where(:user_id => friend_ids)
+    ids = friend_ids << self.id
+    Activity.where(:user_id => ids).order('created_at DESC').limit(10)
   end
 end
