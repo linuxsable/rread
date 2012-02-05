@@ -1,6 +1,6 @@
 #articles
   - for article in @article_feed
-    .article.article-inactive
+    .article.article-inactive{rel: article['id'], class: article['read'] ? 'article-read' : ''}
       .article-controls
         .article-controls-links
           %a{href: "#"} Keep Unread
@@ -18,6 +18,8 @@
       %h2.article-title.article-title-active
         %a{href: article['url']} 
           = raw(article['title'])
+      %p.article-blurb
+        = truncate(strip_tags(raw(article['content'])), :length => 120, :separator => ' ')
       .article-contents
         = distance_of_time_in_words_to_now(article['published_at'])
         = raw(article['content']) 

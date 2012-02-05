@@ -4,20 +4,11 @@ class ArticleController < ApplicationController
   end
 
   def read
-    article_id = params[:id]
-
-    a = ArticleStatus.find_or_create_by_user_id_and_article_id(@current_user.id, article_id)
-    p a
-
-    # if @read_status.save
-    #   respond_to do |format|
-    #     format.json { render :json => { :success => true } }
-    #   end
-    # else
-    #   respond_to do |format|
-    #     format.json { render :json => { :success => false } }
-    #   end
-    # end
+    article = Article.find(params[:id])
+    @current_user.user_model.mark_article_as_read(article)
+    respond_to do |format|
+      format.json { render :json => { :success => true}}
+    end
   end
 
   def liked

@@ -36,10 +36,12 @@ window.App = App
 # This needs to be in each separate pages document.ready and file, etc
 $(document).ready ->
 	$('.article-inactive').click ->
-		$('.article-active').removeClass 'article-active'
-		$(this).addClass 'article-read article-active'
-		$(this).removeClass 'article-inactive'
+		$('.article-active').toggleClass 'article-active article-inactive'
+		article = $(this)
+		article.addClass 'article-read'
+		article.toggleClass 'article-inactive article-active'
+		App.updateArticleReadStatus article.attr('rel')
 		
 		$("html,body").animate
-      scrollTop: $(this).offset().top
+      scrollTop: article.offset().top
     , 50
