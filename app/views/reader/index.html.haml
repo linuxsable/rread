@@ -20,6 +20,6 @@
           = raw(article['title'])
       %p.article-blurb
         = truncate(strip_tags(raw(article['content'])), :length => 120, :separator => ' ')
-      .article-contents
-        = distance_of_time_in_words_to_now(article['published_at'])
+      .article-contents.tk-adobe-garamond-pro
+        /= distance_of_time_in_words_to_now(article['published_at'])
         = raw(article['content']) 
