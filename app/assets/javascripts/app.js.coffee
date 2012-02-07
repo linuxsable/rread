@@ -55,13 +55,13 @@ $.fn.toggleArticle = ->
 	$('.article-active').toggleClass('article-active article-inactive')
 	
 	if !active
-		article.addClass('article-read')
 		article.toggleClass('article-inactive article-active')
 		articleRead = article.hasClass('article-read')
 		$(".article-contents a", article).attr("target","_blank");
 
 		if !articleRead
 			App.updateArticleReadStatus article.attr('rel')
+			article.addClass('article-read')
 		
 		###
 		$("html,body").animate

@@ -7,5 +7,5 @@
 //= require jquery
 //= require_tree .
 
-require jquery
-require_tree .
+//= require jquery
+//= require_tree
