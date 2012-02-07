@@ -26,7 +26,7 @@ class Blog < ActiveRecord::Base
   def self.create_from_user_and_feed_url(user, feed_url)
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
 
-    if !feed.is_a? Feedzirra::Parser::RSS
+    if feed.nil?
       raise 'Cannot fetch and parse feed: "' + feed_url + '"'
     end
 
@@ -82,6 +82,9 @@ class Blog < ActiveRecord::Base
   def sync_articles(feed=nil)
     if feed.nil?
       feed = Feedzirra::Feed.fetch_and_parse(feed_url)
+      if feed.nil?
+        raise 'Cannot sync articles'
+      end
     end
 
     return false if feed.nil? or feed.entries.empty?
