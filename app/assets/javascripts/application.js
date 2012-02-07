@@ -7,13 +7,5 @@
 //= require jquery
 //= require_tree .
 
-// $(document).ready ->
-//   $('.article h a').click ->
-//     $('.article.active').removeClass('active')
-//     article = $(this).parent().parent()
-//     article.addClass 'read active'
-//     
-//     $("html,body").animate
-//       scrollTop: $(this).offset().top - 50
-//     , 0
-//     return false
+require jquery
+require_tree .

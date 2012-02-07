@@ -35,7 +35,10 @@ window.App = App
 # This needs to be in each separate pages document.ready and file, etc
 $(document).ready ->
 
-   $('.article-inactive').click ->
+	$(document).bind "keydown", "esc", (evt) ->
+		$('.article-active').toggleArticle();
+
+	$('.article-inactive').click ->
    	if !$(this).hasClass('article-active')
    		$(this).toggleArticle()
 
@@ -55,9 +58,13 @@ $.fn.toggleArticle = ->
 		article.addClass('article-read')
 		article.toggleClass('article-inactive article-active')
 		articleRead = article.hasClass('article-read')
+		$(".article-contents a", article).attr("target","_blank");
+
 		if !articleRead
 			App.updateArticleReadStatus article.attr('rel')
 		
+		###
 		$("html,body").animate
 			scrollTop: article.offset().top
 			, 150
+		###
