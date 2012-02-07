@@ -1,6 +1,16 @@
 #articles
   - for article in @article_feed
-    .article.article-inactive{rel: article['id'], class: article['read'] ? 'article-read' : ''}
+    .article.article-inactive{rel: article['id'], class: article['read'] ? 'article-read' : ''}    
+      %p.article-source
+        %img{src: "http://www.google.com/s2/u/0/favicons?domain=" + article['blog_url'].gsub("http://", "")}
+        = article['blog_name']
+      %p.article-time
+        = distance_of_time_in_words_to_now(article['published_at'])
+        %a.article-close{href: "#"} X
+      %h2.article-title= raw(article['title'])
+      %h2.article-title.article-title-active
+        %a{href: article['url'], target: "_blank"} 
+          = raw(article['title'])
       .article-controls
         .article-controls-links
           %a{href: "#"} Keep Unread
@@ -10,16 +20,8 @@
           %a{href: "#"} Like
           %a{href: "#"}
             %img{src: "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/370638_777577509_271102326_q.jpg", class: "avatar"}
-    
-      %p.article-source
-        %img{src: "http://www.google.com/s2/u/0/favicons?domain=" + article['blog_url'].gsub("http://", "")}
-        = article['blog_name']
-      %h2.article-title= raw(article['title'])
-      %h2.article-title.article-title-active
-        %a{href: article['url']} 
-          = raw(article['title'])
+
       %p.article-blurb
         = truncate(strip_tags(raw(article['content'])), :length => 120, :separator => ' ')
-      .article-contents.tk-adobe-garamond-pro
-        /= distance_of_time_in_words_to_now(article['published_at'])
+      .article-contents
         = raw(article['content']) 

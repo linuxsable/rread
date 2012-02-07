@@ -34,16 +34,30 @@ window.App = App
 
 # This needs to be in each separate pages document.ready and file, etc
 $(document).ready ->
-	$('.article-inactive').click ->
-		$('.article-active').toggleClass('article-active article-inactive')
-		article = $(this)
-		articleRead = article.hasClass('article-read')
+
+   $('.article-inactive').click ->
+   	if !$(this).hasClass('article-active')
+   		$(this).toggleArticle()
+
+   $('.article-close').click ->
+   	$(this).parent().parent().toggleArticle()
+   	return false
+
+
+
+$.fn.toggleArticle = ->
+	article = $(this)
+	active = article.hasClass('article-active') ? true : false
+	
+	$('.article-active').toggleClass('article-active article-inactive')
+	
+	if !active
 		article.addClass('article-read')
 		article.toggleClass('article-inactive article-active')
-
+		articleRead = article.hasClass('article-read')
 		if !articleRead
 			App.updateArticleReadStatus article.attr('rel')
 		
 		$("html,body").animate
-      scrollTop: article.offset().top
-    , 50
+			scrollTop: article.offset().top
+			, 150

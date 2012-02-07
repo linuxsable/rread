@@ -71,8 +71,10 @@ a:hover .avatar
   +box_shadow(0px, 2px, 5px, rgba(0,0,0,.3))
 
 .article
-  border-bottom: 1px dotted
+  border-bottom: 1px dashed #CCC
   padding: 20px
+  position: relative
+  overflow: hidden
 
 .article-inactive:hover
   background: #f7f9fa
@@ -90,6 +92,21 @@ a:hover .avatar
   font-size: 15px
   margin: 4px 0
 
+.article-time
+  position: absolute
+  top: 0
+  right: 20px
+  color: #AAA
+
+.article-close
+  color: #fff
+  background: #DDD
+  text-decoration: none
+  +border-radius(100px)
+  padding: 4px 7px
+  font-family: courier
+  font-size: 11px
+
 .article-blurb
   color: #333333
   margin: 0
@@ -97,7 +114,7 @@ a:hover .avatar
 /*** Selected Article **
 
 .article-inactive
-  .article-controls, .article-title-active, .article-contents
+  .article-controls, .article-title-active, .article-contents, .article-close
     display: none
 
 .article-read
@@ -108,13 +125,13 @@ a:hover .avatar
   .article-blurb, .article-title
     display: none
   h2 a
-    color: #35a0e8
+    color: #222
     text-decoration: none
-  .article-controls, .article-title-active, .article-contents
+  .article-controls, .article-title-active, .article-contents, article-close
     display: block
 
 .article-controls
-  background-color: #f7f7f7
+  background-color: #eeeeee
   padding: 6px
   line-height: 40px
   overflow: hidden
@@ -136,19 +153,20 @@ a:hover .avatar
       vertical-align: middle
 
 .article-contents
-  font-family: Garamond, Georgia, Times, serif
-  font-size: 18px
+  font-family: ProximaNovaCondensedRegular, 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-size: 15px
   line-height: 1.6em
+  color: #444
   a
     font-weight: bold
     text-decoration: none
+    color: #222
+    border-bottom: 1px dotted
     &:hover
       text-decoration: none
       color: darken(#900, 10%)
   img
     -webkit-border-radius: 6px
-    margin: 0 auto
-    display: block
 
   .alignleft
     float: right
@@ -157,3 +175,12 @@ a:hover .avatar
   .alignright
     float: right
     margin: 0 0 10px 10px
+
+
+
+@font-face
+  font-family: 'ProximaNovaRegular'
+  src: url('proxima_nova-regular-webfont.eot')
+  src: url('proxima_nova-regular-webfont.eot?#iefix') format("embedded-opentype"), url('proxima_nova-regular-webfont.woff') format("woff"), url('proxima_nova-regular-webfont.ttf') format("truetype"), url('proxima_nova-regular-webfont.svg#ProximaNovaRegular') format("svg")
+  font-weight: normal
+  font-style: normal
