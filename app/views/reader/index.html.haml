@@ -13,11 +13,12 @@
           = raw(article['title'])
       .article-controls
         .article-controls-links
-          %a{href: "#"} Keep Unread
           %a{href: "#"} Share
           %a{href: "#"} Read Later
         .article-hearts
-          %a{href: "#"} Like
+          %a.article-like{href: "#"}
+            .heart
+            Like
           %a{href: "#"}
             %img{src: "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/370638_777577509_271102326_q.jpg", class: "avatar"}
 

@@ -56,7 +56,13 @@ blogs = [
 		'url' => 'http://pitchfork.com',
 		'feed_url' => 'http://feeds2.feedburner.com/PitchforkLatestNews',
 		'name' => 'Pitchfork'
+	},
+	{
+		'url' => 'http://tuaw.com',
+		'feed_url' => 'http://www.tuaw.com/rss.xml',
+		'name' => 'The Unofficial Apple Weblog'
 	}
+
 ]
 
 blogs.each { |b|

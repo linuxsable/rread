@@ -133,14 +133,15 @@ a:hover .avatar
     display: block
 
 .article-controls
-  background-color: #eeeeee
-  padding: 6px
+  border-top: 1px dotted #ccc
+  border-bottom: 1px dotted #ccc
+  margin: 15px 0
+  padding: 6px 0px
   line-height: 40px
   overflow: hidden
   line-height: 27px
-  margin-bottom: 10px
   a
-    color: #000
+    color: #666
     text-decoration: none
     font-size: 11px
     &:hover
@@ -148,9 +149,26 @@ a:hover .avatar
 
   .article-controls-links
     float: left
+
+    a
+      margin-right: 10px
   
   .article-hearts
     float: right
+    a
+      margin-left: 10px
+    .article-like
+      .heart
+        background: asset-url('sprite_heart.png', image)
+        width: 17px
+        height: 16px
+        display: inline-block
+        vertical-align: middle
+      &:hover 
+        color: #aa0c62
+        .heart
+          background-position: -17px 0
+
     img
       vertical-align: middle
 
@@ -159,7 +177,7 @@ a:hover .avatar
   font-size: 15px
   line-height: 1.6em
   color: #444
-  a
+  > a
     font-weight: bold
     text-decoration: none
     color: #222
@@ -167,8 +185,10 @@ a:hover .avatar
     &:hover
       text-decoration: none
       color: darken(#900, 10%)
+    img
+      border: none!important
+      text-decoration: none
   img
-    -webkit-border-radius: 6px
 
   .alignleft
     float: right
@@ -177,8 +197,6 @@ a:hover .avatar
   .alignright
     float: right
     margin: 0 0 10px 10px
-
-
 
 @font-face
   font-family: 'ProximaNovaRegular'
