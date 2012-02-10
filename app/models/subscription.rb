@@ -3,6 +3,10 @@ class Subscription < ActiveRecord::Base
 	belongs_to :reader
   
   # Don't allow adding the same blog to the reader.
-  validates_uniqueness_of :blog_id, :scope => :reader_id
-	validates_presence_of :blog_id, :reader_id
+  validates :blog_id, :uniqueness => {
+    :scope => :reader_id,
+    :message => "Already subscribed to blog"
+  }
+  validates :blog_id, :presence => true
+  validates :reader_id, :presence => true
 end

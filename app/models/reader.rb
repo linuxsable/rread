@@ -11,16 +11,25 @@ class Reader < ActiveRecord::Base
   def add_subscription(feed_url)
     blog = Blog.find_by_feed_url(feed_url)
     if blog.nil?
-      blog = Blog.create_from_user_and_feed_url(self.user, feed_url)  
+      blog = Blog.create_from_user_and_feed_url(self.user, feed_url)
     end
-    subscriptions.build(:blog => blog).save!
+
+    begin
+      return Subscription.create!(:reader => self, :blog => blog)  
+    rescue Exception => e
+      Rails.logger.error e
+    end
+
+    true
   end
 
   def remove_subscription(feed_url)
     blog = Blog.find_by_feed_url(feed_url)
     return false if blog.nil?
 
-    subscriptions.where(:blog_id => blog.id).limit(1).first.delete!
+    sub = subscriptions.where(:blog_id => blog.id).limit(1).first
+    return false if sub.nil?
+    sub.delete
   end
 
   def add_all_subscriptions
@@ -31,7 +40,7 @@ class Reader < ActiveRecord::Base
 
   # Will import all the Google Reader feeds
   # of the authing user to the current reader.
-  def import_greader_feeds(email, password)
+  def import_greader(email, password)
     creds = { :email => email, :password => password }
     
     greader = GReader.auth(creds)
@@ -97,7 +106,7 @@ class Reader < ActiveRecord::Base
 
   def subscription_list(alpha_sort=true)
     # TODO: Kill this cache when adding or deleteing subscriptions
-    # Rails.cache.fetch("subscription_list|#{user.id}", :expires_in => 5.hours) {
+    Rails.cache.fetch("subscription_list|#{user.id}", :expires_in => 5.hours) {
       output = []
       subs = subscriptions.select(:blog_id)
 
@@ -113,7 +122,7 @@ class Reader < ActiveRecord::Base
       end
 
       output
-    # }
+    }
   end
 
   def async_all_subscriptions
