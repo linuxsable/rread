@@ -61,7 +61,12 @@ blogs = [
 		'url' => 'http://tuaw.com',
 		'feed_url' => 'http://www.tuaw.com/rss.xml',
 		'name' => 'The Unofficial Apple Weblog'
-	}
+	},
+  # {
+  #   'url' => 'http://kaya.gs',
+  #   'feed_url' => 'http://kayags.blogspot.com/feeds/posts/default',
+  #   'name' => 'Kaya.gs'
+  # }
 
 ]
 
