@@ -26,7 +26,6 @@ App.Reader = do ->
 			toggleArticle $(this)
 
 	toggleArticle = (article) ->
-		console.log article
 		active = article.hasClass('article-active') ? true : false
 		
 		$('.article-active').toggleClass('article-active article-inactive')
@@ -101,8 +100,6 @@ App.Reader = do ->
 		refreshTimestamp = Date.now()
 		assignListeners()
 		autoRefreshArticles()
-
-		
 
 		$('.article-inactive').click ->
 	   	if !$(this).hasClass('article-active')

@@ -25,6 +25,6 @@
       /       %img{src: "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/370638_777577509_271102326_q.jpg", class: "avatar"}
 
       %p.article-blurb
-        = truncate(strip_tags(raw(article['content'])), :length => 120, :separator => ' ')
+        = truncate(raw(strip_tags(article['content'])), :length => 120, :separator => ' ')
       .article-contents
         = raw(article['content'])
