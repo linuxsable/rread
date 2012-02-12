@@ -1,4 +1,6 @@
 #articles
+  .new-articles
+    13 new articles
   - for article in @article_feed
     .article.article-inactive{rel: article['id'], class: article['read'] ? 'article-read' : ''}    
       %p.article-source
@@ -11,18 +13,18 @@
       %h2.article-title.article-title-active
         %a{href: article['url'], target: "_blank"} 
           = raw(article['title'])
-      .article-controls
-        .article-controls-links
-          %a{href: "#"} Share
-          %a{href: "#"} Read Later
-        .article-hearts
-          %a.article-like{href: "#"}
-            .heart
-            Like
-          %a{href: "#"}
-            %img{src: "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/370638_777577509_271102326_q.jpg", class: "avatar"}
+      / .article-controls
+      /   .article-controls-links
+      /     %a{href: "#"} Share
+      /     %a{href: "#"} Read Later
+      /   .article-hearts
+      /     %a.article-like{href: "#"}
+      /       .heart
+      /       Like
+      /     %a{href: "#"}
+      /       %img{src: "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/370638_777577509_271102326_q.jpg", class: "avatar"}
 
       %p.article-blurb
         = truncate(strip_tags(raw(article['content'])), :length => 120, :separator => ' ')
       .article-contents
-        = raw(article['content']) 
+        = raw(article['content'])

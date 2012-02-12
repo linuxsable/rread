@@ -49,7 +49,7 @@ class Reader < ActiveRecord::Base
     end
   end
 
-  def article_feed(count=50, blog_filter_id=nil, timestamp_since=nil)
+  def article_feed(count=nil, blog_filter_id=nil, timestamp_since=nil)
     blog_ids = []
 
     if blog_filter_id.nil?
@@ -61,6 +61,10 @@ class Reader < ActiveRecord::Base
     return {} if blog_ids.empty?
 
     if !timestamp_since.nil?
+      if !timestamp_since.is_a? Time
+        timestamp_since = Time.at(timestamp_since.to_i/1000)
+      end
+
       articles = Article.where(:blog_id => blog_ids)
         .where("created_at >= :timestamp", {:timestamp => timestamp_since})
         .order('published_at DESC')

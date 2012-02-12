@@ -22,6 +22,7 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'newrelic_rpm'
 gem 'memcache-client'
+gem 'rails-backbone'
 
 # Gems used only for assets and not required
 # in production environments by default.
