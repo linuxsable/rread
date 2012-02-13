@@ -70,6 +70,9 @@ App.Reader = do ->
 		$.when(request).done (result) ->
 			if result.success
 				callback(result)
+				if result.count
+					updateNotifcationView()
+					showNotifcationView()
 			else
 				Log.debug 'Bad getNewArticles response.'
 		
@@ -86,35 +89,22 @@ App.Reader = do ->
 			refreshArticles.push this
 
 	updateNotifcationView = ->
+		$('.new-articles').html(refreshArticles.length + ' new articles')
 
 	hideNotifactionView = ->
-		$('.new-articles').fadeOut()
+		$('.new-articles').hide()
 
 	showNotifcationView = ->
-		$('.new-articles').fadeIn()
+		$('.new-articles').show()
 	
-	insertNewArticles = (result) ->
+	insertNewArticles = ->
 	
 		source = $("#article-template").html()
 		template = Handlebars.compile(source)
-		data = users: [
-		  username: "alan"
-		  firstName: "Alan"
-		  lastName: "Johnson"
-		  email: "alan@test.com"
-		,
-		  username: "allison"
-		  firstName: "Allison"
-		  lastName: "House"
-		  email: "allison@test.com"
-		,
-		  username: "ryan"
-		  firstName: "Ryan"
-		  lastName: "Carson"
-		  email: "ryan@test.com"
-		 ]
-		$("#articles").html template(data)
-		console.log result
+
+		data = articles: refreshArticles
+		
+		$(".new-articles").after template(data)
 
 	init: ->
 		refreshTimestamp = Date.now()

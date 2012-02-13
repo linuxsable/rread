@@ -1,0 +1,11 @@
+{{#articles}}
+  <div class="article article-inactive" rel="{{id}}">
+    <p class="article-source">
+      <img src="http://www.google.com/s2/u/0/favicons?domain={{blog_url}}" />
+      {{blog_name}}
+    </p>
+    <p class="article-time">{{published_at}}</p>
+    <h2 class="article-title">{{title}}</h2>
+    <h2 class="article-title article-title-active"><a href="{{url}}" target="_blank">{{title}}</a></h2>
+  </div>
+{{/articles}}

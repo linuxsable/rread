@@ -20,7 +20,8 @@ class ReaderController < ApplicationController
     result = {:success => true, :articles => [], :count => 0}
 
     if !timestamp.nil?
-      result[:articles] = user.reader.article_feed(nil, nil, timestamp)
+      # result[:articles] = user.reader.article_feed(nil, nil, timestamp)
+      result[:articles] = user.reader.article_feed(1)
       result[:count] = result[:articles].count  
     end
 
