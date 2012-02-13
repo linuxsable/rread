@@ -94,6 +94,26 @@ App.Reader = do ->
 		$('.new-articles').fadeIn()
 	
 	insertNewArticles = (result) ->
+	
+		source = $("#article-template").html()
+		template = Handlebars.compile(source)
+		data = users: [
+		  username: "alan"
+		  firstName: "Alan"
+		  lastName: "Johnson"
+		  email: "alan@test.com"
+		,
+		  username: "allison"
+		  firstName: "Allison"
+		  lastName: "House"
+		  email: "allison@test.com"
+		,
+		  username: "ryan"
+		  firstName: "Ryan"
+		  lastName: "Carson"
+		  email: "ryan@test.com"
+		 ]
+		$("#articles").html template(data)
 		console.log result
 
 	init: ->

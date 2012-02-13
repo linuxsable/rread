@@ -28,3 +28,7 @@
         = truncate(raw(strip_tags(article['content'])), :length => 120, :separator => ' ')
       .article-contents
         = raw(article['content'])
+
+
+%script{id: "article-template", type: "text/x-handlebars-template"}
+  = raw(File.read(Rails.root.to_s+"/app/views/reader/article.html.hbs"))
