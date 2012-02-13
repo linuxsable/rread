@@ -11,7 +11,11 @@ class Reader < ActiveRecord::Base
   def add_subscription(feed_url)
     blog = Blog.find_by_feed_url(feed_url)
     if blog.nil?
-      blog = Blog.create_from_user_and_feed_url(self.user, feed_url)
+      begin
+        blog = Blog.create_from_user_and_feed_url(self.user, feed_url)  
+      rescue Exception => e
+        return false
+      end
     end
 
     begin
