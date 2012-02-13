@@ -129,7 +129,7 @@ class Reader < ActiveRecord::Base
       }
 
       if alpha_sort
-        output.sort! { |a,b| a[:blog_name] <=> b[:blog_name] }
+        output.sort! { |a, b| a[:blog_name] <=> b[:blog_name] }
       end
 
       output
@@ -137,8 +137,6 @@ class Reader < ActiveRecord::Base
   end
 
   def async_all_subscriptions
-    blogs.each { |b|
-      b.async_articles
-    }
+    blogs.each { |b| b.async_articles }
   end
 end

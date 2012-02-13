@@ -1,5 +1,4 @@
 class ReaderController < ApplicationController
-
   def index
     user = current_user.user_model
 

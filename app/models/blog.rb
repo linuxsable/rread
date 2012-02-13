@@ -24,10 +24,13 @@ class Blog < ActiveRecord::Base
   # Look-up a feed_url and create the new blog record.
   # Use feedzira to do this.
   def self.create_from_user_and_feed_url(user, feed_url)
+    rss_log = Logger.new('log/rss.log')
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
 
     if feed.nil?
-      raise 'Cannot fetch and parse feed: "' + feed_url + '"'
+      msg = "Cannot fetch and parse #{feed_url}"
+      rss_log.debug(msg)
+      raise msg
     end
 
     blog = self.new do |b|
@@ -39,8 +42,9 @@ class Blog < ActiveRecord::Base
       b.first_created_by = user.id      
     end
 
-    blog.save
-    blog.sync_articles(feed)
+    if blog.save
+      blog.sync_articles(feed)
+    end
 
     return blog
   end
@@ -80,6 +84,8 @@ class Blog < ActiveRecord::Base
   #
   # NEEDS UNIT TEST
   def sync_articles(feed=nil)
+    rss_log = Logger.new('log/rss.log')
+
     if feed.nil?
       feed = Feedzirra::Feed.fetch_and_parse(feed_url)
       if feed.nil?
@@ -91,6 +97,16 @@ class Blog < ActiveRecord::Base
 
     feed.entries.each do |entry|
       if entry.published.to_i > self.articles_last_syncd_at.to_i
+
+        content = nil
+        if entry.content.nil?
+          content = entry.summary
+        else
+          content = entry.content
+        end
+
+        rss_log.debug(entry) if content.nil?
+
         begin
           entry.sanitize!
           Article.create! do |a|
@@ -98,7 +114,7 @@ class Blog < ActiveRecord::Base
             a.title = entry.title
             a.author = entry.author
             a.url = entry.url
-            a.content = entry.content
+            a.content = content
             a.published_at = entry.published
           end
         rescue Exception => e
