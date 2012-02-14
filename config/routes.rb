@@ -50,7 +50,6 @@ Rread::Application.routes.draw do
 
   # Ajax read status
   match '/article/read' => 'article#read'
-  match '/reader/recent_articles' => 'reader#recent_articles'
   
   resources :home, :user, :reader, :sessions, :blog, :article
   

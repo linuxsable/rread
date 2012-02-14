@@ -13,34 +13,48 @@ App = do ->
 App.Reader = do ->
 	refreshTimestamp = 0
 	refreshArticles = []
+	articles = []
 
 	assignListeners = ->
 		$('.new-articles').on 'click', ->
 			hideNotifactionView()
 			insertNewArticles()
+			clearArticleCache()
 		
 		$(document).bind "keydown", "esc", ->
-  			toggleArticle $(this)
+  			closeArticles()
 
-		$('.article').bind 'click', ->
-			toggleArticle $(this)
-
-	toggleArticle = (article) ->
-		active = article.hasClass('article-active') ? true : false
+		$('#articles').on 'click', '.article', ->
+			openArticle $(this)
 		
+		$(".article").on "click", ".article-close", (event) ->
+			closeArticles()
+			event.stopPropagation()
+			return false
+
+	closeArticles = ->
 		$('.article-active').toggleClass('article-active article-inactive')
+
+	openArticle = (article) ->
+		article.addClass 'article-active'
+		article.removeClass 'article-inactive'
+
+		id = article.attr 'rel'
+
+		console.log articles
 		
-		if !active
-			article.toggleClass('article-inactive article-active')
-			articleRead = article.hasClass('article-read')
-			$(".article-contents a", article).attr("target","_blank");
+		$('.article-contents').html articles[id].content
+		$(".article-contents a", article).attr "target", "_blank"
 
-			if !articleRead
-				updateArticleReadStatus article.attr('rel')
-				article.addClass('article-read')
+		articleRead = article.hasClass('article-read')
 
-			article.ScrollTo
-	  			duration: 0
+		if !articleRead
+			updateArticleReadStatus id
+			article.addClass 'article-read'
+
+		article.ScrollTo
+				duration: 0
+
 
 	# Mark articles as read
 	updateArticleReadStatus = (articleId, callback = (r) ->) ->
@@ -59,10 +73,27 @@ App.Reader = do ->
 				Log.debug 'Bad read response.'
 
 		return request
+
+	getAllArticles = ->
+		request = $.ajax {
+			url: '/reader/show.json',
+			type: 'GET'
+		}	
+
+		$.when(request).done (result) ->
+			if result.success
+				cacheNewArticles result
+				if result.count
+					insertNewArticles()
+					stashArticles result
+			else
+				Log.debug 'Bad getAllArticles response.'
+		
+		return request
 	
 	getNewArticles = (timestamp, callback = (r) ->) ->
 		request = $.ajax {
-			url: '/reader/recent_articles.json',
+			url: '/reader/show.json',
 			type: 'GET',
 			data: { 'timestamp': timestamp }
 		}
@@ -82,12 +113,22 @@ App.Reader = do ->
 		setInterval (=>
 			getNewArticles refreshTimestamp, cacheNewArticles
 			refreshTimestamp = Date.now()
-		), 5000
+		), 60 * 1000
 
 	cacheNewArticles = (result) ->
 		$.each result.articles, ->
 			refreshArticles.push this
+			stashArticle this
 
+	stashArticle = (article) ->
+		articles[article.id] = article
+	
+	stashArticles = (result) ->
+		$.each result.articles, ->
+			stashArticle this
+	
+	clearArticleCache = ->
+		refreshArticles = []
 	updateNotifcationView = ->
 		$('.new-articles').html(refreshArticles.length + ' new articles')
 
@@ -107,17 +148,11 @@ App.Reader = do ->
 		$(".new-articles").after template(data)
 
 	init: ->
+		getAllArticles()
 		refreshTimestamp = Date.now()
 		assignListeners()
 		autoRefreshArticles()
 
-		$('.article-inactive').click ->
-	   	if !$(this).hasClass('article-active')
-	   		$(this).toggleArticle()
-
-	   	$('.article-close').click ->
-	   		$(this).parent().parent().toggleArticle()
-	   	return false
 
 	debug: ->
 		debugger
@@ -131,3 +166,18 @@ window.App = App
 # This needs to be in each separate pages document.ready and file, etc
 $(document).ready ->
 	App.Reader.init()
+
+	Handlebars.registerHelper "time", (time) ->
+	  result = $.timeago time
+	  new Handlebars.SafeString(result)
+
+	Handlebars.registerHelper "article_read", (read) ->
+		if (read)
+			result = 'article-read'
+		else
+			result = ''
+		new Handlebars.SafeString(result)
+
+	Handlebars.registerHelper "favicon_url", (url) ->
+		result = url.replace 'http://', ''
+		new Handlebars.SafeString(result)
