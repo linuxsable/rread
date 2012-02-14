@@ -42,7 +42,6 @@ App.Reader = do ->
 		article.ScrollTo
 				duration: 0
 
-
 	# Mark articles as read
 	updateArticleReadStatus = (articleId, callback = (r) ->) ->
 		return false if not articleId?
@@ -100,7 +99,7 @@ App.Reader = do ->
 		setInterval (=>
 			getNewArticles refreshTimestamp, cacheNewArticles
 			refreshTimestamp = Date.now()
-		), 60 * 1000
+		), 10 * 1000
 
 	cacheNewArticles = (result) ->
 		$.each result.articles, ->
@@ -116,6 +115,7 @@ App.Reader = do ->
 	
 	clearArticleCache = ->
 		refreshArticles = []
+
 	updateNotifcationView = ->
 		$('.new-articles').html(refreshArticles.length + ' new articles')
 
@@ -126,7 +126,6 @@ App.Reader = do ->
 		$('.new-articles').show()
 	
 	insertNewArticles = ->
-	
 		source = $("#article-template").html()
 		template = Handlebars.compile(source)
 
@@ -140,13 +139,11 @@ App.Reader = do ->
 		assignListeners()
 		autoRefreshArticles()
 
-
 	debug: ->
 		debugger
 
 	clearArticles: ->
 		$('.article').remove()
-
 
 $ ->
 	App.Reader.init()

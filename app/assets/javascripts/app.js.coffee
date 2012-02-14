@@ -18,16 +18,14 @@ window.App = App
 
 # This needs to be in each separate pages document.ready and file, etc
 $ ->
-
 	Handlebars.registerHelper "time", (time) ->
 	  result = $.timeago time
 	  new Handlebars.SafeString(result)
 
 	Handlebars.registerHelper "article_read", (read) ->
-		if (read)
+		result = ''
+		if read
 			result = 'article-read'
-		else
-			result = ''
 		new Handlebars.SafeString(result)
 
 	Handlebars.registerHelper "favicon_url", (url) ->
