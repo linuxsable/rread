@@ -36,7 +36,7 @@
         - if signed_in?
           - for sub in current_user.reader.subscription_list
             %li
-              %a{href: '?f=' + sub[:blog_id].to_s}=sub[:blog_name]
+              %a{href: '#source/' + sub[:blog_id].to_s}=sub[:blog_name]
           
     #center
       = yield

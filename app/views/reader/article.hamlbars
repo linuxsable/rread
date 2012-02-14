@@ -4,7 +4,9 @@
       <img src="http://www.google.com/s2/u/0/favicons?domain={{favicon_url blog_url}}" />
       {{blog_name}}
     </p>
-    <p class="article-time">{{time published_at}}</p>
+    <p class="article-time">{{time published_at}}
+      <a href="#" class="article-close">X</a>
+    </p>
     <h2 class="article-title">{{title}}</h2>
     <h2 class="article-title article-title-active"><a href="{{url}}" target="_blank">{{title}}</a></h2>
     <p class="article-blurb">{{blurb}}</p>

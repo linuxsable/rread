@@ -25,6 +25,7 @@ App.Reader = do ->
   			closeArticles()
 
 		$('#articles').on 'click', '.article', ->
+			closeArticles()
 			openArticle $(this)
 		
 		$(".article").on "click", ".article-close", (event) ->
@@ -40,10 +41,8 @@ App.Reader = do ->
 		article.removeClass 'article-inactive'
 
 		id = article.attr 'rel'
-
-		console.log articles
 		
-		$('.article-contents').html articles[id].content
+		$('.article-contents', this).html articles[id].content
 		$(".article-contents a", article).attr "target", "_blank"
 
 		articleRead = article.hasClass('article-read')
@@ -181,3 +180,14 @@ $(document).ready ->
 	Handlebars.registerHelper "favicon_url", (url) ->
 		result = url.replace 'http://', ''
 		new Handlebars.SafeString(result)
+
+	AppRouter = Backbone.Router.extend(
+	  routes:
+	    "source/:query": "source"
+
+	  source: (query) ->
+	  	alert query
+	)
+
+	app_router = new AppRouter
+	Backbone.history.start()

@@ -5,7 +5,5 @@
 // the compiled file.
 //
 //= require jquery
+//=require underscore
 //= require_tree .
-
-//= require jquery
-//= require_tree
