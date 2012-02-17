@@ -2,7 +2,7 @@ App.Reader = do ->
 	refreshTimestamp = 0
 	refreshArticles = []
 	articles = []
-	source = 0
+	source = null
 
 	assignListeners = ->
 		$('.new-articles').on 'click', ->
@@ -65,7 +65,7 @@ App.Reader = do ->
 		request = $.ajax {
 			url: '/reader/show.json',
 			type: 'GET'
-			data: { 'source' : source }
+			data: { 'source': source || undefined }
 		}
 
 		$.when(request).done (result) ->
