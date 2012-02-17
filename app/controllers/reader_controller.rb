@@ -8,12 +8,12 @@ class ReaderController < ApplicationController
     user = current_user.user_model
     result = {:success => true, :count => 0, :articles => []}
     timestamp = params[:timestamp]
-    filter = params[:f]
+    filter = (params[:source]) ? params[:source] : nil
 
     if !filter.nil? && !timestamp.nil?
       result[:articles] = user.reader.article_feed(nil, filter, timestamp)    
     elsif !filter.nil?
-      result[:articles] = user.reader.aricle_feed(50, filter)
+      result[:articles] = user.reader.article_feed(50, filter)
     elsif !timestamp.nil?
       result[:articles] = user.reader.article_feed(nil, nil, timestamp)
     else

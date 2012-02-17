@@ -10,6 +10,6 @@
     <h2 class="article-title">{{title}}</h2>
     <h2 class="article-title article-title-active"><a href="{{url}}" target="_blank">{{title}}</a></h2>
     <p class="article-blurb">{{blurb}}</p>
-    <div class="article-contents">{{content}}</div>
+    <div class="article-contents"></div>
   </div>
 {{/articles}}

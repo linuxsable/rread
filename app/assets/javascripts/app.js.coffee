@@ -34,10 +34,10 @@ $ ->
 
 	AppRouter = Backbone.Router.extend(
 	  routes:
-	    "source/:query": "source"
+	    "source/:source": "source"
 
-	  source: (query) ->
-	  	App.Reader.clearArticles()
+	  source: (source) ->
+	  	App.Reader.changeSource(source)
 	)
 
 	app_router = new AppRouter

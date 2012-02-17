@@ -2,6 +2,7 @@ App.Reader = do ->
 	refreshTimestamp = 0
 	refreshArticles = []
 	articles = []
+	source = 0
 
 	assignListeners = ->
 		$('.new-articles').on 'click', ->
@@ -29,8 +30,7 @@ App.Reader = do ->
 		article.removeClass 'article-inactive'
 
 		id = article.attr 'rel'
-		
-		$('.article-contents', this).html articles[id].content
+		$('.article-contents', article).html articles[id].content
 		$(".article-contents a", article).attr "target", "_blank"
 
 		articleRead = article.hasClass('article-read')
@@ -61,10 +61,12 @@ App.Reader = do ->
 		return request
 
 	getAllArticles = ->
+		clearArticleCache()
 		request = $.ajax {
 			url: '/reader/show.json',
 			type: 'GET'
-		}	
+			data: { 'source' : source }
+		}
 
 		$.when(request).done (result) ->
 			if result.success
@@ -81,7 +83,10 @@ App.Reader = do ->
 		request = $.ajax {
 			url: '/reader/show.json',
 			type: 'GET',
-			data: { 'timestamp': timestamp }
+			data: { 
+				'timestamp': timestamp
+				'source': source
+			}
 		}
 
 		$.when(request).done (result) ->
@@ -126,8 +131,8 @@ App.Reader = do ->
 		$('.new-articles').show()
 	
 	insertNewArticles = ->
-		source = $("#article-template").html()
-		template = Handlebars.compile(source)
+		src = $("#article-template").html()
+		template = Handlebars.compile(src)
 
 		data = articles: refreshArticles
 		
@@ -142,8 +147,10 @@ App.Reader = do ->
 	debug: ->
 		debugger
 
-	clearArticles: ->
+	changeSource: (s) ->
+		source = s
 		$('.article').remove()
+		getAllArticles()
 
 $ ->
 	App.Reader.init()
