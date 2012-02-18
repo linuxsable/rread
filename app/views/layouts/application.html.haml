@@ -13,11 +13,6 @@
   
   %header
     .left
-      %form
-        Feed URL:
-        %input{type: 'text', name: 'url'}
-        %a{id: 'add_link', href: '#'} Add
-      
   
     %h1.tk-lobsters rread
     .right
@@ -30,40 +25,64 @@
   #main
   
     #left
-      %ul
-        %li
-          %a{href: '/reader'} All Items
-        - if signed_in?
-          - for sub in current_user.reader.subscription_list
-            %li
-              %a{href: '#source/' + sub[:blog_id].to_s}=sub[:blog_name]
+      / %ul
+      /   %li
+      /     %a{href: '/reader'} All Items
+      /   - if signed_in?
+      /     - for sub in current_user.reader.subscription_list
+      /       %li
+      /         %a{href: '#source/' + sub[:blog_id].to_s}=sub[:blog_name]
           
     #center
+      #main-header
+        %ul
+          %li
+            %a.selected{href: "#"}
+              All Items
+              %span#all_count (56)
+          
+          %li
+            %a{href: "#inbox"}
+              Inbox
+              %span#inbox_count (56)
+          
+          %li
+            %a{href: "#sources"}
+              Sources
+
+          %li
+            %a{href: "#sources"}
+              +
+              %div
+                %input{type: "text"}
+                %input{type: "submit", class: "btn"}
+        
+        %a.mark_all{href: "#"} Mark all as read
+        %br{style: "clear: both"}
+
       = yield
     #right
       - if signed_in?
         - for feed_item in @user_feed
-          = feed_item.user.name
-          - if feed_item.activity_type == Activity::SUBSCRIPTION_ADDED
-            subscribed to
-            = feed_item.target.blog.name + '.'
-          - elsif feed_item.activity_type == Activity::ARTICLE_READ
-            read
-            = feed_item.target.article.title + '.'
-          %br
-      
-        %hr
+          %p
+            = feed_item.user.name
+            - if feed_item.activity_type == Activity::SUBSCRIPTION_ADDED
+              subscribed to
+              = feed_item.target.blog.name + '.'
+            - elsif feed_item.activity_type == Activity::ARTICLE_READ
+              read
+              = feed_item.target.article.title + '.'
         
-        %h4 Mutual Friends
-        - for friend in current_user.mutual_friends
-          %img{src: friend.avatar}
+        / %h4 Mutual Friends
+        / - for friend in current_user.mutual_friends
+        /   %img{src: friend.avatar}
         
-        %h4 My Friends
-        - for friend in current_user.friends
-          %img{src: friend.avatar}
+        / %h4 My Friends
+        / - for friend in current_user.friends
+        /   %img{src: friend.avatar}
         
-        %h4 People who've added me
-        - for friend in current_user.inverse_friends
-          %img{src: friend.avatar}
+        / %h4 People who've added me
+        / - for friend in current_user.inverse_friends
+        /   %img{src: friend.avatar}
     
   %footer
