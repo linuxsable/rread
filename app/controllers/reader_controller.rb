@@ -11,7 +11,7 @@ class ReaderController < ApplicationController
     timestamp = params[:timestamp]
     filter = params[:source]
 
-    result[:articles] = user.reader.article_feed(50, filter, timestamp)
+    result[:articles] = user.reader.article_feed(100, filter, timestamp)
     result[:count] = result[:articles].count
 
     respond_to do |format|

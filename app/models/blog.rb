@@ -50,7 +50,13 @@ class Blog < ActiveRecord::Base
   end
 
   def self.sync_articles_all
-    all.each { |b| b.sync_articles }
+    all.each { |b|
+      begin
+        b.sync_articles
+      rescue Exception => e
+        p e
+      end
+    }
   end
 
   def self.get_name_by_id(blog_id)

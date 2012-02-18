@@ -1,7 +1,7 @@
 set :application, "rread"
 
 #github stuff
-set :repository,  "git@github.com:iansilber/Newsie.git"
+set :repository,  "git@github.com:iansilber/rread.git"
 set :scm, :git
 
 set :use_sudo,    false
@@ -14,7 +14,7 @@ set :password, "Megaman1@"
 ssh_options[:forward_agent] = true
 
 # will be different entries for app, web, db if you host them on different servers
-server "rread.co", :app, :web, :db, :primary => true
+server "50.56.208.142", :app, :web, :db, :primary => true
 
 namespace :deploy do
   task :start, :roles => :app do
