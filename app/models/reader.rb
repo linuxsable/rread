@@ -1,9 +1,11 @@
 class Reader < ActiveRecord::Base
+  include ActionView::Helpers::TextHelper
+
   belongs_to :user
   has_many :subscriptions
   has_many :blogs, :through => :subscriptions
 
-  validates_uniqueness_of :user_id
+  validates_uniqueness_of :user_id  
 
   # This should support smart detection
   # of the paramter type. It should be able to add a subscription
@@ -87,8 +89,7 @@ class Reader < ActiveRecord::Base
         'blog_name' => Blog.get_name_by_id(article.blog_id),
         'blog_url' => Blog.get_url_by_id(article.blog_id),
         'title' => article.title,
-        # 'blurb' => truncate(raw(strip_tags(article.content)), :length => 120, :separator => ' '),
-        # 'blurb' => 'lorem ipsum dolar sit',
+        'blurb' => truncate(strip_tags(article.content), :length => 120, :separator => ' '),
         'content' => article.content,
         'created_at' => article.created_at,
         'published_at' => article.published_at,
