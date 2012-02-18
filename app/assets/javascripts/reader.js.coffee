@@ -2,6 +2,7 @@ App.Reader = do ->
 	refreshTimestamp = 0
 	refreshArticles = []
 	articles = []
+	activeArticle = null
 	source = null
 
 	assignListeners = ->
@@ -12,9 +13,20 @@ App.Reader = do ->
 		
 		$(document).bind "keydown", "esc", ->
   			closeArticles()
+  		
+  		$(document).bind "keydown", "j", ->
+  			if activeArticle == null
+  				openArticle $('#articles .article').first()
+  			else
+  				if activeArticle.next('.article').length
+  					openArticle activeArticle.next('.article')
+  		
+  		$(document).bind "keydown", "k", ->
+  			return if activeArticle == null
+  			if activeArticle.prev('.article').length
+  				openArticle activeArticle.prev()
 
 		$('#articles').on 'click', '.article', ->
-			closeArticles()
 			openArticle $(this)
 		
 		$(".article").on "click", ".article-close", (event) ->
@@ -26,6 +38,8 @@ App.Reader = do ->
 		$('.article-active').toggleClass('article-active article-inactive')
 
 	openArticle = (article) ->
+		closeArticles()
+		activeArticle = article
 		article.addClass 'article-active'
 		article.removeClass 'article-inactive'
 
@@ -61,7 +75,9 @@ App.Reader = do ->
 		return request
 
 	getAllArticles = ->
+		showLoader()
 		clearArticleCache()
+		activeArticle = null
 		request = $.ajax {
 			url: '/reader/show.json',
 			type: 'GET'
@@ -72,6 +88,7 @@ App.Reader = do ->
 			if result.success
 				cacheNewArticles result
 				if result.count
+					hideLoader()
 					insertNewArticles()
 					stashArticles result
 			else
@@ -129,6 +146,12 @@ App.Reader = do ->
 
 	showNotifcationView = ->
 		$('.new-articles').show()
+
+	showLoader = ->
+		$('#articles').addClass 'loading'
+	
+	hideLoader = ->
+		$('#articles').removeClass 'loading'
 	
 	insertNewArticles = ->
 		src = $("#article-template").html()

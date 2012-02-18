@@ -31,7 +31,7 @@ $ ->
 	Handlebars.registerHelper "favicon_url", (url) ->
 		result = url.replace 'http://', ''
 		new Handlebars.SafeString(result)
-
+	
 	AppRouter = Backbone.Router.extend(
 	  routes:
 	    "source/:source": "source"
