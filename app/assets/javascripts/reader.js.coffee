@@ -4,6 +4,8 @@ App.Reader = do ->
 	articles = []
 	activeArticle = null
 	source = null
+	articleHeaderOffset = 0
+	isFixed = 0
 
 	assignListeners = ->
 		$('.new-articles').on 'click', ->
@@ -34,11 +36,29 @@ App.Reader = do ->
 			event.stopPropagation()
 			return false
 
-	closeArticles = ->
+		$('#main-header').on 'click', ->
+			$('html, body').animate scrollTop 0
+			, 800
+		
+		$(window).on "scroll", ->
+			scrollTop = $(this).scrollTop()
+			if scrollTop >= articleHeaderOffset and not isFixed
+			  isFixed = 1
+			  $('#main-header').addClass "subnav-fixed"
+			else if scrollTop <= articleHeaderOffset and isFixed
+			  isFixed = 0
+			  $('#main-header').removeClass "subnav-fixed"
+
+
+			console.log $(this).scrollTop(), articleHeaderOffset
+
+	closeArticles = (shades = true) ->
 		$('.article-active').toggleClass('article-active article-inactive')
+		if shades
+			$('.article, #right').css opacity: '1'
 
 	openArticle = (article) ->
-		closeArticles()
+		closeArticles(false)
 		activeArticle = article
 		article.addClass 'article-active'
 		article.removeClass 'article-inactive'
@@ -46,6 +66,10 @@ App.Reader = do ->
 		id = article.attr 'rel'
 		$('.article-contents', article).html articles[id].content
 		$(".article-contents a", article).attr "target", "_blank"
+
+		article.siblings().animate opacity: '.2'
+		$('#right').animate opacity: '.2'
+		article.css opacity: '1'
 
 		articleRead = article.hasClass('article-read')
 
@@ -166,6 +190,7 @@ App.Reader = do ->
 		refreshTimestamp = Date.now()
 		assignListeners()
 		autoRefreshArticles()
+		articleHeaderOffset = $('#main-header').offset().top
 
 	debug: ->
 		debugger
