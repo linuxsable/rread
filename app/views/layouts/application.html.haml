@@ -5,84 +5,74 @@
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    %script{src: "http://use.typekit.com/hrs5uav.js"}
-    %script
-      try{Typekit.load();}catch(e){}
+
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     
   %body
-  
-  %header
-    .left
-  
-    %h1.tk-lobsters rread
-    .right
-      - if signed_in?
-        =current_user.name
-        %img{src: current_user.avatar, height: '30'}
-      - else
-        %p [Not signed in]
-      
-  #main
-  
-    #left
-      / %ul
-      /   %li
-      /     %a{href: '/reader'} All Items
-      /   - if signed_in?
-      /     - for sub in current_user.reader.subscription_list
-      /       %li
-      /         %a{href: '#source/' + sub[:blog_id].to_s}=sub[:blog_name]
+    .container
+      #header.row
+        .span8
+          %h1 rread
+        
+        .span4.right
+          - if signed_in?
+            =current_user.name
+            %img{src: current_user.avatar, height: '30', class: 'avatar'}
+          - else
+            %p [Not signed in]
           
-    #center
-      #main-header
-        %ul
-          %li
-            %a.selected{href: "#"}
-              All Items
-              %span#all_count (56)
-          
-          %li
-            %a{href: "#inbox"}
-              Inbox
-              %span#inbox_count (56)
-          
-          %li
-            %a{href: "#sources"}
-              Sources
-
-          %li
-            %a{href: "#sources"}
-              +
-              %div
-                %input{type: "text"}
-                %input{type: "submit", class: "btn"}
-        
-        %a.mark_all{href: "#"} Mark all as read
-        %br{style: "clear: both"}
-
-      = yield
-    #right
-      - if signed_in?
-        - for feed_item in @user_feed
-          %p
-            = feed_item.user.name
-            - if feed_item.activity_type == Activity::SUBSCRIPTION_ADDED
-              subscribed to
-              = feed_item.target.blog.name + '.'
-            - elsif feed_item.activity_type == Activity::ARTICLE_READ
-              read
-              = feed_item.target.article.title + '.'
-        
-        / %h4 Mutual Friends
-        / - for friend in current_user.mutual_friends
-        /   %img{src: friend.avatar}
-        
-        / %h4 My Friends
-        / - for friend in current_user.friends
-        /   %img{src: friend.avatar}
-        
-        / %h4 People who've added me
-        / - for friend in current_user.inverse_friends
-        /   %img{src: friend.avatar}
+      #main.row          
+        #center.span8
+          #main-header
+            %ul
+              %li
+                %a.selected{href: "#"}
+                  All Items
+                  %span#all_count (56)
+              
+              %li
+                %a{href: "#inbox"}
+                  Inbox
+                  %span#inbox_count (56)
+              
+              %li
+                %a{href: "#sources"}
+                  Sources
     
-  %footer
+              %li
+                %a{href: "#sources"}
+                  +
+                  %div
+                    %input{type: "text"}
+                    %input{type: "submit", class: "btn"}
+            
+            %a.mark_all{href: "#"} Mark all as read
+            %br{style: "clear: both"}
+    
+          = yield
+        #right.span4
+          %div
+            - if signed_in?
+              - for feed_item in @user_feed
+                %p
+                  = feed_item.user.name
+                  - if feed_item.activity_type == Activity::SUBSCRIPTION_ADDED
+                    subscribed to
+                    = feed_item.target.blog.name + '.'
+                  - elsif feed_item.activity_type == Activity::ARTICLE_READ
+                    read
+                    = feed_item.target.article.title + '.'
+            
+            / %h4 Mutual Friends
+            / - for friend in current_user.mutual_friends
+            /   %img{src: friend.avatar}
+            
+            / %h4 My Friends
+            / - for friend in current_user.friends
+            /   %img{src: friend.avatar}
+            
+            / %h4 People who've added me
+            / - for friend in current_user.inverse_friends
+            /   %img{src: friend.avatar}
+        
+    %footer
