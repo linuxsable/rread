@@ -67,9 +67,9 @@ App.Reader = do ->
 		$('.article-contents', article).html articles[id].content
 		$(".article-contents a", article).attr "target", "_blank"
 
-		article.siblings().animate opacity: '.2'
-		$('#right').animate opacity: '.2'
-		article.css opacity: '1'
+		#article.siblings().animate opacity: '.2'
+		#$('#right').animate opacity: '.2'
+		#article.css opacity: '1'
 
 		articleRead = article.hasClass('article-read')
 
@@ -77,8 +77,9 @@ App.Reader = do ->
 			updateArticleReadStatus id
 			article.addClass 'article-read'
 
-		article.ScrollTo
-				duration: 0
+		#article.ScrollTo
+		#	duration: 0
+		#	over: 1
 
 	# Mark articles as read
 	updateArticleReadStatus = (articleId, callback = (r) ->) ->

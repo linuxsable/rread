@@ -6,7 +6,7 @@ $bright_blue: #09C
 a
   +transition(all .08s ease-in-out)
 
-$header_height: 30px
+$header_height: 60px
 
 body
   font-family: 'Helvetica Neue', Arial, Helvetica
@@ -14,10 +14,11 @@ body
   font-size: 13px
   color: #222
   background: #EFEFEF
+  margin: 0
 
 #header
   h1
-    margin: 0
+    margin: 0 10px
     font-size: 14px
     line-height: $header_height
     color: rgba(130,130,130,1)
@@ -25,13 +26,15 @@ body
 
   .right
     text-align: right
-    
+    font-size: 11px
+    box-align: center
+    line-height: $header_height
+
     img
       vertical-align: middle
 
   
 #main
-  margin-top: $header_height
   position: relative
 
 #right
@@ -41,8 +44,8 @@ body
     font-size: 11px
 
 .avatar
-  width: 27px
-  width: 27px
+  width: 32px
+  width: 32px
   border-radius: 8px
 
 a:hover .avatar
@@ -136,6 +139,8 @@ a:hover .avatar
   color: #8ba8b2
   margin: 0
   line-height: 16px
+  float: left
+  margin: 0 0 5px
   img
     vertical-align: middle
 
@@ -143,11 +148,11 @@ a:hover .avatar
   font-weight: bold
   font-size: 15px
   margin: 4px 0
+  clear: both
 
 .article-time
-  position: absolute
-  top: 0
-  right: 20px
+  float: right
+  margin: 0 0 5px
   color: #AAA
 
 .article-close
@@ -259,8 +264,16 @@ a:hover .avatar
   font-style: normal
 
 
+@media (max-width: 640px)
+  .container
+    padding: 0
+  
+  .article-source, .article-time
+    float: none
+
 // Landscape phones and down
 @media (max-width: 767px)
+  
   #main-header.subnav-fixed
     width: auto
     right: 0
