@@ -17,17 +17,17 @@ App.Reader = do ->
 		$(document).bind "keydown", "esc", ->
   			closeArticles()
   		
-  		$(document).bind "keydown", "j", ->
-  			if activeArticle == null
-  				openArticle $('#articles .article').first()
-  			else
-  				if activeArticle.next('.article').length
-  					openArticle activeArticle.next('.article')
-  		
-  		$(document).bind "keydown", "k", ->
-  			return if activeArticle == null
-  			if activeArticle.prev('.article').length
-  				openArticle activeArticle.prev()
+		$(document).bind "keydown", "j", ->
+			if activeArticle == null
+				openArticle $('#articles .article').first()
+			else
+				if activeArticle.next('.article').length
+					openArticle activeArticle.next('.article')
+		
+		$(document).bind "keydown", "k", ->
+			return if activeArticle == null
+			if activeArticle.prev('.article').length
+				openArticle activeArticle.prev()
 
 		$('#articles').on 'click', '.article', ->
 			openArticle $(this)
@@ -49,9 +49,6 @@ App.Reader = do ->
 			else if scrollTop <= articleHeaderOffset and isFixed
 			  isFixed = 0
 			  $('#main-header').removeClass "subnav-fixed"
-
-
-			console.log $(this).scrollTop(), articleHeaderOffset
 
 	closeArticles = (shades = true) ->
 		$('.article-active').toggleClass('article-active article-inactive')
@@ -78,9 +75,7 @@ App.Reader = do ->
 			updateArticleReadStatus id
 			article.addClass 'article-read'
 
-		#article.ScrollTo
-		#	duration: 0
-		#	over: 1
+		$.scrollTo(article, { offset: -articleHeaderOffset })
 
 	# Mark articles as read
 	updateArticleReadStatus = (articleId, callback = (r) ->) ->
