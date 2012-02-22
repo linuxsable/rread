@@ -1,5 +1,6 @@
 App.Reader = do ->
 	refreshTimestamp = 0
+	refreshInterval = 5
 	refreshArticles = []
 	articles = []
 	activeArticle = null
@@ -126,8 +127,8 @@ App.Reader = do ->
 			url: '/reader/show.json',
 			type: 'GET',
 			data: { 
-				'timestamp': timestamp
-				'source': source
+				'timestamp': timestamp || undefined
+				'source': source || undefined
 			}
 		}
 
@@ -146,7 +147,7 @@ App.Reader = do ->
 		setInterval (=>
 			getNewArticles refreshTimestamp, cacheNewArticles
 			refreshTimestamp = Date.now()
-		), 10 * 1000
+		), refreshInterval * 1000
 
 	cacheNewArticles = (result) ->
 		$.each result.articles, ->
