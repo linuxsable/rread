@@ -124,7 +124,7 @@ class Reader < ActiveRecord::Base
 
   def subscription_list(alpha_sort=true)
     # TODO: Kill this cache when adding or deleteing subscriptions
-    Rails.cache.fetch("subscription_list|#{user.id}", :expires_in => 5.hours) {
+    # Rails.cache.fetch("subscription_list|#{user.id}", :expires_in => 5.hours) {
       output = []
       subs = subscriptions.select(:blog_id)
 
@@ -140,7 +140,7 @@ class Reader < ActiveRecord::Base
       end
 
       output
-    }
+    # }
   end
 
   def async_all_subscriptions

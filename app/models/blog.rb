@@ -19,7 +19,7 @@ class Blog < ActiveRecord::Base
   }
 
   # Save some bandwith
-  SYNC_DIFFERENCE = 5.minutes
+  SYNC_DIFFERENCE = 3.minutes
 
   # Look-up a feed_url and create the new blog record.
   # Use feedzira to do this.
