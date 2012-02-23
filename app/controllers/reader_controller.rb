@@ -6,12 +6,16 @@ class ReaderController < ApplicationController
 
   def show
     user = current_user.user_model
+    reader = user.reader
+
+    reader.async_all_subscriptions
+
     result = {:success => true, :count => 0, :articles => []}
 
     timestamp = params[:timestamp]
     filter = params[:source]
 
-    result[:articles] = user.reader.article_feed(100, filter, timestamp)
+    result[:articles] = reader.article_feed(100, filter, timestamp)
     result[:count] = result[:articles].count
 
     respond_to do |format|
