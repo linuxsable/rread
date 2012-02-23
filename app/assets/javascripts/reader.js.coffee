@@ -1,6 +1,6 @@
 App.Reader = do ->
 	refreshTimestamp = 0
-	refreshInterval = 5
+	refreshInterval = 60
 	refreshArticles = []
 	articles = []
 	activeArticle = null

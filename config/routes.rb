@@ -50,6 +50,8 @@ Rread::Application.routes.draw do
 
   # Ajax read status
   match '/article/read' => 'article#read'
+  match '/subscriptions/add' => 'subscriptions#create'
+  match '/subscriptions/remove' => 'subscriptions#delete'
   
   resources :home, :user, :reader, :sessions, :blog, :article
   
