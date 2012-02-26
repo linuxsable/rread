@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_onboarding_status, :authenticate
   
+  # Make these avail to the views as helpers
+  helper_method :current_user, :signed_in?
+  
   protected
   
   # Get the current user
@@ -50,7 +53,4 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
-  # Make these avail to the views as helpers
-  helper_method :current_user, :signed_in?
 end
