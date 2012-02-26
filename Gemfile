@@ -23,6 +23,7 @@ gem 'therubyracer'
 gem 'newrelic_rpm'
 gem 'memcache-client'
 gem 'rails-backbone'
+gem 'ejs-1.0.0'
 # gem 'hamlbars'
 
 # Gems used only for assets and not required
