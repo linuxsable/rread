@@ -57,4 +57,7 @@ Rread::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  config.fb_app_id = '137065989735336'
+  config.fb_app_secret = '713781007928349d79934d6121ff2f0f'
 end
