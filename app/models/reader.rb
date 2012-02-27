@@ -47,12 +47,25 @@ class Reader < ActiveRecord::Base
   # Will import all the Google Reader feeds
   # of the authing user to the current reader.
   def import_greader(email, password)
+    errors = []
     creds = { :email => email, :password => password }
-    
+
+    if creds[:email].nil? or creds[:password].nil?
+      return false
+    end
+
     greader = GReader.auth(creds)
     greader.feeds.each do |feed|
-      add_subscription(feed.url)
+      begin
+        add_subscription(feed.url)  
+      rescue Exception => e
+        errors << e.message
+      end
     end
+
+    return errors if not errors.empty?
+
+    true
   end
 
   def article_feed(count=nil, blog_filter_id=nil, timestamp_since=nil)

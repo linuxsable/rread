@@ -1,7 +1,7 @@
 class ReaderController < ApplicationController
   def index
     user = current_user.user_model
-    @user_feed = @current_user.user_model.friend_activity_feed
+    @user_feed = user.friend_activity_feed
   end
 
   def show
@@ -22,4 +22,29 @@ class ReaderController < ApplicationController
       format.json { render :json => result }
     end
   end
+
+  def import_greader
+    username = params[:username]
+    password = params[:password]
+
+    r = {:success => true, :result => nil, :error => nil}
+
+    if username.nil? or password.nil?
+      r[:error] = 'missing params'
+    end
+
+    reader = current_user.reader
+    result = reader.import_greader(username, password)
+
+    if result.is_a? Array
+      r[:error] = result
+    else
+      r[:success] = result
+    end
+
+    respond_to do |format|
+      format.json { render :json => r }
+    end
+  end
+
 end

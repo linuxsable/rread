@@ -43,7 +43,7 @@ class Blog < ActiveRecord::Base
     end
 
     if blog.save
-      blog.sync_articles(feed)
+      blog.async_articles(feed)
     end
 
     return blog
