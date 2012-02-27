@@ -52,6 +52,12 @@
           = yield
         #right.span4
           %div
+            %ul#list
+              %script{id: "activity-row", type: "text/x-handlebars-template"}
+                = raw(File.read(Rails.root.to_s+"/app/views/reader/activityrow.handlebars"))  
+              %script
+                af = 
+                = raw(@user_feed.to_json)
             - if signed_in?
               - for feed_item in @user_feed
                 %p
