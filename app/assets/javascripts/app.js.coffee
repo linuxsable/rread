@@ -21,6 +21,12 @@ App.ActivityFeed = Backbone.Collection.extend(
 	url: "/feed/show.json"
 
 	initialize: ->
+		self = @
+
+		setInterval =>
+			this.fetch()
+		, 10 * 1000
+
 		this.on "add", (activity) ->
 	  	view = new App.Views.Activity(model: activity)
 	  	$("#list").append view.render().el
