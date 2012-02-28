@@ -32,11 +32,18 @@ namespace :deploy do
 end
 
 desc "Tail the logs"
-task :tail_logs do
+task :dl do
   run "tail -f /rails_apps/rread/current/log/*"
 end
 
 desc "Get ram usage"
 task :mem do
-  run "vmstat -S M"
+  # run "vmstat -S M"
+  run "free -m"
+end
+
+# THIS DOESNT WORK
+task :start_worker do
+  run "cd #{deploy_to}/current"
+  run "BACKGROUND=yes RAILS_ENV=production QUEUE=* bundle exec rake resque:work"
 end
