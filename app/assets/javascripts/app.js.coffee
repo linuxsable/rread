@@ -23,9 +23,9 @@ App.ActivityFeed = Backbone.Collection.extend(
 	initialize: ->
 		self = @
 
-		setInterval =>
-			this.fetch()
-		, 10 * 1000
+		# setInterval =>
+			# this.fetch()
+		# , 10 * 1000
 
 		this.on "add", (activity) ->
 	  	view = new App.Views.Activity(model: activity)

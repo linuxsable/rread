@@ -85,7 +85,7 @@ class Reader < ActiveRecord::Base
       end
 
       articles = Article.where(:blog_id => blog_ids)
-        .where("created_at >= DATETIME(?)", timestamp_since)
+        .where("created_at > ?", timestamp_since)
         .order('published_at DESC')
         .limit(count)
     else
