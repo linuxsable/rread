@@ -6,3 +6,7 @@ Required services:
 - Redis
 - Memcache
 - Bundler
+
+== Running Paperboy
+
+RAILS_ENV=development rails runner script/paperboy.rb run

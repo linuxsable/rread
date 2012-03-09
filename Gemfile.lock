@@ -48,6 +48,7 @@ GEM
       execjs
     coffee-script-source (1.2.0)
     curb (0.7.18)
+    daemons (1.1.4)
     ejs (1.0.0)
     erubis (2.7.0)
     execjs (1.3.0)
@@ -218,6 +219,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   coffee-rails (~> 3.1.1)
+  daemons
   ejs
   execjs
   feedzirra

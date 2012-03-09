@@ -24,6 +24,7 @@ gem 'newrelic_rpm'
 gem 'memcache-client'
 gem 'rails-backbone'
 gem 'ejs'
+gem 'daemons'
 # gem 'hamlbars'
 
 # Gems used only for assets and not required
