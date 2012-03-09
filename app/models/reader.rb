@@ -14,19 +14,14 @@ class Reader < ActiveRecord::Base
     blog = Blog.find_by_feed_url(feed_url)
     if blog.nil?
       begin
-        blog = Blog.create_from_user_and_feed_url(self.user, feed_url)  
+        blog = Blog.create_from_feed_url(user, feed_url)  
       rescue Exception => e
+        Rails.logger.error e
         return false
       end
     end
 
-    begin
-      return Subscription.create!(:reader => self, :blog => blog)  
-    rescue Exception => e
-      Rails.logger.error e
-    end
-
-    true
+    Subscription.create!(:reader => self, :blog => blog)
   end
 
   def remove_subscription(feed_url)
@@ -57,7 +52,8 @@ class Reader < ActiveRecord::Base
     greader = GReader.auth(creds)
     greader.feeds.each do |feed|
       begin
-        add_subscription(feed.url)  
+        result = add_subscription(feed.url)
+        errors << feed.url + ' failed to subscribe' if !result
       rescue Exception => e
         errors << e.message
       end

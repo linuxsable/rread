@@ -23,7 +23,7 @@ class Blog < ActiveRecord::Base
 
   # Look-up a feed_url and create the new blog record.
   # Use feedzira to do this.
-  def self.create_from_user_and_feed_url(user, feed_url)
+  def self.create_from_feed_url(user, feed_url)
     rss_log = Logger.new('log/rss.log')
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
 
@@ -43,7 +43,7 @@ class Blog < ActiveRecord::Base
     end
 
     if blog.save
-      blog.async_articles(feed)
+      blog.async_articles
     end
 
     return blog
