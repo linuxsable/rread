@@ -51,8 +51,8 @@ Rread::Application.routes.draw do
   # Ajax read status
   match '/article/read' => 'article#read'
 
-  match '/subscriptions/add' => 'subscriptions#create'
-  match '/subscriptions/remove' => 'subscriptions#delete'
+  match '/subscriptions/create' => 'subscriptions#create'
+  match '/subscriptions/destroy' => 'subscriptions#destroy'
 
   match '/reader/import_greader' => 'reader#import_greader'
   
