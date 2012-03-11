@@ -5,6 +5,7 @@
 class ArticleStatus < ActiveRecord::Base
   belongs_to :article
   belongs_to :user
+  belongs_to :blog
 
   validates :article_id, :user_id, :presence => true
   validates :user_id, :uniqueness => { :scope => :article_id }

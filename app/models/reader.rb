@@ -21,7 +21,7 @@ class Reader < ActiveRecord::Base
       end
     end
 
-    Subscription.create!(:reader => self, :blog => blog)
+    Subscription.create_with_unread_marker!(self, blog)
   end
 
   def remove_subscription(feed_url)
@@ -135,14 +135,15 @@ class Reader < ActiveRecord::Base
     # TODO: Kill this cache when adding or deleteing subscriptions
     # Rails.cache.fetch("subscription_list|#{user.id}", :expires_in => 5.hours) {
       output = []
-      subs = subscriptions.select(:blog_id)
+      subs = subscriptions.select('blog_id, unread_marker')
 
-      subs.each { |sub| 
+      subs.each do |sub|
         output << {
           :blog_id => sub.blog_id,
-          :blog_name => Blog.get_name_by_id(sub.blog_id)
+          :blog_name => Blog.get_name_by_id(sub.blog_id),
+          :unread_count => unread_count(sub.blog_id)
         }
-      }
+      end
 
       if alpha_sort
         output.sort! { |a, b| a[:blog_name] <=> b[:blog_name] }
@@ -150,6 +151,43 @@ class Reader < ActiveRecord::Base
 
       output
     # }
+  end
+
+  # This will return the unread count for all
+  # the subscriptions at once if no blog_id is given.
+  def unread_count(blog_id=nil)
+    total_count = 0
+
+    if blog_id.nil?
+      subs = subscriptions.select('blog_id, unread_marker')
+    else
+      subs = subscriptions
+        .where(:blog_id => blog_id)
+        .select('blog_id, unread_marker')
+    end
+
+    subs.each do |sub|
+      # Now we have to merge in the article_read table to deduct
+      # from the total just from the marker.
+      status_count = ArticleStatus
+        .count(:conditions => ['blog_id = ? and created_at > ? and article_read_id IS NOT NULL', sub.blog_id, sub.unread_marker])
+      total_count -= status_count
+
+      total_count += Article.count(:conditions => ['blog_id = ? and created_at > ?', sub.blog_id, sub.unread_marker])
+    end
+
+    total_count
+  end
+
+  # This will mark every article as read in the 
+  # reader for a specific user. This currently
+  # doesn't support individual subscriptions.
+  def mark_all_as_read
+    timestamp = Time.now
+    subscriptions.each { |sub|
+      sub.unread_marker = timestamp
+      sub.save
+    }
   end
 
   def async_all_subscriptions

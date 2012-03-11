@@ -68,7 +68,12 @@ class User < ActiveRecord::Base
         status.article_read_id = article_read.id
         status.save!
       else
-        ArticleStatus.create!(:user => self, :article => article, :article_read_id => article_read.id)
+        ArticleStatus.create!(
+          :user => self,
+          :article => article,
+          :article_read_id => article_read.id,
+          :blog_id => article.blog_id
+        )
       end
     }
   end
