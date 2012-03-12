@@ -170,7 +170,7 @@ class Reader < ActiveRecord::Base
       # Now we have to merge in the article_read table to deduct
       # from the total just from the marker.
       status_count = ArticleStatus
-        .count(:conditions => ['blog_id = ? and created_at > ? and article_read_id IS NOT NULL', sub.blog_id, sub.unread_marker])
+        .count(:conditions => ['blog_id = ? and user_id = ? and created_at > ? and article_read_id IS NOT NULL', sub.blog_id, self.user_id, sub.unread_marker])
       total_count -= status_count
 
       total_count += Article.count(:conditions => ['blog_id = ? and created_at > ?', sub.blog_id, sub.unread_marker])
@@ -182,6 +182,8 @@ class Reader < ActiveRecord::Base
   # This will mark every article as read in the 
   # reader for a specific user. This currently
   # doesn't support individual subscriptions.
+  # 
+  # TODO: Allow individual subscription marking.
   def mark_all_as_read
     timestamp = Time.now
     subscriptions.each { |sub|
