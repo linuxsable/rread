@@ -47,4 +47,20 @@ class ReaderController < ApplicationController
     end
   end
 
+  def mark_all_as_read
+    confirm = params[:confirm]
+
+    r = { :success => false }
+
+    if confirm
+      r[:success] = current_user.user_model.reader.mark_all_as_read
+    else
+      r[:error] = "Must pass a 'confirm' param"
+    end    
+
+    respond_to do |format|
+      format.json { render :json => r }
+    end
+  end
+
 end

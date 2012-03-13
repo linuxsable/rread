@@ -55,6 +55,7 @@ Rread::Application.routes.draw do
   match '/subscriptions/destroy' => 'subscriptions#destroy'
 
   match '/reader/import_greader' => 'reader#import_greader'
+  match '/reader/mark_all_as_read' => 'reader#mark_all_as_read'
   
   resources :home, :user, :reader, :sessions, :blog, :article
   

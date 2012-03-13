@@ -186,10 +186,20 @@ class Reader < ActiveRecord::Base
   # TODO: Allow individual subscription marking.
   def mark_all_as_read
     timestamp = Time.now
-    subscriptions.each { |sub|
+
+    subscriptions.each do |sub|
       sub.unread_marker = timestamp
-      sub.save
-    }
+
+      begin
+        sub.save!
+      rescue Exception => e
+        Rails.logger.error e
+        return false
+      end
+
+    end
+
+    true
   end
 
   def async_all_subscriptions
