@@ -49,12 +49,11 @@ class User < ActiveRecord::Base
     self.save!
   end
 
-  def mark_article_as_read(article)
+  def read_article(article)
     # First check if it's read already
-
-    # Not sure why I can't do (:article => article, :user => user)
     status_query = ArticleStatus.where(:article_id => article.id, :user_id => self.id)
     status = status_query.first
+
     if status_query.exists?
       return true if status.article_read_id?
     end
@@ -76,6 +75,37 @@ class User < ActiveRecord::Base
         )
       end
     }
+
+    true
+  end
+
+  def like_article(article)
+    status_query = ArticleStatus.where(:article_id => article.id, :user_id => self.id)
+    status = status_query.first
+
+    if status_query.exists?
+      return true if status.like_id?
+    end
+
+    ActiveRecord::Base.transaction {
+      # Create the like record
+      like = Like.create!(:user => self, :target => article)
+
+      # Create the ArticleStatus record
+      if status_query.exists?
+        status.like_id = like.id
+        status.save!
+      else
+        ArticleStatus.create!(
+          :user => self,
+          :article => article,
+          :like_id => like.id,
+          :blog_id => article.blog_id
+        )
+      end
+    }
+
+    true
   end
   
   def friend_activity_feed

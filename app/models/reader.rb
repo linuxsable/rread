@@ -196,7 +196,6 @@ class Reader < ActiveRecord::Base
         Rails.logger.error e
         return false
       end
-
     end
 
     true

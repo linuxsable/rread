@@ -3,15 +3,42 @@ class ArticleController < ApplicationController
     render :layout => 'index'
   end
 
+  # For reading an article by the current user.
   def read
-    article = Article.find(params[:id])
-    @current_user.user_model.mark_article_as_read(article)
+    r = { :success => false }
+
+    begin
+      article = Article.find(params[:id])  
+    rescue Exception => e
+      r[:error] = "Article not found"
+    end
+
+    if article.is_a? Article
+      r[:success] = current_user.user_model.read_article(article)
+    end
+
     respond_to do |format|
-      format.json { render :json => { :success => true}}
+      format.json { render :json => r }
     end
   end
 
-  def liked
+  # For liking an article by the current user.
+  def like
+    r = { :success => false }
 
+    begin
+      article = Article.find(params[:id])  
+    rescue Exception => e
+      r[:error] = "Article not found"
+    end
+
+    if article.is_a? Article
+      r[:success] = current_user.user_model.like_article(article)
+    end
+
+    respond_to do |format|
+      format.json { render :json => r }
+    end
   end
+
 end
