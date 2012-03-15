@@ -2,6 +2,8 @@
 
 - Wrap up account creation with email/password system
 - Wrap up article inboxing and the ability to pull an article feed based from this
+- Figure out a method of keeping the facebook friendships in sync w/ queueing
+- Friendship controller w/ the ability to follow/unfollow
 
 
 * Beandip / Frontend *
