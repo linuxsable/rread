@@ -1,6 +1,15 @@
-- Setup a queue system that syncs blog articles in a smart way with weights
+* Tyler *
 
--- Q
-- Each time a blog gets added to a reader, that blog has a column which gets incremented
-- When a blog is added to the Q, that column is used as the priority
-- It may be that we need to reverse this so that less used blogs have a higher priority because they'll be read less
+- Wrap up account creation with email/password system
+- Wrap up article inboxing and the ability to pull an article feed based from this
+
+
+* Beandip / Frontend *
+
+- Fix article polling bugs and get it working (backend is finished)
+- Scroll loading
+- Use moment.js (https://github.com/timrwood/moment) to handle all displays of dates in artile feed
+- Get activty feed auto updating
+- GUI for adding & removing subscriptions
+- GUI for importing google reader
+- GUI for filtering by subscription
