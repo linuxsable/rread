@@ -4,6 +4,7 @@
 - Wrap up article inboxing and the ability to pull an article feed based from this
 - Figure out a method of keeping the facebook friendships in sync w/ queueing
 - Friendship controller w/ the ability to follow/unfollow
+- Enforce a subscription count limit per user
 
 
 * Beandip / Frontend *
