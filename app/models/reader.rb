@@ -64,28 +64,41 @@ class Reader < ActiveRecord::Base
     true
   end
 
+  # This is the main method to pull the article feed
+  # in the reader (the main page).
+  #
+  # TODO: If an article is read because it of the
+  # unread marker, don't hit the DB asking for the article_status
+  # on that item because we already know that it is read (we don't need it).
   def article_feed(count=nil, blog_filter_id=nil, timestamp_since=nil)
-    blog_ids = []
+    subs = []
 
     if blog_filter_id.nil?
-      blogs.each { |b| blog_ids << b.id }
+      subs = subscriptions
     else
-      blog_ids << blog_filter_id
+      subs << subscription.where(:blog_id => blog_filter_id).limit(1)
     end
 
-    return {} if blog_ids.empty?
+    return {} if subs.empty?
+
+    blog_ids = []
+    subs.each { |b| blog_ids << b.id }
 
     if !timestamp_since.nil?
       if !timestamp_since.is_a? Time
         timestamp_since = Time.at(timestamp_since.to_i / 1000)
       end
 
-      articles = Article.where(:blog_id => blog_ids)
+      articles = Article
+        .where(:blog_id => blog_ids)
         .where("created_at > ?", timestamp_since)
         .order('published_at DESC')
         .limit(count)
     else
-      articles = Article.where(:blog_id => blog_ids).order('published_at DESC').limit(count)
+      articles = Article
+        .where(:blog_id => blog_ids)
+        .order('published_at DESC')
+        .limit(count)
     end
     
     return {} if articles.empty?
@@ -106,6 +119,17 @@ class Reader < ActiveRecord::Base
         'read' => false,
         'liked' => false
       }
+
+      # Let's check the read status against
+      # a mark_all_as_read marker if it exists.
+      subs_search = subs.select { |s| s.blog_id == article.blog_id }
+      if subs_search.size == 1
+        if !subs_search.first.unread_marker.nil?
+          if subs_search.first.unread_marker > article.created_at
+            articles_by_id[article.id]['read'] = true
+          end
+        end
+      end
     end
 
     article_statuses = ArticleStatus.where(:user_id => user.id, :article_id => articles_by_id.keys)
@@ -180,14 +204,21 @@ class Reader < ActiveRecord::Base
   end
 
   # This will mark every article as read in the 
-  # reader for a specific user. This currently
-  # doesn't support individual subscriptions.
-  # 
-  # TODO: Allow individual subscription marking.
-  def mark_all_as_read
+  # reader for a specific user.
+  #
+  # If a blog_id is passed, it will only
+  # mark all as read for that blog.
+  def mark_all_as_read(blog_id=nil)
     timestamp = Time.now
 
-    subscriptions.each do |sub|
+    subs = []
+    if !blog_id.nil?
+      subs = subscriptions.where(:blog_id => blog_id).limit(1)
+    else
+      subs = subscriptions
+    end
+
+    subs.each do |sub|
       sub.unread_marker = timestamp
 
       begin
