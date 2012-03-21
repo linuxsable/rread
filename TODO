@@ -1,10 +1,10 @@
 * Tyler *
 
 - Wrap up account creation with email/password system
-- Wrap up article inboxing and the ability to pull an article feed based from this
 - Figure out a method of keeping the facebook friendships in sync w/ queueing
 - Friendship controller w/ the ability to follow/unfollow
 - Enforce a subscription count limit per user
+- Article feed needs to have marked as read after "mark all as read"
 
 
 * Beandip / Frontend *
@@ -16,3 +16,8 @@
 - GUI for adding & removing subscriptions
 - GUI for importing google reader
 - GUI for filtering by subscription
+- GUI for article liking
+
+* V2 *
+
+- Wrap up article inboxing and the ability to pull an article feed based from this
