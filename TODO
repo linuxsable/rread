@@ -4,7 +4,8 @@
 - Figure out a method of keeping the facebook friendships in sync w/ queueing
 - Friendship controller w/ the ability to follow/unfollow
 - Enforce a subscription count limit per user
-- Article feed needs to have marked as read after "mark all as read"
+Article feed needs to have marked as read after "mark all as read"
+- Update reader_controller#mark_all_as_read to support single blogs
 
 
 * Beandip / Frontend *
