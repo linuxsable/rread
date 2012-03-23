@@ -1,10 +1,17 @@
 class SubscriptionsController < ApplicationController
 	def create
-    reader = current_user.reader
-    result = reader.add_subscription(params[:feed_url])
+    result = {:success => true}
+
+    begin
+      reader = current_user.reader
+      result[:success] = reader.add_subscription(params[:feed_url])  
+    rescue Exception => e
+      result[:success] = false
+      result[:error] = e.message
+    end
 
     respond_to do |format|
-      format.json { render :json => { :success => result } }
+      format.json { render :json => result }
     end
 	end
 

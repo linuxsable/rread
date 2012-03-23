@@ -1,11 +1,3 @@
-# - How many articles a blog has
-# - How many articles the user has read
-# Total Articles - User Read count = Unread count
-
-# Mark all as read
-
-# Is a row in the database for each
-
 class Subscription < ActiveRecord::Base
 	belongs_to :blog
 	belongs_to :reader

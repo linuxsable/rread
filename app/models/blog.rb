@@ -27,7 +27,7 @@ class Blog < ActiveRecord::Base
     rss_log = Logger.new('log/rss.log')
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
 
-    if feed.nil?
+    if feed.nil? or feed == 404
       msg = "Cannot fetch and parse #{feed_url}"
       rss_log.debug(msg)
       raise msg

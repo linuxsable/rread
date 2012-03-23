@@ -5,12 +5,18 @@ class Reader < ActiveRecord::Base
   has_many :subscriptions
   has_many :blogs, :through => :subscriptions
 
-  validates_uniqueness_of :user_id  
+  validates_uniqueness_of :user_id
+
+  MAX_SUBSCRIPTION_COUNT = 25
 
   # This should support smart detection
   # of the paramter type. It should be able to add a subscription
   # based on feed_url, regular url, name, etc.
   def add_subscription(feed_url)
+    if subscriptions.count >= MAX_SUBSCRIPTION_COUNT
+      raise Exception, 'Max amount of user subscriptions'
+    end
+
     blog = Blog.find_by_feed_url(feed_url)
     if blog.nil?
       begin
