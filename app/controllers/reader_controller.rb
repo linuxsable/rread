@@ -49,11 +49,12 @@ class ReaderController < ApplicationController
 
   def mark_all_as_read
     confirm = params[:confirm]
+    blog_id = params[:blog_id]
 
     r = { :success => false }
 
     if confirm
-      r[:success] = current_user.user_model.reader.mark_all_as_read
+      r[:success] = current_user.user_model.reader.mark_all_as_read(blog_id)
     else
       r[:error] = "Must pass a 'confirm' param"
     end    
