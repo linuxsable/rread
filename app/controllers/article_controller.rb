@@ -14,7 +14,7 @@ class ArticleController < ApplicationController
     end
 
     if article.is_a? Article
-      r[:success] = current_user.user_model.read_article(article)
+      r[:success] = current_user.read_article(article)
     end
 
     respond_to do |format|
@@ -33,7 +33,7 @@ class ArticleController < ApplicationController
     end
 
     if article.is_a? Article
-      r[:success] = current_user.user_model.like_article(article)
+      r[:success] = current_user.like_article(article)
     end
 
     respond_to do |format|

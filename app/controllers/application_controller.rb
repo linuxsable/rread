@@ -13,10 +13,7 @@ class ApplicationController < ActionController::Base
     if @current_user
       @current_user
     else
-      user_model = User.find_by_id(session[:user_id])
-      if !user_model.nil?
-        @current_user = AppUser.new(user_model)
-      end
+      User.find_by_id(session[:user_id])
     end
   end
   
