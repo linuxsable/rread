@@ -1,6 +1,12 @@
 class ArticleController < ApplicationController
+  respond_to :json
+
   def index
-    render :layout => 'index'
+    
+  end
+
+  def show
+    @article = Article.find(params[:id])
   end
 
   # For reading an article by the current user.
