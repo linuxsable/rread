@@ -1,13 +1,10 @@
 class ReaderController < ApplicationController
   def index
-    user = current_user.user_model
-    @user_feed = user.friend_activity_feed
+    @user_feed = current_user.friend_activity_feed
   end
 
   def show
-    user = current_user.user_model
-    reader = user.reader
-
+    reader = current_user.reader
     reader.async_all_subscriptions
 
     result = {:success => true, :count => 0, :articles => []}
@@ -54,7 +51,7 @@ class ReaderController < ApplicationController
     r = { :success => false }
 
     if confirm
-      r[:success] = current_user.user_model.reader.mark_all_as_read(blog_id)
+      r[:success] = current_user.reader.mark_all_as_read(blog_id)
     else
       r[:error] = "Must pass a 'confirm' param"
     end    

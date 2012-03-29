@@ -16,7 +16,7 @@
         
         .span4.right
           - if signed_in?
-            =current_user.name
+            =current_user.full_name
             %img{src: current_user.avatar, height: '30', class: 'avatar'}
           - else
             %p [Not signed in]
