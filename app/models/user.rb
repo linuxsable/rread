@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
       u.private_reading = false
     end
 
+    Rails.logger.info(user.inspect)
+
     user.setup_reader
 
     return user
@@ -36,7 +38,7 @@ class User < ActiveRecord::Base
       return self.reader
     end
 
-    reader = Reader.create do |reader|
+    reader = Reader.create! do |reader|
       reader.user = self
     end
 
@@ -120,7 +122,7 @@ class User < ActiveRecord::Base
     @provider_info_model.avatar
   end
 
-  def name
+  def full_name
     load_provider_model
     @provider_info_model.first_name+' '+@provider_info_model.last_name
   end
