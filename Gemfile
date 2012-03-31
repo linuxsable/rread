@@ -25,6 +25,7 @@ gem 'memcache-client'
 gem 'rails-backbone'
 gem 'ejs'
 gem 'daemons'
+gem 'rabl'
 # gem 'hamlbars'
 
 # Gems used only for assets and not required
