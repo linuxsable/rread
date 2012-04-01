@@ -9,6 +9,18 @@ class ArticleController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  def create
+    
+  end
+
+  def update
+    
+  end
+
+  def destroy
+    
+  end
+
   # For reading an article by the current user.
   def read
     r = { :success => false }
