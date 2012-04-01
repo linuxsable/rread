@@ -21,12 +21,11 @@ gem 'mysql2'
 gem 'execjs'
 gem 'therubyracer'
 gem 'newrelic_rpm'
-gem 'memcache-client'
+gem 'dalli'
 gem 'rails-backbone'
 gem 'ejs'
 gem 'daemons'
 gem 'rabl'
-# gem 'hamlbars'
 
 # Gems used only for assets and not required
 # in production environments by default.
