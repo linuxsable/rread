@@ -1,8 +1,9 @@
-class ArticleController < ApplicationController
+class ArticlesController < ApplicationController
   respond_to :json
+  layout nil
 
   def index
-    
+    @articles = Article.limit(50)
   end
 
   def show

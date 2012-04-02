@@ -2,8 +2,8 @@ Rread::Application.routes.draw do
   root :to => 'home#index'
 
   # Ajax read status
-  match '/article/read' => 'article#read'
-  match '/article/like' => 'article#like'
+  match '/articles/read' => 'articles#read'
+  match '/articles/like' => 'articles#like'
 
   match '/subscriptions/create' => 'subscriptions#create'
   match '/subscriptions/destroy' => 'subscriptions#destroy'
@@ -11,7 +11,7 @@ Rread::Application.routes.draw do
   match '/reader/import_greader' => 'reader#import_greader'
   match '/reader/mark_all_as_read' => 'reader#mark_all_as_read'
   
-  resources :home, :user, :reader, :sessions, :blog, :article
+  resources :home, :user, :reader, :sessions, :blog, :articles
   
   # Sessions stuff
   match '/auth/:provider/callback', :to => 'sessions#create'

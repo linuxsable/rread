@@ -9,3 +9,9 @@ window.Rread =
   Collections: {}
   Routers: {}
   Views: {}
+
+  init: ->
+    new Rread.Routers.Reader
+
+$(document).ready ->
+  Rread.init()
