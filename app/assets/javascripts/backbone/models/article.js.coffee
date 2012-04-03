@@ -8,3 +8,7 @@ class Rread.Models.Article extends Backbone.Model
 class Rread.Collections.Articles extends Backbone.Collection
   model: Rread.Models.Article
   url: '/articles'
+
+class Rread.Collections.ReaderArticles extends Backbone.Collection
+  model: Rread.Models.Article
+  url: '/reader'

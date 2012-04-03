@@ -5,10 +5,8 @@
 // the compiled file.
 //
 //= require jquery
-//=require underscore
-//=require backbone
-//=require handlebars
-//= require underscore
+//= require ./vendor/underscore
+//= require ./vendor/backbone
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
