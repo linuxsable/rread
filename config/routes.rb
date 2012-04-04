@@ -10,6 +10,7 @@ Rread::Application.routes.draw do
 
   match '/reader/import_greader' => 'reader#import_greader'
   match '/reader/mark_all_as_read' => 'reader#mark_all_as_read'
+  match '/reader/article_feed' => 'reader#article_feed'
   
   resources :home, :user, :reader, :sessions, :blog, :articles
   

@@ -198,4 +198,4 @@ App.Reader = do ->
 		getAllArticles()
 
 $ ->
-	App.Reader.init()
+	# App.Reader.init()

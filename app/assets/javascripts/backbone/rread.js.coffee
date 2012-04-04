@@ -13,5 +13,9 @@ window.Rread =
   init: ->
     new Rread.Routers.Reader
 
+  globalError: (msg) ->
+    alert(msg)
+
 $(document).ready ->
   Rread.init()
+  Backbone.history.start()

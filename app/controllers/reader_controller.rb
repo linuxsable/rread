@@ -24,41 +24,55 @@ class ReaderController < ApplicationController
     username = params[:username]
     password = params[:password]
 
-    r = {:success => true, :result => nil, :error => nil}
+    @success = false
+    @result = nil
+    @error = nil
 
     if username.nil? or password.nil?
-      r[:error] = 'missing params'
+      @error = 'Missing params.'
+      return
     end
-
-    reader = current_user.reader
-    result = reader.import_greader(username, password)
+    
+    result = current_user.reader.import_greader(username, password)
 
     if result.is_a? Array
-      r[:error] = result
+      @error = result
     else
-      r[:success] = result
-    end
-
-    respond_to do |format|
-      format.json { render :json => r }
+      @result = result
     end
   end
 
   def mark_all_as_read
-    confirm = params[:confirm]
-    blog_id = params[:blog_id]
+    @success = false
+    @result = nil
+    @error = nil
 
-    r = { :success => false }
-
-    if confirm
-      r[:success] = current_user.reader.mark_all_as_read(blog_id)
+    if params[:confirm]
+      @result = current_user.reader.mark_all_as_read(params[:blog_id])
+      if !@result
+        @error = 'Something went wrong.'
+      else
+        @success = true
+      end
     else
-      r[:error] = "Must pass a 'confirm' param"
-    end    
-
-    respond_to do |format|
-      format.json { render :json => r }
+      @error = "Must pass a 'confirm' param"
     end
+  end
+
+  # The main method of returning articles in
+  # date order for the reader
+  def article_feed
+    reader = current_user.reader
+
+    # This is a temp way of putting the reader
+    # blogs on the q for syncing
+    reader.async_all_subscriptions
+
+    timestamp = params[:timestamp]
+    filter = params[:source]
+    count = params[:count] || 25
+
+    @articles = reader.article_feed(count, filter, timestamp)
   end
 
 end

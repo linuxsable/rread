@@ -2,40 +2,4 @@
   .new-articles
 
 %script{id: "article-template", type: "text/x-handlebars-template"}
-  = raw(File.read(Rails.root.to_s+"/app/views/reader/article.hamlbars"))  
-
-
-/ #articles
-/   .new-articles
-/     13 new articles
-/   - for article in @article_feed
-/     .article.article-inactive{rel: article['id'], class: article['read'] ? 'article-read' : ''}    
-/       %p.article-source
-/         %img{src: "http://www.google.com/s2/u/0/favicons?domain=" + article['blog_url'].gsub("http://", "")}
-/         = article['blog_name']
-/       %p.article-time
-/         = distance_of_time_in_words_to_now(article['published_at'])
-/         %a.article-close{href: "#"} X
-/       %h2.article-title= raw(article['title'])
-/       %h2.article-title.article-title-active
-/         %a{href: article['url'], target: "_blank"} 
-/           = raw(article['title'])
-/       / .article-controls
-/       /   .article-controls-links
-/       /     %a{href: "#"} Share
-/       /     %a{href: "#"} Read Later
-/       /   .article-hearts
-/       /     %a.article-like{href: "#"}
-/       /       .heart
-/       /       Like
-/       /     %a{href: "#"}
-/       /       %img{src: "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/370638_777577509_271102326_q.jpg", class: "avatar"}
-
-/       %p.article-blurb
-/         = truncate(raw(strip_tags(article['content'])), :length => 120, :separator => ' ')
-/       .article-contents
-/         / = raw(article['content'])
-
-
-/ %script{id: "article-template", type: "text/x-handlebars-template"}
-/   = raw(File.read(Rails.root.to_s+"/app/views/reader/article.hamlbars"))
+  = raw(File.read(Rails.root.to_s+"/app/views/reader/article.hamlbars"))
