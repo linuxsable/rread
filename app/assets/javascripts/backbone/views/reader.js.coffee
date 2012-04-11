@@ -1,11 +1,6 @@
 class Rread.Views.Reader extends Backbone.View
-  # el: null
-
   initialize: ->
-    console.log this.el
-
     this.articles = []
-    # this.template = Handlebars.compile( $("#article-template").html() )
     articlesCollection = new Rread.Collections.ReaderArticles
 
     self = this
@@ -20,6 +15,8 @@ class Rread.Views.Reader extends Backbone.View
     }
 
   render: ->
-    console.log this.articles
-    # this.articles.each (article) ->
-    #   console.log(article)
+    @renderArticleFeed()
+
+  renderArticleFeed: ->
+    this.articles.each (index) ->
+      new Rread.Views.ReaderArticle(index)

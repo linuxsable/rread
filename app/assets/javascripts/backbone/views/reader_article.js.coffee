@@ -1,9 +1,14 @@
 class Rread.Views.ReaderArticle extends Backbone.View
-  el: null
-  template: null
+  model: null
+  template: $('#reader-article-tpl')
 
-  initialize: ->
-    this.render()
+  initialize: (model) ->
+    @model = model
+    @render()
 
   render: ->
-    console.log this.collection
+    # view = Mustache.render(@template, {
+    #   title: @model.get('title')
+    # })
+
+    $('#articles').append('<div>' + @model.get('title') + '</div>')

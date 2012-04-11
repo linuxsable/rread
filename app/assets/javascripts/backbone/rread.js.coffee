@@ -13,6 +13,8 @@ window.Rread =
   init: ->
     new Rread.Routers.Reader
 
+  # This will be refactored into a pretty
+  # user notification for errors and messages.
   globalError: (msg) ->
     alert(msg)
 

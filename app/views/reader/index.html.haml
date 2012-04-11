@@ -1,5 +1,7 @@
 #articles.loading
   .new-articles
 
+= raw(File.read(Rails.root.to_s + "/app/views/mustache/reader_article.js"))
+
 %script{id: "article-template", type: "text/x-handlebars-template"}
   = raw(File.read(Rails.root.to_s+"/app/views/reader/article.hamlbars"))

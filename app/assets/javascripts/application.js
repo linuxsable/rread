@@ -7,6 +7,7 @@
 //= require jquery
 //= require ./vendor/underscore
 //= require ./vendor/backbone
+//= require ./vendor/mustache
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
