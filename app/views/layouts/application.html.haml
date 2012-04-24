@@ -30,10 +30,10 @@
                   All Items
                   %span#all_count (56)
               
-              %li
-                %a{href: "#inbox"}
-                  Inbox
-                  %span#inbox_count (56)
+              / %li
+              /   %a{href: "#inbox"}
+              /     Inbox
+              /     %span#inbox_count (56)
               
               %li
                 %a{href: "#sources"}
@@ -50,35 +50,35 @@
             %br{style: "clear: both"}
     
           = yield
-        #right.span4
-          %div
-            %ul#list
-              %script{id: "activity-row", type: "text/x-handlebars-template"}
-                = raw(File.read(Rails.root.to_s+"/app/views/reader/activityrow.handlebars"))  
-              %script
-                af = 
-                = raw(@user_feed.to_json)
-            - if signed_in?
-              - for feed_item in @user_feed
-                %p
-                  = feed_item.user.name
-                  - if feed_item.activity_type == Activity::SUBSCRIPTION_ADDED
-                    subscribed to
-                    = feed_item.target.blog.name + '.'
-                  - elsif feed_item.activity_type == Activity::ARTICLE_READ
-                    read
-                    = feed_item.target.article.title + '.'
+        / #right.span4
+        /   %div
+        /     %ul#list
+        /       %script{id: "activity-row", type: "text/x-handlebars-template"}
+        /         = raw(File.read(Rails.root.to_s+"/app/views/reader/activityrow.handlebars"))  
+        /       %script
+        /         af = 
+        /         = raw(@user_feed.to_json)
+        /     - if signed_in?
+        /       - for feed_item in @user_feed
+        /         %p
+        /           = feed_item.user.name
+        /           - if feed_item.activity_type == Activity::SUBSCRIPTION_ADDED
+        /             subscribed to
+        /             = feed_item.target.blog.name + '.'
+        /           - elsif feed_item.activity_type == Activity::ARTICLE_READ
+        /             read
+        /             = feed_item.target.article.title + '.'
             
-            / %h4 Mutual Friends
-            / - for friend in current_user.mutual_friends
-            /   %img{src: friend.avatar}
+        /     %h4 Mutual Friends
+        /     - for friend in current_user.mutual_friends
+        /       %img{src: friend.avatar}
             
-            / %h4 My Friends
-            / - for friend in current_user.friends
-            /   %img{src: friend.avatar}
+        /     %h4 My Friends
+        /     - for friend in current_user.friends
+        /       %img{src: friend.avatar}
             
-            / %h4 People who've added me
-            / - for friend in current_user.inverse_friends
-            /   %img{src: friend.avatar}
+        /     %h4 People who've added me
+        /     - for friend in current_user.inverse_friends
+        /       %img{src: friend.avatar}
         
     %footer
