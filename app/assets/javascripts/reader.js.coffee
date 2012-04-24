@@ -82,7 +82,7 @@ App.Reader = do ->
 		return false if not articleId?
 
 		request = $.ajax {
-			url: '/article/read.json',
+			url: '/articles/read.json',
 			type: 'GET',
 			data: { 'id': articleId }
 		}
@@ -198,4 +198,4 @@ App.Reader = do ->
 		getAllArticles()
 
 $ ->
-	App.Reader.init()
+	# App.Reader.init()

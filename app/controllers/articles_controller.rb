@@ -1,12 +1,25 @@
-class ArticleController < ApplicationController
+class ArticlesController < ApplicationController
   respond_to :json
+  layout nil
 
   def index
-    
+    @articles = Article.limit(50)
   end
 
   def show
     @article = Article.find(params[:id])
+  end
+
+  def create
+    
+  end
+
+  def update
+    
+  end
+
+  def destroy
+    
   end
 
   # For reading an article by the current user.

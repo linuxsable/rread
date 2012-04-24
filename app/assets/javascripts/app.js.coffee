@@ -62,23 +62,23 @@ window.App = App
 
 # This needs to be in each separate pages document.ready and file, etc
 $ ->
-	App.AF = new App.ActivityFeed
+	# App.AF = new App.ActivityFeed
 
-	App.AF.reset af
+	# App.AF.reset af
 
-	Handlebars.registerHelper "time", (time) ->
-	  result = $.timeago time
-	  new Handlebars.SafeString(result)
+	# Handlebars.registerHelper "time", (time) ->
+	#   result = $.timeago time
+	#   new Handlebars.SafeString(result)
 
-	Handlebars.registerHelper "article_read", (read) ->
-		result = ''
-		if read
-			result = 'article-read'
-		new Handlebars.SafeString(result)
+	# Handlebars.registerHelper "article_read", (read) ->
+	# 	result = ''
+	# 	if read
+	# 		result = 'article-read'
+	# 	new Handlebars.SafeString(result)
 
-	Handlebars.registerHelper "favicon_url", (url) ->
-		result = url.replace 'http://', ''
-		new Handlebars.SafeString(result)
+	# Handlebars.registerHelper "favicon_url", (url) ->
+	# 	result = url.replace 'http://', ''
+	# 	new Handlebars.SafeString(result)
 
-	App.router = new App.Router
-	Backbone.history.start()
+	# App.router = new App.Router
+	# Backbone.history.start()

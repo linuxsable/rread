@@ -30,7 +30,7 @@ Rread::Application.configure do
 
   config.assets.paths << "#{Rails.root}/app/assets/fonts"
 
-  config.cache_store = :mem_cache_store, "localhost"
+  config.cache_store = :dalli_store
 
   config.fb_app_id = '137065989735336'
   config.fb_app_secret = '713781007928349d79934d6121ff2f0f'

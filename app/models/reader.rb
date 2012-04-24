@@ -76,7 +76,7 @@ class Reader < ActiveRecord::Base
   # TODO: If an article is read because it of the
   # unread marker, don't hit the DB asking for the article_status
   # on that item because we already know that it is read (we don't need it).
-  def article_feed(count=nil, blog_filter_id=nil, timestamp_since=nil)
+  def article_feed(count=25, blog_filter_id=nil, timestamp_since=nil)
     subs = []
 
     if blog_filter_id.nil?

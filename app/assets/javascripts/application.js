@@ -5,7 +5,12 @@
 // the compiled file.
 //
 //= require jquery
-//=require underscore
-//=require backbone
-//=require handlebars
+//= require ./vendor/underscore
+//= require ./vendor/backbone
+//= require ./vendor/mustache
+//= require ./vendor/moment.min.js
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/rread
 //= require_tree .
