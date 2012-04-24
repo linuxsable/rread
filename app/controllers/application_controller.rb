@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :check_onboarding_status, :authenticate
+  before_filter :check_onboarding_status
   
   # Make these avail to the views as helpers
   helper_method :current_user, :signed_in?
