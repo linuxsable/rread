@@ -1,10 +1,10 @@
 class Rread.Views.Reader extends Backbone.View
-  el: $('#main')
+  el: '#main'
   activeArticle: null
   articleHeaderOffset: 0
 
   events: {
-    'click #articles': 'openArticle'
+    'click .article.article-inactive': 'openArticle'
   }
 
   initialize: ->
@@ -28,15 +28,19 @@ class Rread.Views.Reader extends Backbone.View
     if shades 
       $('.article, #right').css('opacity', 1)
 
-  openArticle: (article) ->
-    console.log('hi')
-    closeArticles(false)
+  openArticle: (event) ->
+    article = $(event.target).parent('.article')
+    
+    @closeArticles(false)
     @activeArticle = article
+
     article.addClass('article-active')
     article.removeClass('article-inactive')
 
     id = article.attr('rel')
-    $('.article-contents', article).html(articles[id].content)
+    model = @articlesCollection.get(id)
+
+    $('.article-contents', article).html(model.get('content'))
     $(".article-contents a", article).attr("target", "_blank")
 
     articleRead = article.hasClass('article-read')
