@@ -32,7 +32,6 @@ body
 
     img
       vertical-align: middle
-
   
 #main
   position: relative
@@ -49,11 +48,10 @@ body
   border-radius: 8px
 
 a:hover .avatar
-  opacity: .8
-
+  opacity: 0.8
 
 #main-header, #articles, #right
-  +box_shadow(0px, 2px, 5px, rgba(0,0,0,.3))
+  +box_shadow(0px, 2px, 5px, rgba(0, 0, 0, 0.3))
   background: #fff
 
 #main-header
@@ -82,7 +80,6 @@ a:hover .avatar
   .mark_all
     float: right
 
-
   ul
     list-style: none
     margin: 0
@@ -103,12 +100,11 @@ a:hover .avatar
         
         &:hover
           div
-            display: block
-          
+            display: block          
 
 /** ARTICLES **/
 #articles
-  +box_shadow(0px, 2px, 5px, rgba(0,0,0,.3))
+  +box_shadow(0px, 2px, 5px, rgba(0, 0, 0, 0.3))
   clear: both
   
   &.loading
@@ -122,6 +118,7 @@ a:hover .avatar
     text-align: center
     cursor: pointer
     display: none
+
     &:hover
       background: #F7F9FA
 
@@ -141,6 +138,7 @@ a:hover .avatar
   line-height: 16px
   float: left
   margin: 0 0 5px
+  
   img
     vertical-align: middle
 
@@ -178,14 +176,16 @@ a:hover .avatar
   .article-source, h2, .article-blurb
     color: #aaa
     img
-      opacity: .2
+      opacity: 0.2
 
 .article-active
   .article-blurb, .article-title
     display: none
+
   h2 a
     color: #222
     text-decoration: none
+
   .article-controls, .article-title-active, .article-contents, article-close
     display: block
 
@@ -197,6 +197,7 @@ a:hover .avatar
   line-height: 40px
   overflow: hidden
   line-height: 27px
+
   a
     color: #666
     text-decoration: none
@@ -212,8 +213,10 @@ a:hover .avatar
   
   .article-hearts
     float: right
+
     a
       margin-left: 10px
+
     .article-like
       .heart
         background: asset-url('sprite_heart.png', image)
@@ -221,6 +224,7 @@ a:hover .avatar
         height: 16px
         display: inline-block
         vertical-align: middle
+
       &:hover 
         color: #aa0c62
         .heart
@@ -240,9 +244,11 @@ a:hover .avatar
     text-decoration: none
     color: #222
     border-bottom: 1px dotted
+
     &:hover
       text-decoration: none
       color: darken(#900, 10%)
+
     img
       border: none!important
       text-decoration: none

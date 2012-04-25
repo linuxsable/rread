@@ -1,3 +1,4 @@
+App = {}
 App.Reader = do ->
 	refreshTimestamp = 0
 	refreshInterval = 10
