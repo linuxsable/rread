@@ -10,7 +10,7 @@ class Rread.Views.ReaderArticle extends Backbone.View
       _.extend(@model.toJSON(), {
         article_read: ->
           if m.get('read')
-            return 'article-read'
+            return 'read'
           return ''
       })
     )

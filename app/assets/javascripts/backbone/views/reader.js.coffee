@@ -29,7 +29,7 @@ class Rread.Views.Reader extends Backbone.View
       $('.article, #right').css('opacity', 1)
 
   openArticle: (event) ->
-    article = $(event.target).parent('.article')
+    $article = $(event.target).parent('.article')
     
     @closeArticles(false)
     @activeArticle = article
@@ -50,21 +50,3 @@ class Rread.Views.Reader extends Backbone.View
       article.addClass('article-read')
 
     $.scrollTo(article, { offset: -@articleHeaderOffset })
-
-  # Mark articles as read
-  updateArticleReadStatus: (articleId, callback = (r) ->) ->
-    return false if not articleId?
-
-    request = $.ajax {
-      url: '/articles/read.json',
-      type: 'GET',
-      data: { 'id': articleId }
-    }
-
-    $.when(request).done (result) ->
-      if result.success
-        callback(result)
-      else
-        Rread.globalError 'Bad read response.'
-
-    return request

@@ -103,164 +103,165 @@ a:hover .avatar
             display: block          
 
 /** ARTICLES **/
-#articles
-  +box_shadow(0px, 2px, 5px, rgba(0, 0, 0, 0.3))
-  clear: both
+// #articles
+//   +box_shadow(0px, 2px, 5px, rgba(0, 0, 0, 0.3))
+//   clear: both
   
-  &.loading
-    background: image-url('ajax-loader.gif') no-repeat 50% 50%
+//   &.loading
+//     background: image-url('ajax-loader.gif') no-repeat 50% 50%
 
-  .new-articles
-    padding: 20px
-    border-bottom: 1px dashed #ccc
-    color: #8BA8B2
-    font-weight: bold
-    text-align: center
-    cursor: pointer
-    display: none
+//   .new-articles
+//     padding: 20px
+//     border-bottom: 1px dashed #ccc
+//     color: #8BA8B2
+//     font-weight: bold
+//     text-align: center
+//     cursor: pointer
+//     display: none
 
-    &:hover
-      background: #F7F9FA
+//     &:hover
+//       background: #F7F9FA
 
-.article
-  border-bottom: 1px dashed #CCC
-  padding: 20px
-  position: relative
-  overflow: hidden
+// .article
+//   border-bottom: 1px dashed #CCC
+//   padding: 20px
+//   position: relative
+//   overflow: hidden
 
-.article-inactive:hover
-  background: #f7f9fa
-  cursor: pointer
+//   &.inactive:hover
+//     background: #f7f9fa
+//     cursor: pointer
 
-.article-source
-  color: #8ba8b2
-  margin: 0
-  line-height: 16px
-  float: left
-  margin: 0 0 5px
+//   .source
+//     color: #8ba8b2
+//     margin: 0
+//     line-height: 16px
+//     float: left
+//     margin: 0 0 5px
+    
+//     img
+//       vertical-align: middle
+
+//   .title
+//     font-weight: bold
+//     font-size: 15px
+//     margin: 4px 0
+//     clear: both
+
+//   .time
+//     float: right
+//     margin: 0 0 5px
+//     color: #AAA
+
+//   .close
+//     color: #fff
+//     background: #DDD
+//     text-decoration: none
+//     +border-radius(100px)
+//     padding: 4px 7px
+//     font-family: courier
+//     font-size: 11px
+
+//   .blurb
+//     color: #999
+//     margin: 0
+
+// /*** Selected Article **
+
+// .article.inactive
+//   .controls, .title, .active, .contents, .close
+//     display: none
+
+// .article.read.inactive
+//   .source, h2, .blurb
+//     color: #aaa
+//     img
+//       opacity: 0.2
+
+// .article.active
+//   .blurb, .title
+//     display: none
+
+//   h2 a
+//     color: #222
+//     text-decoration: none
+
+//   .controls, .title.active, .contents, .close
+//     display: block
+
+// .article .controls
+//   border-top: 1px dotted #ccc
+//   border-bottom: 1px dotted #ccc
+//   margin: 15px 0
+//   padding: 6px 0px
+//   line-height: 40px
+//   overflow: hidden
+//   line-height: 27px
+
+//   a
+//     color: #666
+//     text-decoration: none
+//     font-size: 11px
+//     &:hover
+//       color: #35a0e8
+
+//   .controls-links
+//     float: left
+
+//     a
+//       margin-right: 10px
   
-  img
-    vertical-align: middle
+//   .hearts
+//     float: right
 
-.article-title
-  font-weight: bold
-  font-size: 15px
-  margin: 4px 0
-  clear: both
+//     a
+//       margin-left: 10px
 
-.article-time
-  float: right
-  margin: 0 0 5px
-  color: #AAA
+//     .like
+//       .heart
+//         background: asset-url('sprite_heart.png', image)
+//         width: 17px
+//         height: 16px
+//         display: inline-block
+//         vertical-align: middle
 
-.article-close
-  color: #fff
-  background: #DDD
-  text-decoration: none
-  +border-radius(100px)
-  padding: 4px 7px
-  font-family: courier
-  font-size: 11px
+//       &:hover 
+//         color: #aa0c62
+//         .heart
+//           background-position: -17px 0
 
-.article-blurb
-  color: #999
-  margin: 0
+//     img
+//       vertical-align: middle
 
-/*** Selected Article **
+// .article
+//   .contents
+//     font-family: ProximaNovaCondensedRegular, 'Helvetica Neue', Helvetica, Arial, sans-serif
+//     font-size: 14px
+//     line-height: 1.6em
+//     color: #444
+    
+//     a
+//       font-weight: bold
+//       text-decoration: none
+//       color: #222
+//       border-bottom: 1px dotted
 
-.article-inactive
-  .article-controls, .article-title-active, .article-contents, .article-close
-    display: none
+//       &:hover
+//         text-decoration: none
+//         color: darken(#900, 10%)
 
-.article-read.article-inactive
-  .article-source, h2, .article-blurb
-    color: #aaa
-    img
-      opacity: 0.2
+//       img
+//         border: none!important
+//         text-decoration: none
 
-.article-active
-  .article-blurb, .article-title
-    display: none
-
-  h2 a
-    color: #222
-    text-decoration: none
-
-  .article-controls, .article-title-active, .article-contents, article-close
-    display: block
-
-.article-controls
-  border-top: 1px dotted #ccc
-  border-bottom: 1px dotted #ccc
-  margin: 15px 0
-  padding: 6px 0px
-  line-height: 40px
-  overflow: hidden
-  line-height: 27px
-
-  a
-    color: #666
-    text-decoration: none
-    font-size: 11px
-    &:hover
-      color: #35a0e8
-
-  .article-controls-links
-    float: left
-
-    a
-      margin-right: 10px
-  
-  .article-hearts
-    float: right
-
-    a
-      margin-left: 10px
-
-    .article-like
-      .heart
-        background: asset-url('sprite_heart.png', image)
-        width: 17px
-        height: 16px
-        display: inline-block
-        vertical-align: middle
-
-      &:hover 
-        color: #aa0c62
-        .heart
-          background-position: -17px 0
-
-    img
-      vertical-align: middle
-
-.article-contents
-  font-family: ProximaNovaCondensedRegular, 'Helvetica Neue', Helvetica, Arial, sans-serif
-  font-size: 14px
-  line-height: 1.6em
-  color: #444
-  
-  a
-    font-weight: bold
-    text-decoration: none
-    color: #222
-    border-bottom: 1px dotted
-
-    &:hover
-      text-decoration: none
-      color: darken(#900, 10%)
-
-    img
-      border: none!important
-      text-decoration: none
-
-  img
-    .alignleft
-      float: right
-      margin: 0 10px 10px 0
-      
-    .alignright
-      float: right
-      margin: 0 0 10px 10px
+//     img
+//       .alignleft
+//         float: right
+//         margin: 0 10px 10px 0
+        
+//       .alignright
+//         float: right
+//         margin: 0 0 10px 10px
 
 @font-face
   font-family: 'ProximaNovaRegular'
