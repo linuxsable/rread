@@ -4,4 +4,12 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require_tree .
+//= require vendor/jquery-1.7.2.min
+//= require vendor/underscore-min
+//= require vendor/backbone
+//= require vendor/mustache
+
+//= require models/article
+//= require collections/articles
+//= require views/article
+//= require rread
