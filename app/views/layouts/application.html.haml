@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title (5) rread
+    %title rread
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -9,40 +9,3 @@
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0, user-scalable=no"}
     
   %body
-    .container
-      #header.row
-        .span8
-          %h1 rread
-        
-        .span4.right
-          - if signed_in?
-            =current_user.full_name
-            %img{src: current_user.avatar, height: '30', class: 'avatar'}
-          - else
-            %p [Not signed in]
-          
-      #main.row          
-        #center.span8
-          #main-header
-            %ul
-              %li
-                %a.selected{href: "#"}
-                  All Items
-                  %span#all_count (56)
-              
-              %li
-                %a{href: "#sources"}
-                  Sources
-    
-              %li
-                %a{href: "#sources"}
-                  +
-                  %div
-                    %input{type: "text"}
-                    %input{type: "submit", class: "btn"}
-            
-            %a.mark_all{href: "#"} Mark all as read
-            %br{style: "clear: both"}
-    
-          = yield
-    %footer
