@@ -4,6 +4,7 @@ class window.Rread extends Backbone.Router
   }
 
   index: ->
+    reader = new ReaderView
 
 $(document).ready ->
   window.Rread = new Rread

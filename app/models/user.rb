@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
       reader.user = self
     end
 
-    # reader.add_all_subscriptions
+    reader.add_all_subscriptions
   end
 
   def onboard!

@@ -1,2 +1,11 @@
+.reader
+  .articles
+
 %script{:id => 'tpl-article', :type => 'text/template'}
-  {{title}}
+  %img{:src => '{{faviconURL}}', :class => 'favicon'}
+  .title
+    {{{title}}}
+  .date
+    {{date}}&nbsp;-&nbsp;
+  .blog
+    {{blogName}}

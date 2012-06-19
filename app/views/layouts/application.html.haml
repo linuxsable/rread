@@ -9,7 +9,14 @@
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0, user-scalable=no"}
     
   %body
-    %h1 rread
-    %header#main
+    %header.main
+      .left
+        .logo rread
+
+      .right
+        .avatar
+          %img{:src => "#{current_user.avatar}", :class => 'circular'}
+        / .name
+        /   = current_user.full_name
 
     =yield

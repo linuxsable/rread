@@ -8,8 +8,10 @@
 //= require vendor/underscore-min
 //= require vendor/backbone
 //= require vendor/mustache
+//= require vendor/moment.min
 
 //= require models/article
 //= require collections/articles
 //= require views/article
+//= require views/reader
 //= require rread

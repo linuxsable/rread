@@ -27,7 +27,9 @@ class ArticlesController < ApplicationController
     r = { :success => false }
 
     begin
-      article = Article.find(params[:id])  
+      article = Article.find(params[:id])
+      puts article
+      puts current_user
     rescue Exception => e
       r[:error] = "Article not found"
     end
