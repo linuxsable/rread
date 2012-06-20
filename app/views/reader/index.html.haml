@@ -1,5 +1,28 @@
 .reader
-  .articles
+  .left
+    %header.box
+      .left
+        .all-items
+          All Items
+          .num
+            12
+        .inbox
+          Inbox
+          .num
+            0
+        .sources
+          Sources
+      .right
+        Mark All as Read
+      .clearer
+
+    .articles.box  
+
+  .right
+    .activity-feed.box
+      test
+      test
+    .clearer
 
 %script{:id => 'tpl-article', :type => 'text/template'}
   %img{:src => '{{faviconURL}}', :class => 'favicon'}

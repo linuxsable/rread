@@ -40,9 +40,9 @@ class Reader < ActiveRecord::Base
   end
 
   def add_all_subscriptions
-    Blog.all.each { |blog|
-      subscriptions.build(:blog => blog).save!
-    }
+    Blog.all.each do |blog|
+      add_subscription(blog.feed_url)
+    end
   end
 
   # Will import all the Google Reader feeds
@@ -117,7 +117,7 @@ class Reader < ActiveRecord::Base
         'blog_name' => Blog.get_name_by_id(article.blog_id),
         'blog_url' => Blog.get_url_by_id(article.blog_id),
         'title' => article.title,
-        'blurb' => truncate(strip_tags(article.content), :length => 120, :separator => ' '),
+        # 'blurb' => truncate(strip_tags(article.content), :length => 120, :separator => ' '),
         'content' => article.content,
         'created_at' => article.created_at,
         'published_at' => article.published_at,
