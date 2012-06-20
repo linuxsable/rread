@@ -28,8 +28,6 @@ class ArticlesController < ApplicationController
 
     begin
       article = Article.find(params[:id])
-      puts article
-      puts current_user
     rescue Exception => e
       r[:error] = "Article not found"
     end

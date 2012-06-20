@@ -1,8 +1,6 @@
 class window.Article extends Backbone.Model
   read: ->
-    $.post('/articles/read.json', {
-      id: this.id
-    })
+    $.get('/articles/read', { id: this.id })
 
   like: ->
-    # Make ajax call to like it
+    $.get('/articles/like', { id: this.id })

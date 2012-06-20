@@ -6,8 +6,6 @@ class window.ReaderView extends Backbone.View
     @collection.bind('reset', @render, @)
     @collection.fetch()
 
-    console.log(@el)
-
   render: =>
     self = @
     @collection.forEach (item) ->
