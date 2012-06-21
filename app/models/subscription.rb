@@ -11,6 +11,6 @@ class Subscription < ActiveRecord::Base
   validates :reader_id, :presence => true
 
   def self.create_with_unread_marker!(reader, blog)
-    Subscription.create!(:reader => reader, :blog => blog, :unread_marker => Time.now)
+    Subscription.create!(:reader => reader, :blog => blog, :unread_marker => Time.now - 1.day)
   end
 end

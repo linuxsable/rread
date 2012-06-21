@@ -2,7 +2,12 @@ class window.ArticleView extends Backbone.View
   tagName: 'div'
   className: 'article'
 
+  events: {
+    'click': 'clicked'
+  }
+
   initialize: ->
+    @readerView = @options.readerView
     @template = $('#tpl-article').html()
 
   # Apparently always use fat arrow for render
@@ -23,3 +28,41 @@ class window.ArticleView extends Backbone.View
     @$el.html(renderedContent)
 
     return this
+
+  clicked: ->
+    if @$el.hasClass('expanded')
+      @close()
+    else
+      @readerView.closeAllArticles()
+      @expand()
+      @read()
+
+  close: ->
+    @$el.removeClass('expanded')
+    @$el.find('.content')
+      .html('')
+      .hide()
+
+  expand: ->
+    @$el.addClass('expanded')
+    @$el.find('.content')
+      .html(@model.get('content'))
+      .show()
+    @removeFeedFlare()
+
+  # Send ajax read request and update
+  # the view to show that it's read.
+  read: ->
+    return if @$el.hasClass('read')
+    @model.read()
+    @$el.addClass('read')
+    @readerView.decrementUnreadCount()
+
+  # This is that extra junk in the footer from
+  # rss aggregator thingies.
+  removeFeedFlare: ->
+    $feedFlare = @$el.find('.content .feedflare')
+    $feedFlare.next().remove()
+    $feedFlare.prev().remove()
+    $feedFlare.prevAll('br').eq(0).remove()
+    $feedFlare.remove()

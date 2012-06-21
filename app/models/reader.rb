@@ -206,6 +206,10 @@ class Reader < ActiveRecord::Base
       total_count += Article.count(:conditions => ['blog_id = ? and created_at > ?', sub.blog_id, sub.unread_marker])
     end
 
+    if total_count < 0
+      Rails.logger.error 'Uread count less than 0'
+    end
+
     total_count
   end
 

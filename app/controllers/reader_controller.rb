@@ -1,6 +1,7 @@
 class ReaderController < ApplicationController
   def index
-    @user_feed = current_user.friend_activity_feed
+    @unread_count = current_user.reader.unread_count
+    # @user_feed = current_user.friend_activity_feed
   end
 
   def show

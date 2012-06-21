@@ -2,6 +2,7 @@
 %html
   %head
     %title rread
+    = stylesheet_link_tag "reset"
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -9,14 +10,17 @@
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0, user-scalable=no"}
     
   %body
-    %header.main
-      .left
-        .logo rread
+    .wrapper
+      %header.main
+        .left
+          .logo rread
 
-      .right
-        .avatar
-          %img{:src => "#{current_user.avatar}", :class => 'circular'}
-          
-      .clearer
+        .right
+          .avatar
+            %img{:src => "#{current_user.avatar}", :class => 'circular'}
+            .text
+              = current_user.full_name
+            
+        .clearer
 
-    = yield
+      = yield
