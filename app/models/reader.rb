@@ -88,7 +88,7 @@ class Reader < ActiveRecord::Base
     return {} if subs.empty?
 
     blog_ids = []
-    subs.each { |b| blog_ids << b.id }
+    subs.each { |b| blog_ids << b.blog_id }
 
     if !timestamp_since.nil?
       if !timestamp_since.is_a? Time
