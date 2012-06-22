@@ -120,6 +120,7 @@ header.main
         color: #111
         padding: 20px 15px
         border-bottom: 1px dashed #ddd
+        cursor: pointer
 
         img.favicon
           float: left
@@ -132,7 +133,7 @@ header.main
 
         .date
           position: absolute
-          top: 20px
+          top: 22px
           right: 15px
           display: block
           color: #aaa
@@ -150,6 +151,8 @@ header.main
           color: #111
 
           img
+            max-width: 100%
+            max-height: 100%
             border-radius: 2px
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5)
 
@@ -160,8 +163,12 @@ header.main
       .article.read
         .title
           color: #888
+        .blog
+          color: #999
         
       .article.expanded
+        cursor: auto
+        background: #fbfbfb
 
       .article:last-child
         border-bottom: none

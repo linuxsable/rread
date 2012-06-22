@@ -19,7 +19,9 @@ class window.ReaderView extends Backbone.View
     @articles.find('.expanded').each ->
       $(this)
         .removeClass('expanded')
-        .find('.content').html('')
+        .find('.content')
+          .html('')
+          .hide()
 
   decrementUnreadCount: ->
     $num = @header.find('.left .all-items .num')
