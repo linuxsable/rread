@@ -1,7 +1,6 @@
 class ReaderController < ApplicationController
   def index
     @unread_count = current_user.reader.unread_count
-    # @user_feed = current_user.friend_activity_feed
   end
 
   def show
@@ -74,6 +73,20 @@ class ReaderController < ApplicationController
     count = params[:count] || 25
 
     @articles = reader.article_feed(count, filter, timestamp)
+  end
+
+  def activity_feed
+    timestamp = params[:timestamp]
+    count = params[:count] || 20
+
+    friend_ids = []
+    current_user.friendships.each { |f| friend_ids << f.friend_id }
+
+    # Append the current user to show his own activity
+    # in the feed as well.
+    ids = friend_ids << current_user.id
+
+    @activity_feed = Activity.feed(ids, count)
   end
 
 end

@@ -20,46 +20,6 @@
 
   .right
     .activity-feed.box
-      .activity-item
-        .avatar
-          %img.circular{:src => current_user.avatar}
-        .msg
-          Tyler subscribed to TechCrunch just for fun.
-      .activity-item
-        .avatar
-          %img.circular{:src => current_user.avatar}
-        .msg
-          Tyler subscribed to TechCrunch just for fun.
-      .activity-item
-        .avatar
-          %img.circular{:src => current_user.avatar}
-        .msg
-          Tyler subscribed to TechCrunch just for fun.
-      .activity-item
-        .avatar
-          %img.circular{:src => current_user.avatar}
-        .msg
-          Tyler subscribed to TechCrunch just for fun.
-      .activity-item
-        .avatar
-          %img.circular{:src => current_user.avatar}
-        .msg
-          Tyler subscribed to TechCrunch just for fun.
-      .activity-item
-        .avatar
-          %img.circular{:src => current_user.avatar}
-        .msg
-          Tyler subscribed to TechCrunch just for fun.
-      .activity-item
-        .avatar
-          %img.circular{:src => current_user.avatar}
-        .msg
-          Tyler subscribed to TechCrunch just for fun.
-      .activity-item
-        .avatar
-          %img.circular{:src => current_user.avatar}
-        .msg
-          Tyler subscribed to TechCrunch just for fun.
 
     .ad.box
       Ad Goes Here
@@ -81,4 +41,11 @@
   .blog
     {{blogName}}
   .content
+  .clearer
+
+%script{:id => 'tpl-activity-item', :type => 'text/template'}
+  .avatar
+    %img.circular
+  .msg
+    {{userName}} {{actionName}} {{targetName}}.
   .clearer

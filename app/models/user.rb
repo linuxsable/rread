@@ -32,6 +32,15 @@ class User < ActiveRecord::Base
     return user
   end
 
+  def self.name_by_id(id)
+    Rails.cache.fetch("user_name|#{id}", :expires_in => 5.hours) {
+      user = find(id)
+      if !user.nil?
+        user.name
+      end
+    }
+  end
+
   # Create the user reader if necessary.
   def setup_reader
     if self.reader != nil
@@ -108,13 +117,6 @@ class User < ActiveRecord::Base
     }
 
     true
-  end
-  
-  def friend_activity_feed
-    friend_ids = []
-    friendships.each { |f| friend_ids << f.friend_id }
-    ids = friend_ids << self.id
-    Activity.where(:user_id => ids).order('created_at DESC').limit(10)
   end
 
   def avatar

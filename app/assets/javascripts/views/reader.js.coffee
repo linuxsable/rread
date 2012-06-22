@@ -8,6 +8,8 @@ class window.ReaderView extends Backbone.View
     @collection.bind('reset', @render, @)
     @collection.fetch()
 
+    @activityFeedView = new ActivityFeedView
+
   render: =>
     self = @
     @collection.forEach (item) ->
