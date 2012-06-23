@@ -1,295 +1,227 @@
-@import base/_mixins
-@import base/bootstrap
+*
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
+  -webkit-font-smoothing: antialiased
 
-$bright_blue: #09C
-
-a
-  +transition(all .08s ease-in-out)
-
-$header_height: 60px
+p
+  padding: 5px 0
+  line-height: 1.2em
 
 body
-  font-family: 'Helvetica Neue', Arial, Helvetica
-  line-height: 1.5em
-  font-size: 13px
-  color: #222
-  background: #EFEFEF
-  margin: 0
+  font-family: "Proxima Nova", Helvetica
+  font-size: 12px
+  background: url('groovepaper.png') repeat
 
-#header
-  h1
-    margin: 0 10px
-    font-size: 24px
-    line-height: $header_height
-    color: #333
-    +text_shadow(0, 1px, 2px, #fff)
+.round
+  border-radius: 2px
+  -moz-border-radius: 2px
 
-  .right
-    text-align: right
-    font-size: 11px
-    box-align: center
-    line-height: $header_height
+.circular
+  border-radius: 10em
+  -moz-border-radius: 10em
 
-    img
-      vertical-align: middle
+.clearer
+  clear: both
 
-  
-#main
-  position: relative
-
-#right
-  p
-    padding: 10px
-    border-bottom: 1px dashed #CCC
-    font-size: 11px
-
-.avatar
-  width: 32px
-  width: 32px
-  border-radius: 8px
-
-a:hover .avatar
-  opacity: .8
-
-
-#main-header, #articles, #right
-  +box_shadow(0px, 2px, 5px, rgba(0,0,0,.3))
+.box
+  padding: 7px
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.35)
+  border-radius: 2px
   background: #fff
 
-#main-header
-  a
-    position: relative
-    color: #000
-    font-size: 11px
-    text-decoration: none
-    padding: 10px
-    display: block
+.wrapper
+  width: 950px
+  margin: 0 auto
 
-    &:hover
-      color: $bright_blue
-      background: lighten($bright_blue, 50%)
+header.main
+  height: 100%
+  width: 100%
+  margin: 12px 0
 
-    &.selected
-      font-weight: bold
-  
-  &.subnav-fixed
-    width: 620px
-    position: fixed
-    top: 0
-    margin: 0 auto
-    z-index: 9999 
-
-  .mark_all
-    float: right
-
-
-  ul
-    list-style: none
-    margin: 0
-    padding: 0
-  
-    li
-      float: left
-      margin: 0
-      padding: 0
-
-      a
-        div
-          display: none
-          position: absolute
-          background: #fff
-          padding: 20px
-          z-index: 1
-        
-        &:hover
-          div
-            display: block
-          
-
-/** ARTICLES **/
-#articles
-  +box_shadow(0px, 2px, 5px, rgba(0,0,0,.3))
-  clear: both
-  
-  &.loading
-    background: image-url('ajax-loader.gif') no-repeat 50% 50%
-
-  .new-articles
-    padding: 20px
-    border-bottom: 1px dashed #ccc
-    color: #8BA8B2
-    font-weight: bold
-    text-align: center
-    cursor: pointer
-    display: none
-    &:hover
-      background: #F7F9FA
-
-.article
-  border-bottom: 1px dashed #CCC
-  padding: 20px
-  position: relative
-  overflow: hidden
-
-.article-inactive:hover
-  background: #f7f9fa
-  cursor: pointer
-
-.article-source
-  color: #8ba8b2
-  margin: 0
-  line-height: 16px
-  float: left
-  margin: 0 0 5px
-  img
-    vertical-align: middle
-
-.article-title
-  font-weight: bold
-  font-size: 15px
-  margin: 4px 0
-  clear: both
-
-.article-time
-  float: right
-  margin: 0 0 5px
-  color: #AAA
-
-.article-close
-  color: #fff
-  background: #DDD
-  text-decoration: none
-  +border-radius(100px)
-  padding: 4px 7px
-  font-family: courier
-  font-size: 11px
-
-.article-blurb
-  color: #999
-  margin: 0
-
-/*** Selected Article **
-
-.article-inactive
-  .article-controls, .article-title-active, .article-contents, .article-close
-    display: none
-
-.article-read.article-inactive
-  .article-source, h2, .article-blurb
-    color: #aaa
-    img
-      opacity: .2
-
-.article-active
-  .article-blurb, .article-title
-    display: none
-  h2 a
-    color: #222
-    text-decoration: none
-  .article-controls, .article-title-active, .article-contents, article-close
-    display: block
-
-.article-controls
-  border-top: 1px dotted #ccc
-  border-bottom: 1px dotted #ccc
-  margin: 15px 0
-  padding: 6px 0px
-  line-height: 40px
-  overflow: hidden
-  line-height: 27px
-  a
-    color: #666
-    text-decoration: none
-    font-size: 11px
-    &:hover
-      color: #35a0e8
-
-  .article-controls-links
+  .left
+    width: 50%
     float: left
 
-    a
-      margin-right: 10px
-  
-  .article-hearts
+    .logo
+      color: #333
+      font-size: 30px
+      font-weight: bold
+      padding-top: 3px
+
+  .right
+    width: 50%
     float: right
-    a
-      margin-left: 10px
-    .article-like
-      .heart
-        background: asset-url('sprite_heart.png', image)
-        width: 17px
-        height: 16px
-        display: inline-block
-        vertical-align: middle
-      &:hover 
-        color: #aa0c62
-        .heart
-          background-position: -17px 0
+    text-align: right
 
-    img
-      vertical-align: middle
+    .avatar 
+      position: relative
 
-.article-contents
-  font-family: ProximaNovaCondensedRegular, 'Helvetica Neue', Helvetica, Arial, sans-serif
-  font-size: 14px
-  line-height: 1.6em
-  color: #444
-  
-  a
-    font-weight: bold
-    text-decoration: none
-    color: #222
-    border-bottom: 1px dotted
-    &:hover
-      text-decoration: none
-      color: darken(#900, 10%)
-    img
-      border: none!important
-      text-decoration: none
+      img
+        width: 38px
+        height: 38px
+        max-width: 38px
+        max-height: 38px
 
-  img
-    .alignleft
-      float: right
-      margin: 0 10px 10px 0
-      
-    .alignright
-      float: right
-      margin: 0 0 10px 10px
+      .text
+        position: absolute
+        right: 48px
+        top: 14px
+        color: #555
 
-@font-face
-  font-family: 'ProximaNovaRegular'
-  src: url('proxima_nova-regular-webfont.eot')
-  src: url('proxima_nova-regular-webfont.eot?#iefix') format("embedded-opentype"), url('proxima_nova-regular-webfont.woff') format("woff"), url('proxima_nova-regular-webfont.ttf') format("truetype"), url('proxima_nova-regular-webfont.svg#ProximaNovaRegular') format("svg")
-  font-weight: normal
-  font-style: normal
+.reader
+  .left
+    width: 100%
+    float: left
+
+    header
+      margin-right: 250px
+      padding: 12px 10px
+
+      .left
+        width: 50%
+        float: left
+
+        .all-items
+          float: left
+          color: #62ACE6
+          margin-right: 15px
+
+          .num
+            background: #62ACE6
+            color: #fff
+            padding: 0 4px
+            display: inline
+            border-radius: 4px
+
+        .inbox
+          float: left
+          margin-right: 15px
+
+          .num
+            background: #A9A9A9
+            color: #fff
+            padding: 0 4px
+            display: inline
+            border-radius: 4px
+
+      .right
+        width: 50%
+        float: right
+        text-align: right
+
+    .articles
+      margin-right: 250px
+      margin-top: 10px
+      padding: 0
+
+      .article
+        position: relative
+        color: #111
+        padding: 20px 15px
+        border-bottom: 1px dashed #ddd
+        cursor: pointer
+
+        img.favicon
+          float: left
+          margin-right: 4px
+          width: 14px
+          margin-top: 1px
+          padding-bottom: 14px
+
+        .title
+          font-size: 15px
+          padding-right: 100px
+
+        .date
+          position: absolute
+          top: 22px
+          right: 15px
+          display: block
+          color: #aaa
+
+        .blog
+          display: block
+          padding-top: 5px
+          padding-left: 19px
+          color: #666
+
+        .content
+          display: none
+          padding-top: 20px
+          font-size: 15px
+          color: #111
+
+          img
+            max-width: 100%
+            max-height: 100%
+            border-radius: 2px
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5)
 
 
-@media (max-width: 640px)
-  .container
-    padding: 0
-  
-  .article-source, .article-time
-    float: none
+      .article:hover
+        background: #fbfbfb
 
-// Landscape phones and down
-@media (max-width: 767px)
-  
-  #main-header.subnav-fixed
-    width: auto
-    right: 0
-    left: 0
+      .article.read
+        .title
+          color: #888
+        .blog
+          color: #999
+        
+      .article.expanded
+        cursor: auto
+        background: #fbfbfb
 
-// Landscape phone to portrait tablet
-@media (max-width: 768px)
-  #main-header.subnav-fixed
-    width: 476px
+      .article:last-child
+        border-bottom: none
 
-// Portrait tablet to landscape and desktop
-@media (min-width: 768px) and (max-width: 980px)
-  #main-header.subnav-fixed
-    width: 476px
+  .right
+    width: 230px
+    float: left
+    margin-left: -230px
 
-// Large desktop
-@media (min-width: 1200px)
-  #main-header.subnav-fixed
-    width: 770px
+    .activity-feed
+      width: 100%
+      height: 100%
+      min-height: 300px
+      max-height: 400px
+      padding: 0
+      overflow: scroll
+
+      .activity-item
+        min-height: 55px
+        position: relative
+        padding: 12px 12px
+        border-bottom: 1px dashed #ddd
+        color: #777
+
+        .avatar
+          position: absolute
+          left: 12px
+          top: 12px
+
+          img
+            width: 30px
+            height: 30px
+            max-width: 30px
+            max-height: 30px
+
+        .msg
+          position: absolute
+          left: 50px
+          top: 12px
+          font-size: 11px
+          padding-right: 12px
+          line-height: 1.2em
+
+      .activity-item:last-child
+        border-bottom: none
+
+    .ad
+      width: 100%
+      height: 200px
+      margin-top: 10px
+
+    .static
+      width: 100%
+      margin-top: 10px

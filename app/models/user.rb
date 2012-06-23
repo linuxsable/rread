@@ -25,9 +25,20 @@ class User < ActiveRecord::Base
       u.private_reading = false
     end
 
+    Rails.logger.info(user.inspect)
+
     user.setup_reader
 
     return user
+  end
+
+  def self.name_by_id(id)
+    Rails.cache.fetch("user_name|#{id}", :expires_in => 5.hours) {
+      user = find(id)
+      if !user.nil?
+        user.name
+      end
+    }
   end
 
   # Create the user reader if necessary.
@@ -36,11 +47,11 @@ class User < ActiveRecord::Base
       return self.reader
     end
 
-    reader = Reader.create do |reader|
+    reader = Reader.create! do |reader|
       reader.user = self
     end
 
-    # reader.add_all_subscriptions
+    reader.add_all_subscriptions
   end
 
   def onboard!
@@ -107,11 +118,158 @@ class User < ActiveRecord::Base
 
     true
   end
-  
-  def friend_activity_feed
+
+  def avatar
+    load_provider_model
+    @provider_info_model.avatar
+  end
+
+  def full_name
+    load_provider_model
+    @provider_info_model.first_name+' '+@provider_info_model.last_name
+  end
+
+  def email
+    load_provider_model
+    @provider_info_model.email
+  end
+
+  # Get the users friends.
+  def friends
+    output = []
+    friendships.each do |f|
+      output << f.friend
+    end
+    output
+  end
+
+  # Get inverse friends (people who've added this user).
+  def inverse_friends
+    output = []
+    inverse_friendships.each do |f|
+      output << f.user
+    end
+    output
+  end
+
+  # Get mutual friends.
+  def mutual_friends
+    # I don't like this
+    f = friends
+    f.zip(inverse_friends).flatten.compact
+    f
+  end
+
+  # Are you friends with another user?
+  def friend?(user)
+    if !user.is_a? User
+      raise "'user' must be a User obj"
+    end
+    
+    result = Friendship
+      .where(:friend_id => user.id)
+      .limit(1)
+      .first
+
+    !result.nil?
+  end
+
+  # Is the other guy a friend of yours?
+  def inverse_friend?(user)
+    if !user.is_a? User
+      raise "'user' must be a User obj"
+    end
+    
+    result = Friendship
+      .where(:user_id => user.id, :friend_id => self.id)
+      .first
+
+    !result.nil?
+  end
+
+  # Are you friends with another user
+  # and are they friends with you?
+  def mutual_friend?(user)
+    if !user.is_a? User
+      raise "'user' must be a User obj"
+    end
+    
+    friend?(user) and inverse_friend?(user)
+  end
+
+  # This actually goes through the whole process of
+  # importing facebook friends mutually for the user.
+  # That means that it will create friendships for the current
+  # user AND the friend.
+  #
+  # This should be run as a delayed job on registration
+  # and subsequent logins to ensure friends are kept up
+  # to date.
+  #
+  # Currently I do not know how efficent this is as no
+  # DB optimizations have been done.
+  def sync_facebook_friends
+    find_facebook_friends_with_accounts.each do |auth|      
+      if !friend?(auth)
+        Friendship.create! do |f|
+          f.user_id = self.id
+          f.friend_id = auth.id
+        end
+      end
+      
+      # Create the inverse friendship to save
+      # extra db taxes later when the user logs in
+      if !inverse_friend?(auth)
+        Friendship.create! do |f|
+          f.user_id = auth.id
+          f.friend_id = self.id
+        end
+      end
+    end
+  end
+
+  def async_facebook_friends
+    Resque.enqueue(FriendshipSyncer, self.id)
+  end
+
+  private
+
+  # This helps to lazy load the provder model only if it's
+  # needed by getters of this class.
+  #
+  # TODO: When we have more providers, this will have to be updated.
+  def load_provider_model
+    @provider_info_model ||= provider_infos.first
+  end
+
+  # Search the users facebook friends to see which ones
+  # have internal accounts with us. This is used for the
+  # import process.
+  def find_facebook_friends_with_accounts
+    load_facebook_api
+    friends = @facebook_api.get_connections('me', 'friends')
+    
     friend_ids = []
-    friendships.each { |f| friend_ids << f.friend_id }
-    ids = friend_ids << self.id
-    Activity.where(:user_id => ids).order('created_at DESC').limit(10)
+    friends.each { |friend| friend_ids << friend['id'] }
+
+    auths = Authorization.where(:provider => 'facebook', :uid => friend_ids)
+
+    output = []
+    auths.each { |auth| output << auth.user }
+
+    output
+  end
+
+  # Setup the facebook api wrapper.
+  def load_facebook_api
+    return if !@facebook_api.nil?
+    
+    # Find the user token
+    auth = authorizations.where(:provider => 'facebook').first
+    if !auth.nil?
+      @facebook_api = Koala::Facebook::API.new(auth.token)
+    else
+      raise 'User does not have a Facebook authorization.'
+    end
   end
 end

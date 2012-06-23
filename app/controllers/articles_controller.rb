@@ -1,6 +1,25 @@
-class ArticleController < ApplicationController
+class ArticlesController < ApplicationController
+  respond_to :json
+  layout nil
+
   def index
-    render :layout => 'index'
+    @articles = Article.limit(50)
+  end
+
+  def show
+    @article = Article.find(params[:id])
+  end
+
+  def create
+    
+  end
+
+  def update
+    
+  end
+
+  def destroy
+    
   end
 
   # For reading an article by the current user.
@@ -8,13 +27,13 @@ class ArticleController < ApplicationController
     r = { :success => false }
 
     begin
-      article = Article.find(params[:id])  
+      article = Article.find(params[:id])
     rescue Exception => e
       r[:error] = "Article not found"
     end
 
     if article.is_a? Article
-      r[:success] = current_user.user_model.read_article(article)
+      r[:success] = current_user.read_article(article)
     end
 
     respond_to do |format|
@@ -33,7 +52,7 @@ class ArticleController < ApplicationController
     end
 
     if article.is_a? Article
-      r[:success] = current_user.user_model.like_article(article)
+      r[:success] = current_user.like_article(article)
     end
 
     respond_to do |format|

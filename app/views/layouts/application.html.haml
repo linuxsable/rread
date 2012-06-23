@@ -1,84 +1,26 @@
 !!!
 %html
   %head
-    %title (5) rread
-    = stylesheet_link_tag    "application"
+    %title rread
+    = stylesheet_link_tag "reset"
+    = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
 
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0, user-scalable=no"}
     
   %body
-    .container
-      #header.row
-        .span8
-          %h1 rread
-        
-        .span4.right
-          - if signed_in?
-            =current_user.name
-            %img{src: current_user.avatar, height: '30', class: 'avatar'}
-          - else
-            %p [Not signed in]
-          
-      #main.row          
-        #center.span8
-          #main-header
-            %ul
-              %li
-                %a.selected{href: "#"}
-                  All Items
-                  %span#all_count (56)
-              
-              %li
-                %a{href: "#inbox"}
-                  Inbox
-                  %span#inbox_count (56)
-              
-              %li
-                %a{href: "#sources"}
-                  Sources
-    
-              %li
-                %a{href: "#sources"}
-                  +
-                  %div
-                    %input{type: "text"}
-                    %input{type: "submit", class: "btn"}
+    .wrapper
+      %header.main
+        .left
+          .logo rread
+
+        .right
+          .avatar
+            %img{:src => "#{current_user.avatar}", :class => 'circular'}
+            .text
+              = current_user.full_name
             
-            %a.mark_all{href: "#"} Mark all as read
-            %br{style: "clear: both"}
-    
-          = yield
-        #right.span4
-          %div
-            %ul#list
-              %script{id: "activity-row", type: "text/x-handlebars-template"}
-                = raw(File.read(Rails.root.to_s+"/app/views/reader/activityrow.handlebars"))  
-              %script
-                af = 
-                = raw(@user_feed.to_json)
-            - if signed_in?
-              - for feed_item in @user_feed
-                %p
-                  = feed_item.user.name
-                  - if feed_item.activity_type == Activity::SUBSCRIPTION_ADDED
-                    subscribed to
-                    = feed_item.target.blog.name + '.'
-                  - elsif feed_item.activity_type == Activity::ARTICLE_READ
-                    read
-                    = feed_item.target.article.title + '.'
-            
-            / %h4 Mutual Friends
-            / - for friend in current_user.mutual_friends
-            /   %img{src: friend.avatar}
-            
-            / %h4 My Friends
-            / - for friend in current_user.friends
-            /   %img{src: friend.avatar}
-            
-            / %h4 People who've added me
-            / - for friend in current_user.inverse_friends
-            /   %img{src: friend.avatar}
-        
-    %footer
+        .clearer
+
+      = yield

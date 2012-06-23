@@ -15,13 +15,13 @@ class SessionsController < ApplicationController
       @auth = Authorization.create_from_hash(auth, current_user)
     end
 
-    app_user = AppUser.new(@auth.user)
-    app_user.async_facebook_friends
+    user = @auth.user
+    user.async_facebook_friends
     
     # Log the authorizing user in.
-    self.current_user = @auth.user
+    self.current_user = user
 
-    if @auth.user.onboarded?
+    if user.onboarded?
       return redirect_to :controller => 'reader'
     else
       return redirect_to :controller => 'sessions', :action => 'index'

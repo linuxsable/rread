@@ -40,9 +40,9 @@ class Reader < ActiveRecord::Base
   end
 
   def add_all_subscriptions
-    Blog.all.each { |blog|
-      subscriptions.build(:blog => blog).save!
-    }
+    Blog.all.each do |blog|
+      add_subscription(blog.feed_url)
+    end
   end
 
   # Will import all the Google Reader feeds
@@ -76,7 +76,7 @@ class Reader < ActiveRecord::Base
   # TODO: If an article is read because it of the
   # unread marker, don't hit the DB asking for the article_status
   # on that item because we already know that it is read (we don't need it).
-  def article_feed(count=nil, blog_filter_id=nil, timestamp_since=nil)
+  def article_feed(count=25, blog_filter_id=nil, timestamp_since=nil)
     subs = []
 
     if blog_filter_id.nil?
@@ -88,7 +88,7 @@ class Reader < ActiveRecord::Base
     return {} if subs.empty?
 
     blog_ids = []
-    subs.each { |b| blog_ids << b.id }
+    subs.each { |b| blog_ids << b.blog_id }
 
     if !timestamp_since.nil?
       if !timestamp_since.is_a? Time
@@ -117,9 +117,9 @@ class Reader < ActiveRecord::Base
         'blog_name' => Blog.get_name_by_id(article.blog_id),
         'blog_url' => Blog.get_url_by_id(article.blog_id),
         'title' => article.title,
-        'blurb' => truncate(strip_tags(article.content), :length => 120, :separator => ' '),
+        # 'blurb' => truncate(strip_tags(article.content), :length => 120, :separator => ' '),
         'content' => article.content,
-        'created_at' => article.created_at,
+        # 'created_at' => article.created_at,
         'published_at' => article.published_at,
         'url' => article.url,
         'read' => false,
@@ -204,6 +204,10 @@ class Reader < ActiveRecord::Base
       total_count -= status_count
 
       total_count += Article.count(:conditions => ['blog_id = ? and created_at > ?', sub.blog_id, sub.unread_marker])
+    end
+
+    if total_count < 0
+      Rails.logger.error 'Uread count less than 0'
     end
 
     total_count

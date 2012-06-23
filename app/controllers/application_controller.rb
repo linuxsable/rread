@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :check_onboarding_status, :authenticate
+  before_filter :check_onboarding_status
   
   # Make these avail to the views as helpers
   helper_method :current_user, :signed_in?
@@ -13,10 +13,7 @@ class ApplicationController < ActionController::Base
     if @current_user
       @current_user
     else
-      user_model = User.find_by_id(session[:user_id])
-      if !user_model.nil?
-        @current_user = AppUser.new(user_model)
-      end
+      User.find_by_id(session[:user_id])
     end
   end
   

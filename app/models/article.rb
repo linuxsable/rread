@@ -11,4 +11,13 @@ class Article < ActiveRecord::Base
     :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix,
     :message => "Must be a valid URL."
   }
+
+  def self.title_by_id(id)
+    Rails.cache.fetch("article_title|#{id}", :expires_in => 5.hours) {
+      article = find(id)
+      if !article.nil?
+        article.title
+      end
+    }
+  end
 end
