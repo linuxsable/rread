@@ -11,11 +11,11 @@
 //= require vendor/moment.min
 
 //= require models/article
-//= require models/activity-item
+//= require models/activity
 //= require collections/articles
-//= require collections/activity-items
+//= require collections/activities
 //= require views/article
 //= require views/reader
 //= require views/activity-feed
-//= require views/activity-item
+//= require views/activity
 //= require rread

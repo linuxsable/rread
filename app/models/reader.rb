@@ -119,7 +119,7 @@ class Reader < ActiveRecord::Base
         'title' => article.title,
         # 'blurb' => truncate(strip_tags(article.content), :length => 120, :separator => ' '),
         'content' => article.content,
-        'created_at' => article.created_at,
+        # 'created_at' => article.created_at,
         'published_at' => article.published_at,
         'url' => article.url,
         'read' => false,

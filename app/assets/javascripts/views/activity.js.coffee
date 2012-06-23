@@ -1,4 +1,4 @@
-class window.ActivityItemView extends Backbone.View
+class window.ActivityView extends Backbone.View
   tagName: 'div'
   className: 'activity-item'
 

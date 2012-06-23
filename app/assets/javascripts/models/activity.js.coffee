@@ -1,4 +1,4 @@
-class window.ActivityItem extends Backbone.Model
+class window.Activity extends Backbone.Model
   # Activity Types
   ARTICLE_LIKED: 1
   ARTICLE_READ: 2
