@@ -1,14 +1,14 @@
 class window.ReaderView extends Backbone.View
-  el: $('.reader')
+  el: '.reader'
 
   events: {
-    'click .left header .right': 'test'
+    'click .left header .right a': 'markAllAsRead'
   }
 
   initialize: ->
-    @el = $('.reader')
-    @articles = @el.find('.articles')
-    @header = @el.find('.left header')
+    @header = @$el.find('.left header')
+    @articles = @$el.find('.articles')
+    @unreadCount = @$el.find('.left .all-items .num')
 
     @collection = new Articles
     @collection.bind('reset', @render, @)
@@ -24,7 +24,7 @@ class window.ReaderView extends Backbone.View
       self.articles.append(output)
 
   closeAllArticles: ->
-    @articles.find('.expanded').each ->
+    @articles.find('.article.expanded').each ->
       $(this)
         .removeClass('expanded')
         .find('.content')
@@ -32,13 +32,17 @@ class window.ReaderView extends Backbone.View
           .hide()
 
   decrementUnreadCount: ->
-    $num = @header.find('.left .all-items .num')
-    value = parseInt($num.html())
+    value = parseInt(@unreadCount.html())
     if value > 0
-      $num.html(value - 1)
-
-  test: ->
-    console.log('hi')
+      @unreadCount.html(value - 1)
 
   markAllAsRead: ->
+    # Send the request
     $.get('/reader/mark_all_as_read', { confirm: true })
+
+    # Add "read" to all articles
+    @articles.find('.article:not(.read)').each ->
+      $(this).addClass('read')
+
+    # Zero out the unread count
+    @unreadCount.html(0)
