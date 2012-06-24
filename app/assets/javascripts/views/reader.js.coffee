@@ -1,4 +1,10 @@
 class window.ReaderView extends Backbone.View
+  el: $('.reader')
+
+  events: {
+    'click .left header .right': 'test'
+  }
+
   initialize: ->
     @el = $('.reader')
     @articles = @el.find('.articles')
@@ -30,3 +36,9 @@ class window.ReaderView extends Backbone.View
     value = parseInt($num.html())
     if value > 0
       $num.html(value - 1)
+
+  test: ->
+    console.log('hi')
+
+  markAllAsRead: ->
+    $.get('/reader/mark_all_as_read', { confirm: true })
