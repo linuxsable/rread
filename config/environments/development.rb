@@ -28,8 +28,6 @@ Rread::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.assets.paths << "#{Rails.root}/app/assets/fonts"
-
   config.cache_store = :dalli_store
 
   config.fb_app_id = '137065989735336'
