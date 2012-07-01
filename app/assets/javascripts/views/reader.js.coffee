@@ -50,7 +50,9 @@ class window.ReaderView extends Backbone.View
     if value > 0
       @unreadCount.html(value - 1)
 
-  markAllAsRead: ->
+  markAllAsRead: (e) ->
+    e.preventDefault()
+    
     # Send the request
     $.get('/reader/mark_all_as_read', { confirm: true })
 

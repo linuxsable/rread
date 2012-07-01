@@ -70,7 +70,7 @@ class ReaderController < ApplicationController
 
     timestamp = params[:timestamp]
     filter = params[:source]
-    count = params[:count] || 25
+    count = params[:count] || 50
 
     @articles = reader.article_feed(count, filter, timestamp)
   end
@@ -84,9 +84,9 @@ class ReaderController < ApplicationController
 
     # Append the current user to show his own activity
     # in the feed as well.
-    ids = friend_ids << current_user.id
+    # friend_ids << current_user.id
 
-    @activity_feed = Activity.feed(ids, count)
+    @activity_feed = Activity.feed(friend_ids, count)
   end
 
 end
