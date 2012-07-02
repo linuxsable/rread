@@ -1,17 +1,26 @@
+@font-face
+  font-family: 'Proxima Nova'
+  font-style: normal
+  font-weight: 400
+  src: local('Proxima Nova Regular'), local('ProximaNova-Regular'), font-url('proxima_nova-regular-webfont.woff') format('woff')
+
 *
   -moz-box-sizing: border-box
   -webkit-box-sizing: border-box
   box-sizing: border-box
   -webkit-font-smoothing: antialiased
 
-p
-  padding: 5px 0
-  line-height: 1.2em
-
 body
   font-family: "Proxima Nova", Helvetica
   font-size: 12px
   background: url('groovepaper.png') repeat
+  color: #111
+
+p
+  margin: 0 0 15px
+  font-size: 15px
+  line-height: 23px
+  color: #111
 
 .round
   border-radius: 2px
@@ -110,10 +119,21 @@ header.main
         float: right
         text-align: right
 
+        a
+          text-decoration: none
+          color: #111
+
     .articles
+      min-height: 57px
       margin-right: 250px
       margin-top: 10px
       padding: 0
+
+      img.spinner
+        width: 30px
+        margin: 0 auto
+        display: block
+        padding: 10px 0
 
       .article
         position: relative
@@ -149,14 +169,13 @@ header.main
         .content
           display: none
           padding-top: 20px
-          font-size: 15px
-          color: #111
 
           img
             max-width: 100%
             max-height: 100%
             border-radius: 2px
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5)
+            margin-bottom: 10px
 
 
       .article:hover
@@ -196,9 +215,8 @@ header.main
         color: #777
 
         .avatar
-          position: absolute
-          left: 12px
-          top: 12px
+          float: left
+          padding-right: 10px
 
           img
             width: 30px
@@ -207,9 +225,6 @@ header.main
             max-height: 30px
 
         .msg
-          position: absolute
-          left: 50px
-          top: 12px
           font-size: 11px
           padding-right: 12px
           line-height: 1.2em

@@ -1,7 +1,7 @@
 class window.ActivityFeedView extends Backbone.View
-  initialize: ->
-    @el = $('.reader .right .activity-feed')
+  el: '.reader .right .activity-feed'
 
+  initialize: ->
     @activities = new Activities
     @activities.bind('reset', @render, @)
     @activities.fetch()
@@ -11,4 +11,4 @@ class window.ActivityFeedView extends Backbone.View
     @activities.forEach (item) ->
       activity = new ActivityView(model: item)
       output = activity.render().el
-      self.el.append(output)
+      self.$el.append(output)

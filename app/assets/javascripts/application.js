@@ -9,13 +9,18 @@
 //= require vendor/backbone
 //= require vendor/mustache
 //= require vendor/moment.min
+//= require vendor/backbone.shortcuts.min
+//= require vendor/keymaster.min
 
 //= require models/article
 //= require models/activity
+
 //= require collections/articles
 //= require collections/activities
+
 //= require views/article
 //= require views/reader
 //= require views/activity-feed
 //= require views/activity
+
 //= require rread
