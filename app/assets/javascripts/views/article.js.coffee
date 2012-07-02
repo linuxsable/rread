@@ -51,7 +51,8 @@ class window.ArticleView extends Backbone.View
     @$el.addClass('expanded')
     @$el.find('.content')
       .html(@model.get('content'))
-      .show()
+      .fadeIn(250)
+    @readerView.scrollToAnimated(@$el)
     @removeFeedFlare()
 
   # Send ajax read request and update

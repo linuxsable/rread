@@ -94,3 +94,6 @@ class window.ReaderView extends Backbone.View
         @currentArticle.click()
       else
         @currentArticle = null
+
+  scrollToAnimated: ($article, speed=300) ->
+    $('html, body').animate(scrollTop: $article.offset().top - 15, speed)
