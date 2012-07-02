@@ -32,7 +32,7 @@ class window.ArticleView extends Backbone.View
   clicked: ->
     # This is used by the reader view
     # for it's going up and down articles
-    @readerView.currentArticle = @model
+    @readerView.currentArticle = @$el
 
     if @$el.hasClass('expanded')
       @close()

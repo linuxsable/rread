@@ -52,7 +52,7 @@ class window.ReaderView extends Backbone.View
 
   markAllAsRead: (e) ->
     e.preventDefault()
-    
+
     # Send the request
     $.get('/reader/mark_all_as_read', { confirm: true })
 
@@ -64,14 +64,33 @@ class window.ReaderView extends Backbone.View
     @unreadCount.html(0)
 
   moveDown: ->
-    if !@currentArticle
-      articleId = $(@articles.children()[0]).data('id')
-      @currentArticle = @collection.get(articleId)
+    if @currentArticle == null
+      # Index 0 of articles is the spinner, ignore it
+      @currentArticle = $(@articles.children().not('img.spinner')[0])
+      @closeAllArticles()
+      @currentArticle.click()
+    else
+      id = @currentArticle.data('id')
+      article = @articles.find('.article[data-id="' + id + '"]')
+      next = article.next()
 
-    @closeAllArticles()
-
-    currentArticleView = 
-    currentArticleView.expand()
+      if next.length
+        @currentArticle = next
+        @closeAllArticles()
+        @currentArticle.click()
 
   moveUp: ->
-    console.log('up')
+    if !@currentArticle
+      # Don't do anything if there is no current article selected
+      return
+    else
+      id = @currentArticle.data('id')
+      article = @articles.find('.article[data-id="' + id + '"]')
+      @currentArticle = article.prev().not('img.spinner')
+
+      @closeAllArticles()
+
+      if @currentArticle.length
+        @currentArticle.click()
+      else
+        @currentArticle = null
