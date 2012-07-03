@@ -16,11 +16,33 @@ body
   background: url('groovepaper.png') repeat
   color: #111
 
-p
+p, li
   margin: 0 0 15px
   font-size: 15px
   line-height: 23px
   color: #111
+
+li
+  padding-left: 30px
+
+a
+  color: #62ACE6
+  text-decoration: none
+
+h1, h2, h3
+  margin-bottom: 15px
+
+h1
+  font-size: 2em
+
+h2
+  font-size: 1.7em
+
+h3
+  font-size: 1.5em
+
+a:hover
+  text-decoration: underline
 
 .round
   border-radius: 2px
@@ -144,7 +166,7 @@ header.main
 
         img.favicon
           float: left
-          margin-right: 4px
+          margin-right: 6px
           width: 14px
           margin-top: 1px
           padding-bottom: 14px
@@ -162,8 +184,8 @@ header.main
 
         .blog
           display: block
-          padding-top: 5px
-          padding-left: 19px
+          padding-top: 6px
+          padding-left: 22px
           color: #666
 
         .content
@@ -189,7 +211,8 @@ header.main
         
       .article.expanded
         cursor: auto
-        background: #fbfbfb
+        .title
+          font-size: 18px
 
       .article:last-child
         border-bottom: none
