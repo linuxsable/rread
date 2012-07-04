@@ -6,14 +6,29 @@
           All Items
           .num
             = @unread_count
-        .inbox
-          Inbox
-          .num
-            0
-        .sources
-          Sources
+
+        / .inbox
+        /   Inbox
+        /   .num
+        /     0
+
+        .btn-group.sources
+          %a.dropdown-toggle{'data-toggle' => 'dropdown', 'href' => '#'}
+            Sources
+          %ul.dropdown-menu
+            - @subscriptions.each do |sub|
+              %li
+                %a{:href => '#'}
+                  = sub[:blog_name]
+                  (
+                  = sub[:unread_count]
+                  )
+            
       .right
         %a{:href => '#'} Mark All as Read
+
+        .add
+          .text +
       .clearer
 
     .articles.box

@@ -11,6 +11,7 @@
 //= require vendor/moment.min
 //= require vendor/backbone.shortcuts.min
 //= require vendor/keymaster.min
+//= require vendor/bootstrap
 
 //= require models/article
 //= require models/activity

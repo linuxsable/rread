@@ -18,9 +18,9 @@ class window.ActivityView extends Backbone.View
       targetName: self.model.get('target_name'),
       actionName: ->
         activityType = self.model.get('activity_type')
-        if activityType == self.model.ARTICLE_READ
-          return 'read'
-        else if activityType == self.model.SUBSCRIPTION_ADDED
+        # if activityType == self.model.ARTICLE_READ
+        #   return 'read'
+        if activityType == self.model.SUBSCRIPTION_ADDED
           return 'subscribed to'
         else if activityType == self.model.FRIENDSHIP_ADDED
           return 'followed'

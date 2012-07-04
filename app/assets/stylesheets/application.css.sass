@@ -16,14 +16,11 @@ body
   background: url('groovepaper.png') repeat
   color: #111
 
-p, li
+p
   margin: 0 0 15px
   font-size: 15px
   line-height: 23px
   color: #111
-
-li
-  padding-left: 30px
 
 a
   color: #62ACE6
@@ -60,6 +57,28 @@ a:hover
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.35)
   border-radius: 2px
   background: #fff
+
+.btn-group
+  a.dropdown-toggle
+    padding: 0
+    box-shadow: none
+    -webkit-box-shadow: none
+  ul
+    margin-top: 4px
+    border: 1px solid #eee
+
+    border-radius: 2px
+    -webkit-border-radius: 2px
+    -moz-border-radius: 2px
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
+    -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
+  .dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover
+    background: #62ACE6
+.btn-group.open .dropdown-toggle
+  box-shadow: none
+  -webkit-box-shadow: none
 
 .wrapper
   width: 950px
@@ -139,11 +158,32 @@ header.main
       .right
         width: 50%
         float: right
-        text-align: right
+        position: relative
 
         a
+          position: absolute
+          right: 40px
           text-decoration: none
           color: #111
+
+        .add
+          width: 36px
+          height: 36px
+          position: absolute
+          right: -10px
+          top: -12px
+          background: #eee
+          cursor: pointer
+
+          .text
+            font-size: 26px
+            position: relative
+            top: 6px
+            left: 11px
+            color: #777
+
+        .add:hover
+          background: #ddd
 
     .articles
       min-height: 57px
@@ -199,6 +239,8 @@ header.main
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5)
             margin-bottom: 10px
 
+          li
+            padding-left: 30px
 
       .article:hover
         background: #fbfbfb
@@ -211,6 +253,7 @@ header.main
         
       .article.expanded
         cursor: auto
+        background: #fff
         .title
           font-size: 18px
 
@@ -235,7 +278,7 @@ header.main
         position: relative
         padding: 12px 12px
         border-bottom: 1px dashed #ddd
-        color: #777
+        color: #555
 
         .avatar
           float: left

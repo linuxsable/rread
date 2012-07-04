@@ -28,7 +28,11 @@ class Activity < ActiveRecord::Base
   # This appends the user_name to the result set. This field
   # is not actually stored in the DB.
   def self.feed(ids, count=20)
-    result = self.where(:user_id => ids).order('created_at DESC').limit(count)
+    result = self.where(:user_id => ids)
+      .where("activity_type != ?", ARTICLE_READ)
+      .order('created_at DESC')
+      .limit(count)
+
     return result if result.empty?
 
     result.each do |item|
@@ -38,9 +42,9 @@ class Activity < ActiveRecord::Base
       item.user_avatar = user.avatar
 
       # Append the target name based on the target
-      if item.activity_type == ARTICLE_READ
-        item.target_name = Article.title_by_id(item.target_id)
-      elsif item.activity_type == SUBSCRIPTION_ADDED
+      # if item.activity_type == ARTICLE_READ
+      #   item.target_name = Article.title_by_id(item.target_id)
+      if item.activity_type == SUBSCRIPTION_ADDED
         blog_id = Subscription.blog_id_by_id(item.target_id)
         item.target_name = Blog.get_name_by_id(blog_id)
       elsif item.activity_type == FRIENDSHIP_ADDED

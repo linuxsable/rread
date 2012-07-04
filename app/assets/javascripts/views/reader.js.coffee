@@ -53,6 +53,9 @@ class window.ReaderView extends Backbone.View
   markAllAsRead: (e) ->
     e.preventDefault()
 
+    # Don't allow unecessary mark all calls
+    return if parseInt(@unreadCount.html()) == 0
+
     # Send the request
     $.get('/reader/mark_all_as_read', { confirm: true })
 

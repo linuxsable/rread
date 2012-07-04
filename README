@@ -9,15 +9,18 @@ Required services:
 
 == Running Paperboy
 
-RAILS_ENV=development rails runner script/paperboy.rb run
+RAILS_ENV=production rails runner script/paperboy.rb run
 
 == Starting passenger
 
 RAILS_ENV=production passenger start -p 8000
 
-# As a daemon
 RAILS_ENV=production passenger start -p 8000 > /dev/null & disown
 
 == Compiling assets
 
 RAILS_ENV=production bundle exec rake assets:precompile
+
+== Starting Resque Pool
+
+resque-pool --daemon --environment production
