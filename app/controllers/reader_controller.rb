@@ -1,6 +1,7 @@
 class ReaderController < ApplicationController
   def index
     @unread_count = current_user.reader.unread_count
+    @subscriptions = current_user.reader.subscription_list
   end
 
   def show
