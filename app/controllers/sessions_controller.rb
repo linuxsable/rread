@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    cookies[:user_id] = nil
     redirect_to :controller => 'home'
   end
 end

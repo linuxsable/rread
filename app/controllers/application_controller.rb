@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     if @current_user
       @current_user
     else
-      User.find_by_id(session[:user_id])
+      User.find_by_id(cookies[:user_id])
     end
   end
   

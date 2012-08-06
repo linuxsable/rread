@@ -71,7 +71,7 @@ class ReaderController < ApplicationController
 
     timestamp = params[:timestamp]
     filter = params[:source]
-    count = params[:count] || 100
+    count = params[:count] || 50
 
     @articles = reader.article_feed(count, filter, timestamp)
   end
