@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
     self.current_user = user
 
     if user.onboarded?
-      return redirect_to :controller => 'reader'
+      return redirect_to :controller => 'reader', :anchor => ''
     else
       return redirect_to :controller => 'sessions', :action => 'index'
     end
