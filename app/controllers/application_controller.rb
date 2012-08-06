@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   # Assign current user and set session
   def current_user=(user)
     @current_user = user
-    session[:user_id] = user.id
+    cookies[:user_id] = user.id
   end
 
   # Is current user signed in
