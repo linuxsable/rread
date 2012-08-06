@@ -7,6 +7,11 @@ class window.Rread extends Backbone.Router
     reader = new ReaderView
 
 $(document).ready ->
+  # Fixes a pesky issue with facebook auth
+  if window.location.hash == '#_=_'
+    window.location.hash = ''
+    history.pushState('', document.title, window.location.pathname)
+
   window.Rread = new Rread
   Backbone.history.start()
 
