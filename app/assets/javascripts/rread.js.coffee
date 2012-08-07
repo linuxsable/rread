@@ -1,10 +1,14 @@
 class window.Rread extends Backbone.Router
   routes: {
-    '': 'index'
+    '': 'index',
+    'subscription/:id': 'subscription'
   }
 
   index: ->
     reader = new ReaderView
+
+  subscription: (id) ->
+    reader = new ReaderView(id: id)
 
 $(document).ready ->
   # Fixes a pesky issue with facebook auth
@@ -12,7 +16,7 @@ $(document).ready ->
     window.location.hash = ''
     history.pushState('', document.title, window.location.pathname)
 
-  window.Rread = new Rread
+  window.App = new Rread
   Backbone.history.start()
 
   # Setup moment.js

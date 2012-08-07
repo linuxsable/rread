@@ -18,7 +18,7 @@
           %ul.dropdown-menu
             - @subscriptions.each do |sub|
               %li
-                %a{:href => '#'}
+                %a{:href => '#', 'data-id' => sub[:blog_id]}
                   = sub[:blog_name]
                   (
                   = sub[:unread_count]
@@ -30,6 +30,9 @@
         .add
           .text +
       .clearer
+
+    .source-title.box{:style => 'display:none'}
+      .name Blog Name Here
 
     .articles.box
       = image_tag('cave-story-spinner.gif', :class => 'spinner')

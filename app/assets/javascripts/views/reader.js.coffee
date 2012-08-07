@@ -2,7 +2,9 @@ class window.ReaderView extends Backbone.View
   el: '.reader'
 
   events: {
-    'click .left header .right a': 'markAllAsRead'
+    'click .left header .right a': 'markAllAsRead',
+    'click .left header.box .left .all-items a': 'allItems',
+    'click .btn-group .dropdown-menu li > a': 'changeSubscription'
   }
 
   shortcuts: {
@@ -24,7 +26,16 @@ class window.ReaderView extends Backbone.View
 
     @collection = new Articles
     @collection.bind('reset', @render, @)
-    @collection.fetch()
+
+    if @id?
+      $(@articles.children().not('img.spinner')).remove()
+
+      @$el.find('.source-title').show()
+
+      @articleSpinner.show()
+      @collection.fetch(data: { source: @id })
+    else
+      @collection.fetch()
 
     @activityFeedView = new ActivityFeedView
 
@@ -103,3 +114,12 @@ class window.ReaderView extends Backbone.View
 
     # Animated version
     # $('html, body').animate(scrollTop: $article.offset().top - 15, speed)
+
+  changeSubscription: (e) ->
+    e.preventDefault()
+    id = $(e.target).data('id')
+    App.navigate('subscription/' + id, trigger: true)
+
+  allItems: (e) ->
+    e.preventDefault()
+    App.navigate('', trigger: true)
