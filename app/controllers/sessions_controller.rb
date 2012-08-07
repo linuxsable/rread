@@ -22,14 +22,14 @@ class SessionsController < ApplicationController
     self.current_user = user
 
     if user.onboarded?
-      return redirect_to :controller => 'reader'
+      return redirect_to :controller => 'reader', :anchor => ''
     else
       return redirect_to :controller => 'sessions', :action => 'index'
     end
   end
 
   def destroy
-    session[:user_id] = nil
+    cookies[:user_id] = nil
     redirect_to :controller => 'home'
   end
 end

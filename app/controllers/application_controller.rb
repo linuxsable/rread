@@ -13,14 +13,14 @@ class ApplicationController < ActionController::Base
     if @current_user
       @current_user
     else
-      User.find_by_id(session[:user_id])
+      User.find_by_id(cookies[:user_id])
     end
   end
   
   # Assign current user and set session
   def current_user=(user)
     @current_user = user
-    session[:user_id] = user.id
+    cookies[:user_id] = user.id
   end
 
   # Is current user signed in

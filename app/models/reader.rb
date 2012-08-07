@@ -82,8 +82,10 @@ class Reader < ActiveRecord::Base
     if blog_filter_id.nil?
       subs = subscriptions
     else
-      subs << subscription.where(:blog_id => blog_filter_id).limit(1)
+      subs = Subscription.where(:blog_id => blog_filter_id).limit(1)
     end
+
+    puts subs.first.blog_id
 
     return {} if subs.empty?
 
