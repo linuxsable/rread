@@ -48,12 +48,19 @@ class window.ArticleView extends Backbone.View
       .hide()
 
   expand: ->
+    console.time('article_render')
+
     @$el.addClass('expanded')
     @$el.find('.content')
       .html(@model.get('content'))
       .show()
     @readerView.scrollToArticle(@$el)
+    @removeStyleTags()
     @removeFeedFlare()
+    @removeImages()
+    @removeEmptyTags()
+
+    console.timeEnd('article_render')
 
   # Send ajax read request and update
   # the view to show that it's read.
@@ -71,3 +78,19 @@ class window.ArticleView extends Backbone.View
     $feedFlare.prev().remove()
     $feedFlare.prevAll('br').eq(0).remove()
     $feedFlare.remove()
+
+  removeStyleTags: ->
+    $content = @$el.children('.content')
+    $content.find('*[style]').removeAttr('style')
+
+  removeImages: ->
+    $content = @$el.children('.content')
+    $content.find('img').remove()
+
+  removeEmptyTags: ->
+    $content = @$el.children('.content')
+    
+    items = $content.contents().filter ->
+      return $.trim($(this).text()) == ''
+
+    items.remove()
