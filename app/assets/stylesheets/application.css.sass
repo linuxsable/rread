@@ -14,13 +14,13 @@ body
   font-family: "Proxima Nova", Helvetica
   font-size: 12px
   background: url('groovepaper.png') repeat
-  color: #111
+  color: #000
 
 p
   margin: 0 0 15px
   font-size: 15px
   line-height: 23px
-  color: #111
+  color: #000
 
 a
   color: #62ACE6
@@ -30,7 +30,9 @@ a:hover
   border-bottom: 2px solid #ddd
 
 h1, h2, h3
-  margin-bottom: 15px
+  padding-top: 5px
+  padding-bottom: 20px
+  font-weight: bold
 
 h1
   font-size: 2em
@@ -102,9 +104,9 @@ header.main
     float: left
 
     .logo
-      color: #333
+      color: #222
       font-size: 30px
-      font-weight: bold
+      // font-weight: bold
       padding-top: 3px
 
   .right
@@ -172,7 +174,7 @@ header.main
           position: absolute
           right: 40px
           text-decoration: none
-          color: #111
+          color: #333
 
         .add
           width: 36px
@@ -238,7 +240,7 @@ header.main
           top: 22px
           right: 15px
           display: block
-          color: #aaa
+          color: #888
 
         .blog
           display: block
@@ -248,7 +250,7 @@ header.main
 
         .content
           display: none
-          padding-top: 20px
+          margin: 20px 50px 0 20px
 
           img
             max-width: 100%
@@ -265,15 +267,15 @@ header.main
 
       .article.read
         .title
-          color: #888
+          color: #777
         .blog
-          color: #999
+          color: #888
         
       .article.expanded
         cursor: auto
         background: #fff
         .title
-          font-size: 18px
+          font-size: 16px
 
       .article:last-child
         border-bottom: none
