@@ -27,14 +27,15 @@ class window.ReaderView extends Backbone.View
     @collection = new Articles
     @collection.bind('reset', @render, @)
 
+    $(@articles.children().not('img.spinner')).remove()
+    
+    @articleSpinner.show()
+
     if @id?
-      $(@articles.children().not('img.spinner')).remove()
-
       @$el.find('.source-title').show()
-
-      @articleSpinner.show()
       @collection.fetch(data: { source: @id })
     else
+      @$el.find('.source-title').hide()
       @collection.fetch()
 
     @activityFeedView = new ActivityFeedView
@@ -118,8 +119,8 @@ class window.ReaderView extends Backbone.View
   changeSubscription: (e) ->
     e.preventDefault()
     id = $(e.target).data('id')
-    App.navigate('subscription/' + id, trigger: true)
+    App.navigate('subscription/' + id, true)
 
   allItems: (e) ->
     e.preventDefault()
-    App.navigate('', trigger: true)
+    App.navigate('#', true)
