@@ -57,7 +57,6 @@ class window.ArticleView extends Backbone.View
     @readerView.scrollToArticle(@$el)
     @removeStyleTags()
     @removeFeedFlare()
-    @removeImages()
     @removeEmptyTags()
 
     console.timeEnd('article_render')
@@ -90,7 +89,7 @@ class window.ArticleView extends Backbone.View
   removeEmptyTags: ->
     $content = @$el.children('.content')
     
-    items = $content.contents().filter ->
+    items = $content.contents('a, p, div, span, em, strong').filter ->
       return $.trim($(this).text()) == ''
 
     items.remove()
