@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   def index
     current_user.onboard!
 
-    render :layout => 'index'
+    render :layout => 'static'
   end
 
   def create

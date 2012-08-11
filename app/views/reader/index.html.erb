@@ -1,0 +1,84 @@
+<div class="reader">
+    <div class="left">
+        <header class="box">
+            <div class="left">
+                <div class="all-items">
+                    <a href="#">All Items</a>
+                    <div class="num">
+                        <%= @unread_count %>
+                    </div>
+                </div>
+                <div class="btn-group sources">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sources</a>
+                    <ul class="dropdown-menu">
+                        <% @subscriptions.each do |sub| %>
+                            <li>
+                                <a href="#" data-id="<%= sub[:blog_id] %>"><%= sub[:blog_name] %></a>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="right">
+                <a href="#">Mark All As Read</a>
+                <div class="add">
+                    <div class="text">+</div>
+                </div>
+            </div>
+            <div class="clearer"></div>
+        </header>
+
+        <div class="source-title box" style="display:none">
+            <div class="name">Blog Name Here</div>
+        </div>
+
+        <div class="articles box">
+            <%= image_tag('cave-story-spinner.gif', :class => 'spinner') %>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="activity-feed box"></div>
+        
+        <div class="ad box">
+            Ad Goes Here
+        </div>
+        
+        <div class="static">
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">API</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="clearer"></div>
+    </div>
+</div>
+
+<script id="tpl-article" type="text/template">
+    <img class="favicon" src="{{faviconURL}}">
+    <div class="title">
+        {{{title}}}
+    </div>
+    <div class="date">
+        {{date}}
+    </div>
+    <div class="blog">
+        {{blogName}}
+    </div>
+    <div class="content"></div>
+    <div class="likes"></div>
+    <div class="comments"></div>
+    <div class="close"></div>
+    <div class="clearer"></div>
+</script>
+
+<script id="tpl-activity-item" type="text/template">
+    <div class="avatar">
+        <img class="circular">
+    </div>
+    <div class="msg">
+        {{{userName}}} {{{actionName}}} {{{targetName}}}.
+    </div>
+</script>

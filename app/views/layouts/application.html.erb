@@ -1,0 +1,17 @@
+<%= render "shared/header" %>
+<div class="wrapper">
+    <header class="main">
+        <div class="left">
+            <div class="logo">rread</div>
+        </div>
+        <div class="right">
+            <div class="avatar">
+                <img src="<%= current_user.avatar %>" class="circular" />
+                <div class="text"><%= current_user.full_name %></div>
+            </div>
+        </div>
+    </header>
+    <div class="clearer"></div>
+    <%= yield %>
+</div>
+<%= render "shared/footer" %>
