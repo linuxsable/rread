@@ -56,6 +56,7 @@ class window.ArticleView extends Backbone.View
       .show()
     @readerView.scrollToArticle(@$el)
     @removeStyleTags()
+    @hideTinyImages()
     @removeFeedFlare()
     @removeEmptyTags()
 
@@ -85,6 +86,12 @@ class window.ArticleView extends Backbone.View
   removeImages: ->
     $content = @$el.children('.content')
     $content.find('img').remove()
+
+  hideTinyImages: ->
+    $content = @$el.children('.content')
+    items = $content.find('img').filter ->
+      return $(this).width() < 2 && $(this).height() < 2
+    items.hide()
 
   removeEmptyTags: ->
     $content = @$el.children('.content')
