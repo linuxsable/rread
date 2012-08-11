@@ -1,5 +1,6 @@
-LANDING
-
-<% if !signed_in? %>
-  <%= link_to "Sign in with FB", "/auth/facebook" %>
-<% end %>
+<div class="index">
+    <div class="centered">
+        <div class="logo">rread</div>
+        <%= link_to image_tag("facebook-login.png"), "/auth/facebook" %>
+    </div>
+</div>
