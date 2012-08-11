@@ -27,6 +27,8 @@ class window.ArticleView extends Backbone.View
 
     @$el.html(renderedContent)
 
+    @$content = @$el.children('.content')
+
     return this
 
   clicked: ->
@@ -56,6 +58,7 @@ class window.ArticleView extends Backbone.View
       .show()
     @readerView.scrollToArticle(@$el)
     @removeStyleTags()
+    @hideTinyImages()
     @removeFeedFlare()
     @removeEmptyTags()
 
@@ -79,17 +82,20 @@ class window.ArticleView extends Backbone.View
     $feedFlare.remove()
 
   removeStyleTags: ->
-    $content = @$el.children('.content')
-    $content.find('*[style]').removeAttr('style')
+    @$content.find('*[style]').removeAttr('style')
 
   removeImages: ->
-    $content = @$el.children('.content')
-    $content.find('img').remove()
+    @$content.find('img').remove()
 
-  removeEmptyTags: ->
-    $content = @$el.children('.content')
-    
-    items = $content.contents('a, p, div, span, em, strong').filter ->
+  hideTinyImages: ->
+    items = @$content.find('img').filter ->
+      $this = $(this)
+      return $this.width() < 2 && $this.height() < 2
+
+    items.hide()
+
+  removeEmptyTags: ->    
+    items = @$content.contents('a, p, div, span, em, strong').filter ->
       return $.trim($(this).text()) == ''
 
     items.remove()

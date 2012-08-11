@@ -104,10 +104,12 @@ header.main
     float: left
 
     .logo
-      color: #222
-      font-size: 30px
-      // font-weight: bold
-      padding-top: 3px
+      a
+        color: #222
+        font-size: 30px
+        padding-top: 3px
+      a:hover
+        border-bottom: none
 
   .right
     width: 50%
@@ -129,7 +131,17 @@ header.main
         top: 14px
         color: #555
 
+.index
+  .centered
+    padding: 20px
+    .logo
+      font-size: 40px
+      color: #555
+      padding-bottom: 15px
+
 .reader
+  margin-top: 5px
+  
   .left
     width: 100%
     float: left

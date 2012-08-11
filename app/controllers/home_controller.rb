@@ -5,7 +5,7 @@ class HomeController < ApplicationController
       return redirect_to :controller => 'reader', :action => 'index'
     end
 
-    render :layout => 'index'
+    render :layout => 'static'
   end
 
 end

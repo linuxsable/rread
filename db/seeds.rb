@@ -67,6 +67,11 @@ blogs = [
 		'feed_url' => 'http://www.theverge.com/rss/index.xml',
 		'name' => 'The Verge'
 	},
+	{
+		'url' => 'http://www.boston.com/bigpicture/',
+		'feed_url' => 'http://www.boston.com/bigpicture/index.xml',
+		'name' => 'The Big Picture'
+	}
 ]
 
 blogs.each { |b|
